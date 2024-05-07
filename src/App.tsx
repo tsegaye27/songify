@@ -5,10 +5,12 @@ import Home from "./ui/Home";
 import SongList from "./features/SongList/SongList";
 import AddSong from "./features/AddSong/AddSong";
 import EditSong from "./features/EditSong/EditSong";
+import Error from "./ui/Error";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
