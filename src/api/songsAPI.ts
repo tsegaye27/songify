@@ -3,8 +3,9 @@ import { Song } from "../redux/types";
 
 const BASE_URL = "https://jsonplaceholder.typicode.com";
 
-export const fetchSongs = async (limit: number = 10): Promise<Song[]> => {
+export const fetchSongs = async (limit: number = 15): Promise<Song[]> => {
   try {
+    // const response = await axios.get<Song[]>(`${BASE_URL}/posts`);
     const response = await axios.get<Song[]>(
       `${BASE_URL}/posts?_limit=${limit}`
     );
@@ -23,7 +24,7 @@ export const addSong = async (song: Song): Promise<Song> => {
   }
 };
 
-export const deleteSong = async (id: number): Promise<void> => {
+export const deleteSong = async (id: string): Promise<void> => {
   try {
     await axios.delete(`${BASE_URL}/posts/${id}`);
   } catch (error) {
