@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { updateSongStart } from "../../redux/slices/slice";
+import { updateSongStart } from "../../../redux/slices/slice";
 import { useDispatch } from "react-redux";
 
 interface EditSongProps {
   songId: string;
+  onUpdate: (songId: string | null) => void;
 }
 
-const EditSong: React.FC<EditSongProps> = ({ songId }) => {
+const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const dispatch = useDispatch();
@@ -35,7 +36,9 @@ const EditSong: React.FC<EditSongProps> = ({ songId }) => {
           onChange={(e) => setBody(e.target.value)}
         />
         <br />
-        <button type="submit">Update Song</button>
+        <button onClick={() => onUpdate(null)} type="submit">
+          Update Song
+        </button>
       </form>
     </div>
   );
