@@ -3,37 +3,46 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Home from "./ui/Home";
 import SongList from "./features/SongList/SongList";
-import AddSong from "./features/AddSong/AddSong";
-import EditSong from "./features/EditSong/EditSong";
 import Error from "./ui/Error";
+import GlobalStyles from "./styles/GlobalStyles";
+import PlayList from "./features/PlayList/PlayList";
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: (
+      <>
+        <AppLayout />
+        <GlobalStyles />
+      </>
+    ),
     errorElement: <Error />,
     children: [
       {
         path: "/",
         element: <Home />,
+        errorElement: <Error />,
       },
       {
         path: "/songs",
         element: <SongList />,
+        errorElement: <Error />,
       },
       {
-        path: "/songs/add",
-        element: <AddSong />,
-      },
-      {
-        path: "/songs/edit/:id",
-        element: <EditSong />,
+        path: "/playlists",
+        element: <PlayList />,
+        errorElement: <Error />,
       },
     ],
   },
 ]);
 
 const App: React.FC = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;
