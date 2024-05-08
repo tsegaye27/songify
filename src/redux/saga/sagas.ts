@@ -45,7 +45,7 @@ export function* watchAddSong(): SagaIterator {
   yield takeLatest("songs/addSongStart", addSongSaga);
 }
 
-export function* deleteSongSaga(action: PayloadAction<number>): SagaIterator {
+export function* deleteSongSaga(action: PayloadAction<string>): SagaIterator {
   try {
     yield call(deleteSong, action.payload);
     yield put(deleteSongSuccess(action.payload));
