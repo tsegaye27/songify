@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../types";
 
+interface SongPayload {
+  id: string;
+  title: string;
+  body: string;
+}
 export interface SongState {
   list: Song[];
   loading: boolean;
@@ -29,7 +34,7 @@ const songsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    addSongStart(state) {
+    addSongStart(state, action: PayloadAction<SongPayload>) {
       state.loading = true;
       state.error = null;
     },
@@ -45,7 +50,7 @@ const songsSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    deleteSongSuccess(state, action: PayloadAction<number>) {
+    deleteSongSuccess(state, action: PayloadAction<string>) {
       state.list = state.list.filter((song) => song.id !== action.payload);
       state.loading = false;
     },
@@ -53,7 +58,7 @@ const songsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    updateSongStart(state) {
+    updateSongStart(state, action: PayloadAction<SongPayload>) {
       state.loading = true;
       state.error = null;
     },
