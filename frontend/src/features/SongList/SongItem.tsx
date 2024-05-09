@@ -71,16 +71,6 @@ interface Props {
 
 const SongItem: React.FC<Props> = ({ song }) => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const maxTitleLength = 20;
-  const maxBodyLength = 20;
-  const truncatedTitle =
-    song.title.length > maxTitleLength
-      ? song.title.substring(0, maxTitleLength) + "..."
-      : song.title;
-  const truncatedBody =
-    song.body.length > maxBodyLength
-      ? song.body.substring(0, maxBodyLength) + "..."
-      : song.body;
 
   function handleEdit(songId: string | null) {
     if (songId === null) setSelectedId(null);
@@ -95,10 +85,10 @@ const SongItem: React.FC<Props> = ({ song }) => {
     <>
       <StyledSongItem>
         <SongLogo className="song-logo" />
-        <Title>{truncatedTitle}</Title>
-        <Body>{truncatedBody}</Body>
+        <Title>{song.title}</Title>
+        <Body>{song.artist}</Body>
         <ButtonContainer>
-          <Button onClick={() => handleEdit(song.id)}>
+          <Button onClick={() => handleEdit(song._id)}>
             <Icon>
               <BiEdit />
             </Icon>
