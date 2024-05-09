@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 const express = require("express");
+require("dotenv").config({ path: "config.env" });
+const songsRouter = require("./routes/songsRouter");
 
 const app = express();
-const port = process.env.PORT || 3000;
+
+const port = process.env.PORT;
 const db = process.env.DB;
 
 app.use(express.json());
@@ -10,10 +13,7 @@ app.use(express.json());
 app.use("/songs", songsRouter);
 
 mongoose
-  .connect(`${db}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(db)
   .then(() => {
     console.log("DB connection established successfully");
   })
