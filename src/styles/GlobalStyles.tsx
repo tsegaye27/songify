@@ -1,6 +1,12 @@
 import { Global, css } from "@emotion/react";
 import React from "react";
 
+// background color #080f17
+// primary color #9ab9e0
+// text color #e7eef6
+// secondary color #244e82
+// accent color #568fd4
+
 const GlobalStyles: React.FC = () => {
   return (
     <Global
@@ -10,22 +16,40 @@ const GlobalStyles: React.FC = () => {
           padding: 0;
         }
 
+        :root {
+          --background-color: #44b2b2;
+          --second-background-color: #0b1c1ce8;
+          --primary-color: #9ab9e0;
+          --secondary-color: #244e82;
+          --accent-color: #568fd4;
+          --text-color: #e7eef6;
+        }
+
         body {
           font-family: Arial, Helvetica, sans-serif;
         }
 
         .nav-links {
-          /* margin: 1rem; */
-          padding: 1rem;
+          width: 100%;
           text-decoration: none;
-          color: white;
+          color: var(--text-color);
           border: none;
-          transition: all 0.3s ease-in;
+          transition: all 0.2s ease-in;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
+          padding: 1.5rem 0;
         }
 
         .nav-links:hover {
-          box-shadow: 1px 2px lightgreen;
-          /* color: #7e7e7e; */
+          color: var(--accent-color);
+        }
+
+        .song-logo {
+          margin: 1.5rem 0;
+
+          color: black;
         }
       `}
     />
