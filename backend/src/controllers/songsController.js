@@ -17,10 +17,7 @@ exports.getSong = async (req, res) => {
       return res.status(404).json({ message: "Song not found" });
     }
 
-    res.status(200).json({
-      status: "success",
-      data: song,
-    });
+    res.status(200).json(song);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -30,10 +27,7 @@ exports.addSong = async (req, res) => {
   const { title, artist } = req.body;
   try {
     const newSong = await Song.create({ title, artist });
-    res.status(201).json({
-      status: "success",
-      data: newSong,
-    });
+    res.status(201).json(newSong);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -41,16 +35,13 @@ exports.addSong = async (req, res) => {
 
 exports.updateSong = async (req, res) => {
   try {
-    const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedSong = await Song.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    if (!song) {
+    if (!updatedSong) {
       return res.status(404).json({ message: "Song not found" });
     }
-    res.status(200).json({
-      status: "success",
-      data: song,
-    });
+    res.status(200).json(updatedSong);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -60,9 +51,7 @@ exports.deleteSong = async (req, res) => {
   try {
     const deletedSong = await Song.findByIdAndDelete(req.params.id);
     if (deletedSong) {
-      res.status(204).json({
-        message: "Song Deleted",
-      });
+      res.status(204).json(deletedSong);
     } else {
       res.status(404).json({ message: "Song not found" });
     }
