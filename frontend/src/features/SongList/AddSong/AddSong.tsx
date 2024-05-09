@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addSongStart } from "../../redux/slices/slice";
+import { addSongStart } from "../../../redux/slices/slice";
 import { v4 as uuidv4 } from "uuid";
 
 const AddSong: React.FC = () => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [artist, setArtist] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (title.trim() === "" || body.trim() === "") return;
-    const id = uuidv4();
-    dispatch(addSongStart({ id, title, body }));
+    if (title.trim() === "" || artist.trim() === "") return;
+    const _id = uuidv4();
+    dispatch(addSongStart({ _id, title, artist }));
     setTitle("");
-    setBody("");
+    setArtist("");
   };
   return (
     <div>
@@ -30,8 +30,8 @@ const AddSong: React.FC = () => {
         <input
           type="text"
           placeholder="Enter the Artist"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          value={artist}
+          onChange={(e) => setArtist(e.target.value)}
         />
         <br />
         <button type="submit">Add Song</button>
