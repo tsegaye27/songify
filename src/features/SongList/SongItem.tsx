@@ -2,25 +2,68 @@ import React, { useState } from "react";
 import { Song } from "../../redux/types";
 import EditSong from "./EditSong/EditSong";
 import styled from "@emotion/styled";
+import { BsMusicNote } from "react-icons/bs";
+import { BiEdit, BiTrash, BiPlus, BiHeart } from "react-icons/bi";
 
 const StyledSongItem = styled.div`
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
+  background-color: #222;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  p {
-    font-size: 1rem;
-  }
-  button {
-    margin-top: 10px;
+  align-items: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
   }
 `;
+
+const SongLogo = styled(BsMusicNote)`
+  font-size: 32px;
+  color: #ccc;
+  margin-bottom: 20px;
+`;
+
+const Title = styled.h3`
+  font-size: 20px;
+  color: #ccc;
+  margin: 0;
+  text-align: center;
+`;
+
+const Body = styled.p`
+  font-size: 16px;
+  color: #aaa;
+  margin: 10px 0;
+  text-align: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+`;
+
+const Button = styled.button`
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 1px 1px 5px #fea22a;
+  }
+`;
+
+const Icon = styled.span`
+  font-size: 20px;
+`;
+
 interface Props {
   song: Song;
 }
@@ -39,17 +82,42 @@ const SongItem: React.FC<Props> = ({ song }) => {
       : song.body;
 
   function handleEdit(songId: string | null) {
-    setTimeout(() => {
-      setSelectedId(songId);
-    }, 1000);
+    if (songId === null) {
+      return setTimeout(() => {
+        setSelectedId(null);
+      }, 500);
+    }
+    setSelectedId(songId);
   }
 
   return (
     <>
       <StyledSongItem>
-        <h3>{truncatedTitle}</h3>
-        <p>{truncatedBody}</p>
-        <button onClick={() => handleEdit(song.id)}>Edit Song</button>
+        <SongLogo className="song-logo" />
+        <Title>{truncatedTitle}</Title>
+        <Body>{truncatedBody}</Body>
+        <ButtonContainer>
+          <Button onClick={() => handleEdit(song.id)}>
+            <Icon>
+              <BiEdit />
+            </Icon>
+          </Button>
+          <Button>
+            <Icon>
+              <BiTrash />
+            </Icon>
+          </Button>
+          <Button>
+            <Icon>
+              <BiPlus />
+            </Icon>
+          </Button>
+          <Button>
+            <Icon>
+              <BiHeart />
+            </Icon>
+          </Button>
+        </ButtonContainer>
       </StyledSongItem>
       {selectedId && <EditSong onUpdate={handleEdit} songId={selectedId} />}
     </>
