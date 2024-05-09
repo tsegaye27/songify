@@ -11,6 +11,7 @@
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "mongoose": "^8.3.4",
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.0"
   }
 }
