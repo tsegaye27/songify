@@ -35,6 +35,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 10px 20px;
+  margin: 5px 0;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -44,15 +45,15 @@ const Button = styled.button`
 
 const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [artist, setArtist] = useState("");
   const dispatch = useDispatch();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (title.trim() === "" || body.trim() === "") return;
-    dispatch(updateSongStart({ id: songId, title, body }));
+    if (title.trim() === "" || artist.trim() === "") return;
+    dispatch(updateSongStart({ _id: songId, title, artist }));
     setTitle("");
-    setBody("");
+    setArtist("");
     onUpdate(null);
   }
 
@@ -70,8 +71,8 @@ const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
         <Input
           type="text"
           placeholder="Enter the Artist"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          value={artist}
+          onChange={(e) => setArtist(e.target.value)}
           required
         />
         <Button type="submit">Update Song</Button>
