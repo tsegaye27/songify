@@ -1,62 +1,94 @@
 import styled from "@emotion/styled";
-import React from "react";
 import { NavLink } from "react-router-dom";
+import { BiHome, BiMusic, BiListPlus } from "react-icons/bi";
 import logo from "../../public/logo.png";
 
-const Nav = styled.nav`
+const StyledSideNav = styled.nav`
+  background-color: #333333;
+  color: #ffffff;
+  width: 250px;
+`;
+
+const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100svh;
-  margin-top: 3rem;
+  height: 15rem;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #555555;
 `;
 
 const Logo = styled.img`
-  width: 8rem;
-  height: 8rem;
-  margin: auto;
-`;
-
-const StyledSideNav = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #312f2f;
-  width: 20rem;
-  height: 100svh;
-  margin-right: 1rem;
-`;
-const LogoContainer = styled.div`
-  height: 30%;
-  padding: 1rem 1rem;
-  background-color: #cff0d1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 5rem;
 `;
 
 const H1 = styled.h1`
-  margin: auto;
-  color: black;
-  font-family: monospace;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 1rem;
+`;
+
+const ImageContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const Nav = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+`;
+
+const NavItem = styled.li`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const NavLinkIcon = styled.div`
+  display: flex;
+  margin-right: 10px;
+`;
+
+const NavLinkText = styled.span`
+  font-size: 16px;
 `;
 
 const SideNav: React.FC = () => {
   return (
     <StyledSideNav>
       <LogoContainer>
-        <Logo src={logo} />
+        <ImageContainer>
+          <Logo src={logo} alt="Logo" />
+        </ImageContainer>
         <H1>Songify</H1>
       </LogoContainer>
       <Nav>
-        <NavLink className="nav-links" to="/">
-          Home
-        </NavLink>
-        <NavLink className="nav-links" to="/songs">
-          Songs
-        </NavLink>
-        <NavLink className="nav-links" to="/playlists">
-          Playlists
-        </NavLink>
+        <NavItem>
+          <NavLink className="nav-links" to="/">
+            <NavLinkIcon>
+              <BiHome />
+            </NavLinkIcon>
+            <NavLinkText>Home</NavLinkText>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="nav-links" to="/songs">
+            <NavLinkIcon>
+              <BiMusic />
+            </NavLinkIcon>
+            <NavLinkText>Songs</NavLinkText>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="nav-links" to="/playlists">
+            <NavLinkIcon>
+              <BiListPlus />
+            </NavLinkIcon>
+            <NavLinkText>Playlists</NavLinkText>
+          </NavLink>
+        </NavItem>
       </Nav>
     </StyledSideNav>
   );
