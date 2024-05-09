@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../types";
 
 interface SongPayload {
-  id: string;
+  _id: string;
   title: string;
-  body: string;
+  artist: string;
 }
 export interface SongState {
   list: Song[];
@@ -51,7 +51,7 @@ const songsSlice = createSlice({
       state.error = null;
     },
     deleteSongSuccess(state, action: PayloadAction<string>) {
-      state.list = state.list.filter((song) => song.id !== action.payload);
+      state.list = state.list.filter((song) => song._id !== action.payload);
       state.loading = false;
     },
     deleteSongFailure(state, action: PayloadAction<string>) {
