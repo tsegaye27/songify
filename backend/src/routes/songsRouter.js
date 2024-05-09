@@ -8,4 +8,8 @@ router.get("/:id", songsController.getSong);
 
 router.post("/", songsController.addSong);
 
+router.patch("/:id", songsController.updateSong);
+
+router.delete("/:id", songsController.deleteSong);
+
 module.exports = router;
