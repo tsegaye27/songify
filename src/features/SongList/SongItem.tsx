@@ -4,6 +4,7 @@ import EditSong from "./EditSong/EditSong";
 import styled from "@emotion/styled";
 import { BsMusicNote } from "react-icons/bs";
 import { BiEdit, BiTrash, BiPlus, BiHeart } from "react-icons/bi";
+import Modal from "../../ui/Modal";
 
 const StyledSongItem = styled.div`
   background-color: #222;
@@ -82,12 +83,12 @@ const SongItem: React.FC<Props> = ({ song }) => {
       : song.body;
 
   function handleEdit(songId: string | null) {
-    if (songId === null) {
-      return setTimeout(() => {
-        setSelectedId(null);
-      }, 500);
+    if (songId === null) setSelectedId(null);
+    else {
+      setTimeout(() => {
+        setSelectedId(songId);
+      }, 300);
     }
-    setSelectedId(songId);
   }
 
   return (
@@ -119,7 +120,11 @@ const SongItem: React.FC<Props> = ({ song }) => {
           </Button>
         </ButtonContainer>
       </StyledSongItem>
-      {selectedId && <EditSong onUpdate={handleEdit} songId={selectedId} />}
+      {selectedId && (
+        <Modal>
+          <EditSong onUpdate={handleEdit} songId={selectedId} />
+        </Modal>
+      )}
     </>
   );
 };
