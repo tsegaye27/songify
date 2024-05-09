@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen"
+  },
+  {
+    "title": "Hotel California",
+    "artist": "Eagles"
+  },
+  {
+    "title": "Imagine",
+    "artist": "John Lennon"
+  },
+  {
+    "title": "Hey Jude",
+    "artist": "The Beatles"
+  },
+  {
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana"
+  },
+  {
+    "title": "Thriller",
+    "artist": "Michael Jackson"
+  },
+  {
+    "title": "Sweet Child o' Mine",
+    "artist": "Guns N' Roses"
+  },
+  {
+    "title": "Boys Don't Cry",
+    "artist": "The Cure"
+  },
+  {
+    "title": "Shape of You",
+    "artist": "Ed Sheeran"
+  },
+  {
+    "title": "Rolling in the Deep",
+    "artist": "Adele"
+  }
+]
