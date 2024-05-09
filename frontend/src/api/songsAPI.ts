@@ -1,14 +1,11 @@
 import axios from "axios";
 import { Song } from "../redux/types";
 
-const BASE_URL = "https://jsonplaceholder.typicode.com";
+const BASE_URL = "http://127.0.0.1:8000";
 
-export const fetchSongs = async (limit: number = 5): Promise<Song[]> => {
+export const fetchSongs = async (): Promise<Song[]> => {
   try {
-    // const response = await axios.get<Song[]>(`${BASE_URL}/posts`);
-    const response = await axios.get<Song[]>(
-      `${BASE_URL}/posts?_limit=${limit}`
-    );
+    const response = await axios.get<Song[]>(`${BASE_URL}/songs`);
     return response.data;
   } catch (error) {
     throw new Error("failed to fetch songs");
@@ -17,7 +14,7 @@ export const fetchSongs = async (limit: number = 5): Promise<Song[]> => {
 
 export const addSong = async (song: Song): Promise<Song> => {
   try {
-    const response = await axios.post<Song>(`${BASE_URL}/posts`, song);
+    const response = await axios.post<Song>(`${BASE_URL}/songs`, song);
     return response.data;
   } catch (error) {
     throw new Error("failed to create song");
@@ -34,8 +31,8 @@ export const deleteSong = async (id: string): Promise<void> => {
 
 export const updateSong = async (song: Song): Promise<Song> => {
   try {
-    const response = await axios.put<Song>(
-      `${BASE_URL}/posts/${song.id}`,
+    const response = await axios.patch<Song>(
+      `${BASE_URL}/songs/${song._id}`,
       song
     );
     return response.data;
