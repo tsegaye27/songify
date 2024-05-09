@@ -16,6 +16,8 @@ const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
     e.preventDefault();
     if (title.trim() === "" || body.trim() === "") return;
     dispatch(updateSongStart({ id: songId, title, body }));
+    setTitle("");
+    setBody("");
   }
 
   return (
@@ -27,6 +29,7 @@ const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
           placeholder="Enter the Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <br />
         <input
@@ -34,9 +37,16 @@ const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
           placeholder="Enter the Artist"
           value={body}
           onChange={(e) => setBody(e.target.value)}
+          required
         />
         <br />
-        <button onClick={() => onUpdate(null)} type="submit">
+        <button
+          onClick={() => {
+            if (!title || !body) return;
+            onUpdate(null);
+          }}
+          type="submit"
+        >
           Update Song
         </button>
       </form>
