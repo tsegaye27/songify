@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateSongStart } from "../../../redux/slices/slice";
 import styled from "@emotion/styled";
+import RootState from "../../../redux/RootState";
 
 interface EditSongProps {
-  songId: string;
+  song_Id: string;
   onUpdate: (id: string | null) => void;
 }
 
@@ -43,17 +44,18 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const EditSong: React.FC<EditSongProps> = ({ songId, onUpdate }) => {
-  const [title, setTitle] = useState("");
-  const [artist, setArtist] = useState("");
+const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
+  const songs = useSelector((state: RootState) => state.songs.list);
+  const filteredSong = songs.filter((song) => song._id === song_Id);
+  const { title: filteredTitle, artist: filteredArtist } = filteredSong[0];
+  const [title, setTitle] = useState(filteredTitle);
+  const [artist, setArtist] = useState(filteredArtist);
   const dispatch = useDispatch();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (title.trim() === "" || artist.trim() === "") return;
-    dispatch(updateSongStart({ _id: songId, title, artist }));
-    setTitle("");
-    setArtist("");
+    dispatch(updateSongStart({ _id: song_Id, title, artist }));
     onUpdate(null);
   }
 
