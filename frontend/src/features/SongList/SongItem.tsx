@@ -52,12 +52,10 @@ const ButtonContainer = styled.div`
 
 const FavoriteButton = styled.button`
   background-color: #222;
-  color: #ff0000;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
 `;
 const shakeAnimation = keyframes`
     0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -116,6 +114,17 @@ const Icon = styled.span`
   font-size: 20px;
 `;
 
+const IsFavIcon = styled(AiFillHeart)`
+  color: red;
+`;
+
+const IsNotFavIcon = styled(BiHeart)`
+  transition: color 0.3s ease;
+  &:hover {
+    color: red;
+  }
+`;
+
 interface Props {
   song: Song;
   song_Id: string;
@@ -134,10 +143,6 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
       }, 300);
     }
   }
-
-  // function handleFavorite(songId: string) {
-  //   setIsFavorite((fav) => !fav);
-  // }
 
   function handleDelete() {
     setShowDelete((show) => !show);
@@ -165,8 +170,10 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
               <BiPlus />
             </Icon>
           </AddToPlaylistButton>
-          <FavoriteButton onClick={() => setIsFavorite((fav) => !fav)}>
-            <Icon>{isFavorite ? <AiFillHeart /> : <BiHeart />}</Icon>
+          <FavoriteButton>
+            <Icon onClick={() => setIsFavorite((fav) => !fav)}>
+              {isFavorite ? <IsFavIcon /> : <IsNotFavIcon />}
+            </Icon>
           </FavoriteButton>
         </ButtonContainer>
       </StyledSongItem>
