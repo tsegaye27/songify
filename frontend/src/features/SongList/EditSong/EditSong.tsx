@@ -35,7 +35,7 @@ const Input = styled.input`
   text-align: center;
   border: 1px solid #74d3ff;
   border-radius: 1rem;
-  background-color: #74d3ff;
+  background-color: #ffffffe9;
   outline: none;
 `;
 
@@ -72,6 +72,14 @@ const InputContainer = styled.div`
   justify-content: space-evenly;
   gap: 20px;
 `;
+const Label = styled.label`
+  color: #b6b6b6;
+`;
+
+const WrapperField = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
   const songs = useSelector((state: RootState) => state.songs.list);
@@ -93,20 +101,26 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
       <Title>Edit Song</Title>
       <Form onSubmit={handleSubmit}>
         <InputContainer>
-          <Input
-            type="text"
-            placeholder="Enter the Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <Input
-            type="text"
-            placeholder="Enter the Artist"
-            value={artist}
-            onChange={(e) => setArtist(e.target.value)}
-            required
-          />
+          <WrapperField>
+            <Label>Title:</Label>
+            <Input
+              type="text"
+              placeholder="Enter the Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </WrapperField>
+          <WrapperField>
+            <Label>Artist:</Label>
+            <Input
+              type="text"
+              placeholder="Enter the Artist"
+              value={artist}
+              onChange={(e) => setArtist(e.target.value)}
+              required
+            />
+          </WrapperField>
         </InputContainer>
         <ButtonContainer>
           <Button type="submit">
