@@ -46,7 +46,7 @@ const songsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    deleteSongStart(state) {
+    deleteSongStart(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
     },
@@ -64,7 +64,7 @@ const songsSlice = createSlice({
     },
     updateSongSuccess(state, action: PayloadAction<Song>) {
       const index = state.list.findIndex(
-        (song) => song.id === action.payload.id
+        (song) => song._id === action.payload._id
       );
       state.list[index] = action.payload;
       state.loading = false;
