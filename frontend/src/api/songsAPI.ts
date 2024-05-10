@@ -23,9 +23,10 @@ export const addSong = async (song: Song): Promise<Song> => {
 
 export const deleteSong = async (id: string): Promise<void> => {
   try {
-    await axios.delete(`${BASE_URL}/posts/${id}`);
+    await axios.delete(`${BASE_URL}/songs/${id}`);
+    console.log("Song Deleted Successfully");
   } catch (error) {
-    throw new Error("failed to delete song");
+    throw new Error("Failed to delete song");
   }
 };
 
