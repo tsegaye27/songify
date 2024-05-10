@@ -51,11 +51,12 @@ exports.deleteSong = async (req, res) => {
   try {
     const deletedSong = await Song.findByIdAndDelete(req.params.id);
     if (deletedSong) {
-      res.status(204).json(deletedSong);
+      res.status(204).json(null);
     } else {
       res.status(404).json({ message: "Song not found" });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
+    console.log(err.message, "wooo");
   }
 };
