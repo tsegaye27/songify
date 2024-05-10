@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Song } from "../redux/types";
-
-const BASE_URL = "http://127.0.0.1:8000";
+import { url } from "./config.ts";
+const BASE_URL = url;
 
 export const fetchSongs = async (): Promise<Song[]> => {
   try {
