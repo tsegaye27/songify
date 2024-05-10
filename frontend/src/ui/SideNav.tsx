@@ -44,7 +44,6 @@ const NavLinks = styled(NavLink)`
   width: 100%;
   text-decoration: none;
   color: var(--text-color);
-  border: none;
   transition: color 0.3s ease-in;
   display: flex;
   align-items: center;
@@ -56,7 +55,14 @@ const NavLinks = styled(NavLink)`
     color: var(--accent-color);
   }
   &.active {
-    color: var(--accent-color);
+    color: #00ccff;
+    &::before {
+      content: "";
+      margin-right: 2.5rem;
+      background-color: var(--accent-color);
+      transition: margin-right 0.2s ease;
+    }
+    transition: color 0.2s ease;
   }
 `;
 
