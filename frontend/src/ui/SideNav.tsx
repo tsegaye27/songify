@@ -55,6 +55,9 @@ const NavLinks = styled(NavLink)`
   &:hover {
     color: var(--accent-color);
   }
+  &.active {
+    color: var(--accent-color);
+  }
 `;
 
 const NavItem = styled.li`
