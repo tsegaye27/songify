@@ -13,77 +13,57 @@ const StyledSongList = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
-
-// const StyledSongItem = styled.div`
-//   background-color: #222;
-//   border-radius: 10px;
-//   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
-//   padding: 20px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   transition: transform 0.3s ease;
-
-//   &:hover {
-//     transform: translateY(-5px);
-//   }
-// `;
-
-// const SongLogo = styled(BsMusicNote)`
-//   font-size: 32px;
-//   color: #ccc;
-//   margin-bottom: 20px;
-// `;
 
 const Title = styled.h3`
   font-size: 20px;
+  font-family: monospace;
   color: #ccc;
-  margin: 0;
+  margin: 1rem;
   width: 100%;
-  text-align: center;
 `;
 
-// const Body = styled.p`
-//   font-size: 16px;
-//   color: #aaa;
-//   margin: 10px 0;
-//   text-align: center;
-// `;
-
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   gap: 10px;
-//   margin-top: 20px;
-// `;
-
-// const Icon = styled.span`
-//   font-size: 20px;
-//   cursor: pointer;
-//   background-color: #222;
-//   color: #fff;
-//   border: none;
-//   padding: 10px 20px;
-//   border-radius: 5px;
-//   transition: box-shadow 0.3s ease;
-
-//   &:hover {
-//     box-shadow: 1px 1px 5px #fea22a;
-//   }
-// `;
+const EmptyListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 
 const SongList: React.FC = () => {
   const dispatch = useDispatch();
   const songs = useSelector((state: RootState) => state.songs.list);
 
   useEffect(() => {
+    document.title = "Songs";
     dispatch(fetchSongsStart());
   }, [dispatch]);
 
   return (
     <div>
       {songs.length === 0 ? (
-        <Title>No Songs Yet ...</Title>
+        <EmptyListContainer>
+          <Title>No Songs yet...</Title>
+          <Title>Try adding some!</Title>
+        </EmptyListContainer>
       ) : (
         <StyledSongList>
           {songs.map((song) => (
