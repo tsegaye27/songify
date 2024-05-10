@@ -51,7 +51,6 @@ const songsSlice = createSlice({
       state.error = null;
     },
     deleteSongSuccess(state, action: PayloadAction<string>) {
-      state.list = state.list.filter((song) => song._id !== action.payload);
       state.loading = false;
     },
     deleteSongFailure(state, action: PayloadAction<string>) {
