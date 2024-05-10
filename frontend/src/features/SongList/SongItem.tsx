@@ -17,7 +17,7 @@ const StyledSongItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 
   &:hover {
     transform: translateY(-5px);
@@ -98,15 +98,13 @@ const AddToPlaylistButton = styled.button`
 `;
 const EditButton = styled.button`
   background-color: #222;
-  color: #fff;
   border: none;
+  color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-
+  transition: color 0.3s ease;
   &:hover {
-    box-shadow: 1px 1px 5px #fea22a;
+    color: #0800ff;
   }
 `;
 
