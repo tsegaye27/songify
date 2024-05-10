@@ -7,8 +7,7 @@ import { BiEdit, BiTrash, BiPlus, BiHeart } from "react-icons/bi";
 import Modal from "../../ui/Modal";
 import { AiFillHeart } from "react-icons/ai";
 import { keyframes } from "@emotion/react";
-import { deleteSongStart } from "../../redux/slices/slice";
-import { useDispatch } from "react-redux";
+import DeleteSong from "./DeleteSong";
 
 const StyledSongItem = styled.div`
   background-color: #222;
@@ -125,7 +124,7 @@ interface Props {
 const SongItem: React.FC<Props> = ({ song, song_Id }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const [showDelete, setShowDelete] = useState<boolean>(false);
 
   function handleEdit(songId: string | null) {
     if (songId === null) setIsSelected(false);
@@ -136,12 +135,12 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
     }
   }
 
-  function handleFavorite(songId: string) {
-    setIsFavorite((fav) => !fav);
-  }
+  // function handleFavorite(songId: string) {
+  //   setIsFavorite((fav) => !fav);
+  // }
 
-  function handleDelete(songId: string) {
-    dispatch(deleteSongStart(songId));
+  function handleDelete() {
+    setShowDelete((show) => !show);
   }
 
   return (
@@ -156,7 +155,7 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
               <BiEdit />
             </Icon>
           </EditButton>
-          <DeleteButton onClick={() => handleDelete(song._id)}>
+          <DeleteButton onClick={handleDelete}>
             <Icon>
               <BiTrash />
             </Icon>
@@ -166,7 +165,7 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
               <BiPlus />
             </Icon>
           </AddToPlaylistButton>
-          <FavoriteButton onClick={() => handleFavorite(song._id)}>
+          <FavoriteButton onClick={() => setIsFavorite((fav) => !fav)}>
             <Icon>{isFavorite ? <AiFillHeart /> : <BiHeart />}</Icon>
           </FavoriteButton>
         </ButtonContainer>
@@ -174,6 +173,11 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
       {isSelected && (
         <Modal>
           <EditSong onUpdate={handleEdit} song_Id={song_Id} />
+        </Modal>
+      )}
+      {showDelete && (
+        <Modal>
+          <DeleteSong onDelete={handleDelete} song_Id={song_Id} />
         </Modal>
       )}
     </>
