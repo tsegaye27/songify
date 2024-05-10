@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import { BiHome, BiMusic, BiListPlus } from "react-icons/bi";
+import { BiHome, BiMusic, BiListPlus, BiStar } from "react-icons/bi";
 import logo from "../../public/logo.png";
 
 const StyledSideNav = styled.nav`
@@ -40,6 +40,23 @@ const Nav = styled.ul`
   flex-direction: column;
 `;
 
+const NavLinks = styled(NavLink)`
+  width: 100%;
+  text-decoration: none;
+  color: var(--text-color);
+  border: none;
+  transition: color 0.3s ease-in;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+`;
+
 const NavItem = styled.li`
   display: flex;
   flex-direction: row;
@@ -66,28 +83,36 @@ const SideNav: React.FC = () => {
       </LogoContainer>
       <Nav>
         <NavItem>
-          <NavLink className="nav-links" to="/">
+          <NavLinks to="/">
             <NavLinkIcon>
               <BiHome />
             </NavLinkIcon>
             <NavLinkText>Home</NavLinkText>
-          </NavLink>
+          </NavLinks>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-links" to="/songs">
+          <NavLinks to="/songs">
             <NavLinkIcon>
               <BiMusic />
             </NavLinkIcon>
             <NavLinkText>Songs</NavLinkText>
-          </NavLink>
+          </NavLinks>
         </NavItem>
         <NavItem>
-          <NavLink className="nav-links" to="/playlists">
+          <NavLinks to="/playlists">
             <NavLinkIcon>
               <BiListPlus />
             </NavLinkIcon>
             <NavLinkText>Playlists</NavLinkText>
-          </NavLink>
+          </NavLinks>
+        </NavItem>
+        <NavItem>
+          <NavLinks to="/favorites">
+            <NavLinkIcon>
+              <BiStar />
+            </NavLinkIcon>
+            <NavLinkText>Favorites</NavLinkText>
+          </NavLinks>
         </NavItem>
       </Nav>
     </StyledSideNav>
