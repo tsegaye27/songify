@@ -15,6 +15,7 @@ const StyledSongItem = styled.div`
   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
   padding: 20px;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   transition: transform 0.4s ease;
@@ -54,9 +55,18 @@ const FavoriteButton = styled.button`
   background-color: #222;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  &:hover {
+    color: red;
+  }
 `;
+
 const shakeAnimation = keyframes`
     0% { transform: translate(1px, 1px) rotate(0deg); }
     10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -104,7 +114,7 @@ const EditButton = styled.button`
   border-radius: 5px;
   transition: color 0.3s ease;
   &:hover {
-    color: #0800ff;
+    color: #006eff;
   }
 `;
 
@@ -168,12 +178,12 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
               <BiPlus />
             </Icon>
           </AddToPlaylistButton>
-          <FavoriteButton>
-            <Icon onClick={() => setIsFavorite((fav) => !fav)}>
-              {isFavorite ? <IsFavIcon /> : <IsNotFavIcon />}
-            </Icon>
-          </FavoriteButton>
         </ButtonContainer>
+        <FavoriteButton>
+          <Icon onClick={() => setIsFavorite((fav) => !fav)}>
+            {isFavorite ? <IsFavIcon /> : <IsNotFavIcon />}
+          </Icon>
+        </FavoriteButton>
       </StyledSongItem>
       {isSelected && (
         <Modal>
