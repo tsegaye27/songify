@@ -29,26 +29,8 @@ const GlobalStyles: React.FC = () => {
           font-family: Arial, Helvetica, sans-serif;
         }
 
-        .nav-links {
-          width: 100%;
-          text-decoration: none;
-          color: var(--text-color);
-          border: none;
-          transition: all 0.2s ease-in;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          justify-content: center;
-          padding: 1.5rem 0;
-        }
-
-        .nav-links:hover {
-          color: var(--accent-color);
-        }
-
         .song-logo {
           margin: 1.5rem 0;
-
           color: black;
         }
       `}
