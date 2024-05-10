@@ -5,6 +5,10 @@ import styled from "@emotion/styled";
 import { BsMusicNote } from "react-icons/bs";
 import { BiEdit, BiTrash, BiPlus, BiHeart } from "react-icons/bi";
 import Modal from "../../ui/Modal";
+import { AiFillHeart } from "react-icons/ai";
+import { keyframes } from "@emotion/react";
+import { deleteSongStart } from "../../redux/slices/slice";
+import { useDispatch } from "react-redux";
 
 const StyledSongItem = styled.div`
   background-color: #222;
@@ -47,7 +51,55 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
-const Button = styled.button`
+const FavoriteButton = styled.button`
+  background-color: #222;
+  color: #ff0000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+`;
+const shakeAnimation = keyframes`
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  `;
+const DeleteButton = styled.button`
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    animation: ${shakeAnimation} 0.5s linear;
+  }
+`;
+
+const AddToPlaylistButton = styled.button`
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+  }
+`;
+const EditButton = styled.button`
   background-color: #222;
   color: #fff;
   border: none;
@@ -67,18 +119,29 @@ const Icon = styled.span`
 
 interface Props {
   song: Song;
+  song_Id: string;
 }
 
-const SongItem: React.FC<Props> = ({ song }) => {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+const SongItem: React.FC<Props> = ({ song, song_Id }) => {
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   function handleEdit(songId: string | null) {
-    if (songId === null) setSelectedId(null);
+    if (songId === null) setIsSelected(false);
     else {
       setTimeout(() => {
-        setSelectedId(songId);
+        setIsSelected(true);
       }, 300);
     }
+  }
+
+  function handleFavorite(songId: string) {
+    setIsFavorite((fav) => !fav);
+  }
+
+  function handleDelete(songId: string) {
+    dispatch(deleteSongStart(songId));
   }
 
   return (
@@ -88,31 +151,29 @@ const SongItem: React.FC<Props> = ({ song }) => {
         <Title>{song.title}</Title>
         <Body>{song.artist}</Body>
         <ButtonContainer>
-          <Button onClick={() => handleEdit(song._id)}>
+          <EditButton onClick={() => handleEdit(song._id)}>
             <Icon>
               <BiEdit />
             </Icon>
-          </Button>
-          <Button>
+          </EditButton>
+          <DeleteButton onClick={() => handleDelete(song._id)}>
             <Icon>
               <BiTrash />
             </Icon>
-          </Button>
-          <Button>
+          </DeleteButton>
+          <AddToPlaylistButton>
             <Icon>
               <BiPlus />
             </Icon>
-          </Button>
-          <Button>
-            <Icon>
-              <BiHeart />
-            </Icon>
-          </Button>
+          </AddToPlaylistButton>
+          <FavoriteButton onClick={() => handleFavorite(song._id)}>
+            <Icon>{isFavorite ? <AiFillHeart /> : <BiHeart />}</Icon>
+          </FavoriteButton>
         </ButtonContainer>
       </StyledSongItem>
-      {selectedId && (
+      {isSelected && (
         <Modal>
-          <EditSong onUpdate={handleEdit} songId={selectedId} />
+          <EditSong onUpdate={handleEdit} song_Id={song_Id} />
         </Modal>
       )}
     </>
