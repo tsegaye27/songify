@@ -22,6 +22,7 @@ const StyledSongItem = styled.div`
 
   &:hover {
     transform: translateY(-5px);
+    /* transform: rotateY(180deg); */
   }
 `;
 
@@ -142,6 +143,7 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
+  // const [showDetails, setShowDetails] = useState<boolean>(false);
 
   function handleEdit(songId: string | null) {
     if (songId === null) setIsSelected(false);
