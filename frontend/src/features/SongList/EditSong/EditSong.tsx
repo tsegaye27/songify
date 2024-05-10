@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSongStart } from "../../../redux/slices/slice";
 import styled from "@emotion/styled";
 import RootState from "../../../redux/RootState";
+import { BiCheck, BiX } from "react-icons/bi";
 
 interface EditSongProps {
   song_Id: string;
@@ -10,38 +11,66 @@ interface EditSongProps {
 }
 
 const EditSongContainer = styled.div`
-  background-color: #fff;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  width: 20rem;
+  height: 20rem;
 `;
 
 const Title = styled.h3`
-  color: #333;
+  color: white;
   margin-bottom: 20px;
+  text-align: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  height: 70%;
+  margin: 3rem 0;
 `;
 
 const Input = styled.input`
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px 16px;
+  text-align: center;
+  border: 1px solid #74d3ff;
+  border-radius: 1rem;
+  background-color: #74d3ff;
   outline: none;
 `;
 
 const Button = styled.button`
   padding: 10px 20px;
-  margin: 5px 0;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+  background-color: #222;
+  border: 1px solid #007bff;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  align-items: flex-end;
+`;
+
+const UpdateButton = styled(BiCheck)`
+  color: #00ff00;
+  font-size: 20px;
+  &:hover {
+  }
+`;
+const CancelButton = styled(BiX)`
+  color: red;
+  font-size: 20px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 20px;
 `;
 
 const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
@@ -63,22 +92,30 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
     <EditSongContainer>
       <Title>Edit Song</Title>
       <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          placeholder="Enter the Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <Input
-          type="text"
-          placeholder="Enter the Artist"
-          value={artist}
-          onChange={(e) => setArtist(e.target.value)}
-          required
-        />
-        <Button type="submit">Update Song</Button>
-        <Button onClick={() => onUpdate(null)}>Cancel</Button>
+        <InputContainer>
+          <Input
+            type="text"
+            placeholder="Enter the Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <Input
+            type="text"
+            placeholder="Enter the Artist"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+            required
+          />
+        </InputContainer>
+        <ButtonContainer>
+          <Button type="submit">
+            <UpdateButton />
+          </Button>
+          <Button onClick={() => onUpdate(null)}>
+            <CancelButton />
+          </Button>
+        </ButtonContainer>
       </Form>
     </EditSongContainer>
   );
