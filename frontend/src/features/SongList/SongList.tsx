@@ -106,7 +106,9 @@ const SongList: React.FC = () => {
             </ButtonContainer>
           </StyledSongItem>
         ) : (
-          songs.map((song) => <SongItem key={song._id} song={song} />)
+          songs.map((song) => (
+            <SongItem key={song._id} song_Id={song._id} song={song} />
+          ))
         )}
       </StyledSongList>
     </div>
