@@ -35,7 +35,7 @@ const Input = styled.input`
   text-align: center;
   border: 1px solid #74d3ff;
   border-radius: 1rem;
-  background-color: #ffffffe9;
+  background-color: #d7d7d7e9;
   outline: none;
 `;
 
@@ -70,10 +70,7 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  gap: 20px;
-`;
-const Label = styled.label`
-  color: #b6b6b6;
+  gap: 10px;
 `;
 
 const WrapperField = styled.div`
@@ -102,7 +99,7 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
       <Form onSubmit={handleSubmit}>
         <InputContainer>
           <WrapperField>
-            <Label>Title:</Label>
+            {/* <Label>Title:</Label> */}
             <Input
               type="text"
               placeholder="Enter the Title"
@@ -112,7 +109,7 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
             />
           </WrapperField>
           <WrapperField>
-            <Label>Artist:</Label>
+            {/* <Label>Artist:</Label> */}
             <Input
               type="text"
               placeholder="Enter the Artist"
