@@ -136,10 +136,9 @@ const IsNotFavIcon = styled(BiHeart)`
 
 interface Props {
   song: Song;
-  song_Id: string;
 }
 
-const SongItem: React.FC<Props> = ({ song, song_Id }) => {
+const SongItem: React.FC<Props> = ({ song }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
