@@ -8,6 +8,8 @@ import {
   watchFetchSongs,
   watchUpdateSong,
 } from "../sagas/saga";
+import favoritesReducer from "../slices/favoriteSlice";
+import playlistsReducer from "../slices/playlistSlice";
 
 function* rootSaga() {
   yield all([
@@ -20,6 +22,8 @@ function* rootSaga() {
 
 const rootReducer = combineReducers({
   songs: songsReducer,
+  favorites: favoritesReducer,
+  playlists: playlistsReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
