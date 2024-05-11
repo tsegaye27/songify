@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 
-const Favorite: React.FC = () => {
+interface FavoriteProps {
+  searchQuery: string;
+}
+
+const Favorite: React.FC<FavoriteProps> = ({ searchQuery }) => {
   useEffect(() => {
     document.title = "Favorites";
   }, []);
