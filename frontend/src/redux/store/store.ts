@@ -7,7 +7,7 @@ import {
   watchDeleteSong,
   watchFetchSongs,
   watchUpdateSong,
-} from "../saga/sagas";
+} from "../sagas/saga";
 
 function* rootSaga() {
   yield all([
