@@ -1,6 +1,6 @@
 import React from "react";
 import SideNav from "./SideNav";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import Header from "./Header";
 
@@ -13,6 +13,10 @@ const StyledMain = styled.main`
   padding: 2rem;
   flex: 1;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    background-color: #949494;
+    border-radius: 10px;
+  }
 `;
 
 const MiniContainer = styled.div`
@@ -22,11 +26,12 @@ const MiniContainer = styled.div`
   background-color: #494949;
 `;
 
-const Footer = styled.footer`
+const Footer = styled(NavLink)`
   background-color: #333;
-  color: #fff;
+  color: #aaaaaacc;
   text-align: center;
   padding: 10px;
+  text-decoration: none;
 `;
 
 const AppLayout: React.FC = () => {
@@ -38,7 +43,7 @@ const AppLayout: React.FC = () => {
         <StyledMain>
           <Outlet />
         </StyledMain>
-        <Footer>Songify | All Rights Reserved</Footer>
+        <Footer to="/">Songify | All Rights Reserved</Footer>
       </MiniContainer>
     </StyledAppLayout>
   );
