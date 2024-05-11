@@ -3,3 +3,8 @@ export interface Song {
   title: string;
   artist: string;
 }
+
+export interface SongsList {
+  list: Song[];
+  name: string;
+}
