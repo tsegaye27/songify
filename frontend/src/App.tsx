@@ -5,8 +5,8 @@ import Home from "./ui/Home";
 import SongList from "./features/SongList/SongList";
 import Error from "./ui/Error";
 import GlobalStyles from "./styles/GlobalStyles";
-import PlayList from "./features/PlayList/PlayList";
 import Favorite from "./features/Favorite/Favorite";
+import Playlist from "./features/Playlist/Playlist";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/playlists",
-        element: <PlayList />,
+        element: <Playlist />,
         errorElement: <Error />,
       },
       {
