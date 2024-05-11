@@ -28,7 +28,6 @@ const Input = styled.input`
   padding: 10px 16px;
   border: 1px solid #5dfe3c;
   text-align: center;
-  background-color: #d7d7d7e9;
   outline: none;
 `;
 
@@ -65,10 +64,6 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-// const FormContainer = styled.div`
-//   padding: 2rem;
-//   border-radius: 10px;
-// `;
 const WrapperField = styled.div`
   display: flex;
   flex-direction: column;
@@ -100,6 +95,7 @@ const AddSong: React.FC<AddSongFProps> = ({ onAdd }) => {
               type="text"
               placeholder="Enter the Title"
               value={title}
+              required
               onChange={(e) => setTitle(e.target.value)}
             />
           </WrapperField>
@@ -107,6 +103,7 @@ const AddSong: React.FC<AddSongFProps> = ({ onAdd }) => {
             <Input
               type="text"
               placeholder="Enter the Artist"
+              required
               value={artist}
               onChange={(e) => setArtist(e.target.value)}
             />
