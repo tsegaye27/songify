@@ -99,7 +99,6 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
       <Form onSubmit={handleSubmit}>
         <InputContainer>
           <WrapperField>
-            {/* <Label>Title:</Label> */}
             <Input
               type="text"
               placeholder="Enter the Title"
@@ -109,7 +108,6 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
             />
           </WrapperField>
           <WrapperField>
-            {/* <Label>Artist:</Label> */}
             <Input
               type="text"
               placeholder="Enter the Artist"
