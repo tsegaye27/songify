@@ -24,6 +24,7 @@ const Title = styled.h3`
   color: #ccc;
   margin: 1rem;
   width: 100%;
+  text-align: center;
 `;
 
 const EmptyListContainer = styled.div`
