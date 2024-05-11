@@ -18,6 +18,7 @@ import {
   deleteSong,
   updateSong,
 } from "../../api/songsAPI";
+import { AddSongProp } from "../../api/songsAPI";
 
 function* fetchSongsSaga(): SagaIterator {
   try {
@@ -32,7 +33,7 @@ export function* watchFetchSongs(): SagaIterator {
   yield takeLatest("songs/fetchSongsStart", fetchSongsSaga);
 }
 
-export function* addSongSaga(action: PayloadAction<Song>): SagaIterator {
+export function* addSongSaga(action: PayloadAction<AddSongProp>): SagaIterator {
   try {
     const song: Song = yield call(addSong, action.payload);
     yield put(addSongSuccess(song));
