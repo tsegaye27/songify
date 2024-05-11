@@ -35,7 +35,6 @@ const Input = styled.input`
   text-align: center;
   border: 1px solid #5dfe3c;
   border-radius: 1rem;
-  background-color: #d7d7d7e9;
   outline: none;
 `;
 
