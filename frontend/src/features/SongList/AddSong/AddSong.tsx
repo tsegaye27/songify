@@ -6,9 +6,8 @@ import styled from "@emotion/styled";
 
 const AddSongContainer = styled.div`
   border-radius: 10px;
-  padding: 20px;
   width: 20rem;
-  height: 20rem;
+  height: 22rem;
 `;
 const Title = styled.h3`
   color: white;
@@ -65,6 +64,11 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
+const FormContainer = styled.div`
+  padding: 2rem;
+  border-radius: 10px;
+`;
+
 interface AddSongFProps {
   onAdd: () => void;
 }
@@ -79,36 +83,36 @@ const AddSong: React.FC<AddSongFProps> = ({ onAdd }) => {
     if (title.trim() === "" || artist.trim() === "") return;
     dispatch(addSongStart({ title, artist }));
     onAdd();
-    // setTitle("");
-    // setArtist("");
   };
   return (
     <AddSongContainer>
-      <Title>Add Song</Title>
-      <Form onSubmit={handleSubmit}>
-        <InputContainer>
-          <Input
-            type="text"
-            placeholder="Enter the Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Enter the Artist"
-            value={artist}
-            onChange={(e) => setArtist(e.target.value)}
-          />
-        </InputContainer>
-        <ButtonContainer>
-          <Button type="submit">
-            <AddButton />
-          </Button>
-          <Button onClick={() => onAdd()}>
-            <CancelButton />
-          </Button>
-        </ButtonContainer>
-      </Form>
+      <FormContainer>
+        <Title>Add Song</Title>
+        <Form onSubmit={handleSubmit}>
+          <InputContainer>
+            <Input
+              type="text"
+              placeholder="Enter the Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Enter the Artist"
+              value={artist}
+              onChange={(e) => setArtist(e.target.value)}
+            />
+          </InputContainer>
+          <ButtonContainer>
+            <Button type="submit">
+              <AddButton />
+            </Button>
+            <Button onClick={() => onAdd()}>
+              <CancelButton />
+            </Button>
+          </ButtonContainer>
+        </Form>
+      </FormContainer>
     </AddSongContainer>
   );
 };
