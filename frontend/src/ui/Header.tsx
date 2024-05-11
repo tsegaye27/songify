@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { BiSearch } from "react-icons/bi";
+import React from "react";
 
 const StyledHeader = styled.header`
   /* background-color: #181818; */
