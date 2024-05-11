@@ -16,22 +16,6 @@ const StyledSongList = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #3e3a3a;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 `;
 
 const Title = styled.h3`
