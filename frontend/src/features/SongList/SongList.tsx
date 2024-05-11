@@ -42,7 +42,7 @@ const AddSongButton = styled.div`
   align-items: center;
   font-size: 2rem;
   color: #222;
-  background-color: #5fe4a4;
+  background-color: #09d371;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -50,7 +50,7 @@ const AddSongButton = styled.div`
   transition: all 0.3s;
 
   &:hover {
-    background-color: #bbf1dd;
+    background-color: #5fe4a4;
   }
 `;
 
