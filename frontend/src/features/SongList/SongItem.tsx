@@ -112,6 +112,7 @@ const EditButton = styled.button`
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;
+  cursor: pointer;
   transition: color 0.3s ease;
   &:hover {
     color: #006eff;
