@@ -2,11 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../types";
 import { AddSongProp } from "../../api/songsAPI";
 
-interface SongPayload {
-  _id: string;
-  title: string;
-  artist: string;
-}
 export interface SongState {
   list: Song[];
   loading: boolean;
@@ -59,7 +54,7 @@ const songsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    updateSongStart(state, action: PayloadAction<SongPayload>) {
+    updateSongStart(state, action: PayloadAction<Song>) {
       state.loading = true;
       state.error = null;
     },
