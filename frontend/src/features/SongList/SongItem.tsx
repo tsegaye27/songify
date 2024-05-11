@@ -188,12 +188,12 @@ const SongItem: React.FC<Props> = ({ song, song_Id }) => {
       </StyledSongItem>
       {isSelected && (
         <Modal>
-          <EditSong onUpdate={handleEdit} song_Id={song_Id} />
+          <EditSong onUpdate={handleEdit} song_Id={song._id} />
         </Modal>
       )}
       {showDelete && (
         <Modal>
-          <DeleteSong onDelete={handleDelete} song_Id={song_Id} />
+          <DeleteSong onDelete={handleDelete} song_Id={song._id} />
         </Modal>
       )}
     </>
