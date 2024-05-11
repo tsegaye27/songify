@@ -1,6 +1,12 @@
 import axios from "axios";
 import { Song } from "../redux/types";
 import { url } from "./config.ts";
+
+export interface AddSongProp {
+  title: string;
+  artist: string;
+}
+
 const BASE_URL = url;
 
 export const fetchSongs = async (): Promise<Song[]> => {
@@ -12,7 +18,7 @@ export const fetchSongs = async (): Promise<Song[]> => {
   }
 };
 
-export const addSong = async (song: Song): Promise<Song> => {
+export const addSong = async (song: AddSongProp): Promise<Song> => {
   try {
     const response = await axios.post<Song>(`${BASE_URL}/songs`, song);
     return response.data;
