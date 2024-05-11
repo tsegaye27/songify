@@ -23,15 +23,15 @@ const ExploreLink = styled(NavLink)`
   margin: 1rem;
   text-decoration: none;
   display: block;
-  padding: 10px;
+  background-color: #111;
+  padding: 15px;
   font-size: 18px;
   border-radius: 10px;
-  border: 1px solid #ec1313f1;
   cursor: pointer;
-  transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: box-shadow 0.3s ease-in-out;
 
   &:hover {
-    background-color: #ec1313f1;
+    box-shadow: 1px 1px 5px 2px #ec1313f1;
   }
 `;
 
