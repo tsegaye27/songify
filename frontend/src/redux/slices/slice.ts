@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../types";
+import { AddSongProp } from "../../api/songsAPI";
 
 interface SongPayload {
   _id: string;
@@ -34,7 +35,7 @@ const songsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    addSongStart(state, action: PayloadAction<SongPayload>) {
+    addSongStart(state, action: PayloadAction<AddSongProp>) {
       state.loading = true;
       state.error = null;
     },
