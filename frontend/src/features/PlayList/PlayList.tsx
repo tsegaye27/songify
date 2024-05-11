@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 
-const PlayList: React.FC = () => {
+interface PlayListProps {
+  searchQuery: string;
+}
+
+const PlayList: React.FC<PlayListProps> = ({ searchQuery }) => {
   useEffect(() => {
     document.title = "Playlist";
   }, []);
