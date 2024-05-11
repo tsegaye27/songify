@@ -33,7 +33,7 @@ const Form = styled.form`
 const Input = styled.input`
   padding: 10px 16px;
   text-align: center;
-  border: 1px solid #74d3ff;
+  border: 1px solid #5dfe3c;
   border-radius: 1rem;
   background-color: #d7d7d7e9;
   outline: none;
