@@ -163,13 +163,13 @@ const SongItem: React.FC<Props> = ({ song }) => {
         <Title>{song.title}</Title>
         <Body>{song.artist}</Body>
         <ButtonContainer>
-          <EditButton onClick={() => handleEdit(song._id)}>
-            <Icon>
+          <EditButton>
+            <Icon onClick={() => handleEdit(song._id)}>
               <BiEdit />
             </Icon>
           </EditButton>
-          <DeleteButton onClick={handleDelete}>
-            <Icon>
+          <DeleteButton>
+            <Icon onClick={handleDelete}>
               <BiTrash />
             </Icon>
           </DeleteButton>
