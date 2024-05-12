@@ -54,6 +54,16 @@ const AddSongButton = styled.div`
   }
 `;
 
+const H2 = styled.h2`
+  align-self: center;
+  color: white;
+`;
+
+const AddNewSongContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
 const SongList: React.FC = () => {
   const dispatch = useDispatch();
   const songs = useSelector((state: RootState) => state.songs.list);
@@ -80,12 +90,15 @@ const SongList: React.FC = () => {
         </EmptyListContainer>
       ) : (
         <>
-          <AddSongButton onClick={handleAdd}>
-            <BiPlus />
-          </AddSongButton>
+          <AddNewSongContainer>
+            <AddSongButton onClick={handleAdd}>
+              <BiPlus />
+            </AddSongButton>
+            <H2>Add a Song</H2>
+          </AddNewSongContainer>
           <StyledSongList>
             {songs.map((song) => (
-              <SongItem key={song._id} song_Id={song._id} song={song} />
+              <SongItem key={song._id} song={song} />
             ))}
           </StyledSongList>
         </>
