@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Song } from "../../redux/types";
 import EditSong from "./EditSong/EditSong";
 import styled from "@emotion/styled";
@@ -8,6 +8,12 @@ import Modal from "../../ui/Modal";
 import { AiFillHeart } from "react-icons/ai";
 import { keyframes } from "@emotion/react";
 import DeleteSong from "./DeleteSong";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/slices/favoriteSlice";
+import RootState from "../../redux/RootState";
 
 const StyledSongItem = styled.div`
   background-color: #222;
@@ -142,6 +148,13 @@ const SongItem: React.FC<Props> = ({ song }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const favorites = useSelector((state: RootState) => state.favorites.favList);
+
+  useEffect(() => {
+    const isFav = favorites.some((favSong) => favSong._id === song._id);
+    setIsFavorite(isFav);
+  }, [favorites, song._id]);
 
   function handleEdit(songId: string | null) {
     if (songId === null) setIsSelected(false);
@@ -149,6 +162,15 @@ const SongItem: React.FC<Props> = ({ song }) => {
       setTimeout(() => {
         setIsSelected(true);
       }, 300);
+    }
+  }
+
+  function handleFavorite() {
+    setIsFavorite((prevState) => !prevState);
+    if (!isFavorite) {
+      dispatch(addToFavorites(song));
+    } else {
+      dispatch(removeFromFavorites(song._id));
     }
   }
 
@@ -180,7 +202,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
           </AddToPlaylistButton>
         </ButtonContainer>
         <FavoriteButton>
-          <Icon onClick={() => setIsFavorite((fav) => !fav)}>
+          <Icon onClick={handleFavorite}>
             {isFavorite ? <IsFavIcon /> : <IsNotFavIcon />}
           </Icon>
         </FavoriteButton>
