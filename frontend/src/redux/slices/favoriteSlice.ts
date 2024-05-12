@@ -5,8 +5,17 @@ export interface FavoriteSongState {
   favList: Song[];
 }
 
+const loadToLocalStorage = (): Song[] => {
+  const favList = localStorage.getItem("favorites");
+  return favList ? JSON.parse(favList) : [];
+};
+
+const saveToLocalStorage = (favSong: Song[]): void => {
+  localStorage.setItem("favorites", JSON.stringify(favSong));
+};
+
 const initialState: FavoriteSongState = {
-  favList: [],
+  favList: loadToLocalStorage(),
 };
 
 const favoriteSlice = createSlice({
@@ -15,11 +24,13 @@ const favoriteSlice = createSlice({
   reducers: {
     addToFavorites(state, action: PayloadAction<Song>) {
       state.favList.push(action.payload);
+      saveToLocalStorage(state.favList);
     },
     removeFromFavorites(state, action: PayloadAction<string>) {
       state.favList = state.favList.filter(
         (song) => song._id !== action.payload
       );
+      saveToLocalStorage(state.favList);
     },
   },
 });
