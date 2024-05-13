@@ -13,7 +13,7 @@ const playlistSlice = createSlice({
   name: "playlists",
   initialState,
   reducers: {
-    addPlaylist(state, action: PayloadAction<SongsList>) {
+    createPlaylist(state, action: PayloadAction<SongsList>) {
       state.listOfPlaylist.push(action.payload);
     },
     deletePlaylist(state, action: PayloadAction<string>) {
@@ -30,7 +30,7 @@ const playlistSlice = createSlice({
   },
 });
 
-export const { addPlaylist, deletePlaylist, updatePlaylist } =
+export const { createPlaylist, deletePlaylist, updatePlaylist } =
   playlistSlice.actions;
 
 export default playlistSlice.reducer;
