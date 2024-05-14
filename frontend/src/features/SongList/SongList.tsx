@@ -18,7 +18,7 @@ const StyledSongList = styled.div`
   margin-top: 1rem;
 `;
 
-const Title = styled.h3`
+export const Title = styled.h3`
   font-size: 20px;
   font-family: monospace;
   color: #ccc;
@@ -36,7 +36,7 @@ const EmptyListContainer = styled.div`
   height: 100%;
 `;
 
-const AddSongButton = styled.div`
+export const AddSongButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
