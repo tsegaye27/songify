@@ -22,7 +22,7 @@ const Playlist: React.FC = () => {
   return (
     <StyledPlaylist>
       <Title>No Playlist yet, Start by creating a new one</Title>
-      <AddPlaylistButton>
+      <AddPlaylistButton onClick={() => console.log("add playlist")}>
         <BiPlus />
       </AddPlaylistButton>
     </StyledPlaylist>
