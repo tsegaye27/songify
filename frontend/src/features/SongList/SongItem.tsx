@@ -16,23 +16,7 @@ import {
 import RootState from "../../redux/RootState";
 import AddPlaylist from "../Playlist/AddPlaylist";
 
-// const StyledSongItem = styled.div`
-//   background-color: #222;
-//   border-radius: 10px;
-//   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
-//   padding: 20px;
-//   display: flex;
-//   position: relative;
-//   flex-direction: column;
-//   align-items: center;
-//   transition: transform 0.4s ease;
-
-//   &:hover {
-//     transform: translateY(-5px);
-//   }
-// `;
-
-const StyledHorizontalView = styled.div`
+const StyledSongItem = styled.div`
   background-color: #222;
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
@@ -203,7 +187,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
 
   return (
     <>
-      <StyledHorizontalView>
+      <StyledSongItem>
         <SongLogo className="song-logo" />
         <Title>{song.title}</Title>
         <Body>{song.artist}</Body>
@@ -229,7 +213,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
             {isFavorite ? <IsFavIcon /> : <IsNotFavIcon />}
           </Icon>
         </FavoriteButton>
-      </StyledHorizontalView>
+      </StyledSongItem>
       {/* <StyledSongItem>
         <SongLogo className="song-logo" />
         <Title>{song.title}</Title>
