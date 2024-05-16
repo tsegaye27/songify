@@ -31,7 +31,9 @@ const GlobalStyles: React.FC = () => {
 
         .song-logo {
           margin: 1.5rem 0;
-          color: black;
+          padding: 1rem;
+          border-radius: 100%;
+          background-color: black;
         }
       `}
     />
