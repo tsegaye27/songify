@@ -27,7 +27,7 @@ export const Title = styled.h3`
   text-align: center;
 `;
 
-const EmptyListContainer = styled.div`
+export const EmptyListContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
