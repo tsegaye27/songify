@@ -15,14 +15,14 @@ const Title = styled.h3`
   margin-bottom: 20px;
   text-align: center;
 `;
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   height: 70%;
   margin: 3rem 0;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   border: none;
   border-radius: 1rem;
   padding: 10px 16px;
@@ -57,14 +57,14 @@ const CancelButton = styled(BiX)`
   font-size: 20px;
 `;
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 10px;
 `;
 
-const WrapperField = styled.div`
+export const WrapperField = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -87,7 +87,6 @@ const AddSong: React.FC<AddSongFProps> = ({ onAdd }) => {
   return (
     <AddSongContainer>
       <Title>Add Song</Title>
-      {/* <FormContainer> */}
       <Form onSubmit={handleSubmit}>
         <InputContainer>
           <WrapperField>
@@ -118,7 +117,6 @@ const AddSong: React.FC<AddSongFProps> = ({ onAdd }) => {
           </Button>
         </ButtonContainer>
       </Form>
-      {/* </FormContainer> */}
     </AddSongContainer>
   );
 };
