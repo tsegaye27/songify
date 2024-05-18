@@ -59,7 +59,7 @@ const H2 = styled.h2`
   color: white;
 `;
 
-const AddNewSongContainer = styled.div`
+export const AddNewSongContainer = styled.div`
   display: flex;
   gap: 1rem;
 `;
