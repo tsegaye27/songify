@@ -4,11 +4,16 @@ import {
   AddSongButton as AddPlaylistButton,
   EmptyListContainer,
 } from "../SongList/SongList";
+import { SongsList } from "../../redux/types";
 
-const PlaylistItem: React.FC = () => {
+interface PlaylistItemProp {
+  item: SongsList;
+}
+
+const PlaylistItem: React.FC<PlaylistItemProp> = ({ item }) => {
   return (
     <EmptyListContainer>
-      <Title>Add a Playlist</Title>
+      <Title>{item.name}</Title>
       <AddPlaylistButton />
     </EmptyListContainer>
   );
