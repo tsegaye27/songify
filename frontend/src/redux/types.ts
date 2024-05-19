@@ -4,7 +4,7 @@ export interface Song {
   artist: string;
 }
 
-export interface SongsList {
-  list: Song[];
+export interface TypePlaylist {
   name: string;
+  list: Song[];
 }
