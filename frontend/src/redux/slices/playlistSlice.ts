@@ -1,43 +1,45 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SongsList } from "../types";
+import { TypePlaylist } from "../types";
 
 export interface PlaylistState {
-  listOfPlaylist: SongsList[];
+  playlist: TypePlaylist[];
 }
 
-const loadToLocalStorage = (): SongsList[] => {
-  const listOfPlaylists = localStorage.getItem("playlists");
-  return listOfPlaylists ? JSON.parse(listOfPlaylists) : [];
+const loadPlaylist = (): TypePlaylist[] => {
+  const playlists = localStorage.getItem("playlists");
+  return playlists ? JSON.parse(playlists) : [];
 };
 
-const saveToLocalStorage = (listOfPlaylists: SongsList[]): void => {
-  localStorage.setItem("playlists", JSON.stringify(listOfPlaylists));
+const savePlaylist = (playlists: TypePlaylist[]): void => {
+  localStorage.setItem("playlists", JSON.stringify(playlists));
 };
 
 const initialState: PlaylistState = {
-  listOfPlaylist: loadToLocalStorage(),
+  playlist: loadPlaylist(),
 };
 
 const playlistSlice = createSlice({
-  name: "playlists",
+  name: "playlist",
   initialState,
   reducers: {
-    createPlaylist(state, action: PayloadAction<SongsList>) {
-      state.listOfPlaylist.push(action.payload);
-      saveToLocalStorage(state.listOfPlaylist);
+    createPlaylist(state, action: PayloadAction<TypePlaylist>) {
+      state.playlist.push(action.payload);
+      savePlaylist(state.playlist);
     },
     deletePlaylist(state, action: PayloadAction<string>) {
-      state.listOfPlaylist.filter(
+      state.playlist = state.playlist.filter(
         (playlist) => playlist.name !== action.payload
       );
-      saveToLocalStorage(state.listOfPlaylist);
+      savePlaylist(state.playlist);
     },
-    updatePlaylist(state, action: PayloadAction<SongsList>) {
-      const index = state.listOfPlaylist.findIndex(
+    updatePlaylist(state, action: PayloadAction<TypePlaylist>) {
+      const index = state.playlist.findIndex(
         (playlist) => playlist.name === action.payload.name
       );
-      state.listOfPlaylist[index] = action.payload;
-      saveToLocalStorage(state.listOfPlaylist);
+      if (index !== -1) {
+        state.playlist[index] = action.payload;
+        savePlaylist(state.playlist);
+      }
     },
   },
 });
