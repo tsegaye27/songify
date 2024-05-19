@@ -1,50 +1,74 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TypePlaylist } from "../types";
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { Song, TypePlaylist } from "../types";
+import { loadPlaylist, savePlaylist } from "../../api/playlistService";
 
-export interface PlaylistState {
-  playlist: TypePlaylist[];
+interface PlaylistState {
+  list: TypePlaylist[];
 }
 
-const loadPlaylist = (): TypePlaylist[] => {
-  const playlists = localStorage.getItem("playlists");
-  return playlists ? JSON.parse(playlists) : [];
-};
-
-const savePlaylist = (playlists: TypePlaylist[]): void => {
-  localStorage.setItem("playlists", JSON.stringify(playlists));
-};
-
 const initialState: PlaylistState = {
-  playlist: loadPlaylist(),
+  list: loadPlaylist(),
 };
 
-const playlistSlice = createSlice({
+const playlistSlice: Slice<PlaylistState> = createSlice({
   name: "playlist",
   initialState,
   reducers: {
-    createPlaylist(state, action: PayloadAction<TypePlaylist>) {
-      state.playlist.push(action.payload);
-      savePlaylist(state.playlist);
+    addPlaylist(state, action: PayloadAction<{ name: string }>) {
+      state.list.push({ name: action.payload.name, list: [] });
+      savePlaylist(state.list);
+    },
+    editPlaylist(
+      state,
+      action: PayloadAction<{ name: string; newName: string }>
+    ) {
+      const playlist = state.list.find((p) => p.name === action.payload.name);
+      if (playlist) {
+        playlist.name = action.payload.newName;
+        savePlaylist(state.list);
+      }
     },
     deletePlaylist(state, action: PayloadAction<string>) {
-      state.playlist = state.playlist.filter(
+      state.list = state.list.filter(
         (playlist) => playlist.name !== action.payload
       );
-      savePlaylist(state.playlist);
+      savePlaylist(state.list);
     },
-    updatePlaylist(state, action: PayloadAction<TypePlaylist>) {
-      const index = state.playlist.findIndex(
+    addSongToPlaylist(
+      state,
+      action: PayloadAction<{ name: string; song: Song }>
+    ) {
+      const playlist = state.list.find(
         (playlist) => playlist.name === action.payload.name
       );
-      if (index !== -1) {
-        state.playlist[index] = action.payload;
-        savePlaylist(state.playlist);
+      if (playlist) {
+        playlist.list.push(action.payload.song);
+        savePlaylist(state.list);
+      }
+    },
+    removeSongFromPlaylist(
+      state,
+      action: PayloadAction<{ name: string; songId: string }>
+    ) {
+      const playlist = state.list.find(
+        (playlist) => playlist.name === action.payload.name
+      );
+      if (playlist) {
+        playlist.list = playlist.list.filter(
+          (song) => song._id !== action.payload.songId
+        );
+        savePlaylist(state.list);
       }
     },
   },
 });
 
-export const { createPlaylist, deletePlaylist, updatePlaylist } =
-  playlistSlice.actions;
+export const {
+  addPlaylist,
+  editPlaylist,
+  deletePlaylist,
+  addSongToPlaylist,
+  removeSongFromPlaylist,
+} = playlistSlice.actions;
 
 export default playlistSlice.reducer;
