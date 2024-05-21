@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createPlaylist } from "../../redux/slices/playlistSlice";
+import { addPlaylist } from "../../redux/slices/playlistSlice";
 import styled from "@emotion/styled";
 
 const Form = styled.form`
@@ -35,7 +35,7 @@ const AddPlaylist: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      dispatch(createPlaylist({ list: [], name: title }));
+      dispatch(addPlaylist({ list: [], name: title }));
       setTitle("");
     }
   };
