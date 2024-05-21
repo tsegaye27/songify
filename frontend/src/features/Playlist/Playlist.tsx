@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import RootState from "../../redux/RootState";
-import { createPlaylist } from "../../redux/slices/playlistSlice";
+import { addPlaylist } from "../../redux/slices/playlistSlice";
 import PlaylistItem from "./PlaylistItem";
 import Modal from "../../ui/Modal";
 import AddPlaylist from "./AddPlaylist";
@@ -23,7 +23,7 @@ const Playlist: React.FC = () => {
   };
 
   // const handleAddPlaylistSubmit = (newPlaylistName: string) => {
-  //   dispatch(createPlaylist({}));
+  //   dispatch(addPlaylist({}));
   //   setShowAddPlaylist(false);
   // };
 
