@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import RootState from "../../redux/RootState";
-import { addPlaylist } from "../../redux/slices/playlistSlice";
-import PlaylistItem from "./PlaylistItem";
+// import { addPlaylist } from "../../redux/slices/playlistSlice";
+// import PlaylistItem from "./PlaylistItem";
 import Modal from "../../ui/Modal";
 import AddPlaylist from "./AddPlaylist";
 
 const Playlist: React.FC = () => {
   const playlists = useSelector((state: RootState) => state.playlist.list);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [showAddPlaylist, setShowAddPlaylist] = useState(false);
 
   const hasPlaylists = playlists.length > 0;
@@ -22,11 +22,6 @@ const Playlist: React.FC = () => {
     setShowAddPlaylist(true);
   };
 
-  // const handleAddPlaylistSubmit = (newPlaylistName: string) => {
-  //   dispatch(addPlaylist({}));
-  //   setShowAddPlaylist(false);
-  // };
-
   return (
     <div className="playlist-container">
       {hasPlaylists ? (
@@ -37,11 +32,11 @@ const Playlist: React.FC = () => {
           >
             Add Playlist
           </button>
-          <div className="playlist-grid">
+          {/* <div className="playlist-grid">
             {playlists.map((playlist) => (
               <PlaylistItem key={playlist.name} playlist={playlist} />
             ))}
-          </div>
+          </div> */}
         </>
       ) : (
         <div className="empty-playlist">
