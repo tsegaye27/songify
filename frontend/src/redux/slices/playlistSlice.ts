@@ -14,7 +14,7 @@ const playlistSlice: Slice<PlaylistState> = createSlice({
   name: "playlist",
   initialState,
   reducers: {
-    addPlaylist(state, action: PayloadAction<{ name: string }>) {
+    addPlaylist(state, action: PayloadAction<TypePlaylist>) {
       state.list.push({ name: action.payload.name, list: [] });
       savePlaylist(state.list);
     },
