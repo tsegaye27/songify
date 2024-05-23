@@ -7,6 +7,8 @@ import Error from "./ui/Error";
 import GlobalStyles from "./styles/GlobalStyles";
 import Favorite from "./features/Favorite/Favorite";
 import Playlist from "./features/Playlist/Playlist";
+import Artist from "./features/Artist/Artist";
+import Album from "./features/Album/Album";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,16 @@ const router = createBrowserRouter([
       {
         path: "/favorites",
         element: <Favorite />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/artists",
+        element: <Artist />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/albums",
+        element: <Album />,
         errorElement: <Error />,
       },
     ],
