@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { Song, TypePlaylist } from "../types";
 import { loadPlaylist, savePlaylist } from "../../api/playlistService";
 
-interface PlaylistState {
+export interface PlaylistState {
   list: TypePlaylist[];
 }
 
