@@ -8,6 +8,7 @@ import {
   watchFetchSongs,
   watchUpdateSong,
 } from "../sagas/saga";
+import searchReducer from "../slices/searchSlice";
 import favoritesReducer from "../slices/favoriteSlice";
 import playlistsReducer from "../slices/playlistSlice";
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   songs: songsReducer,
   favorites: favoritesReducer,
   playlists: playlistsReducer,
+  search: searchReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
