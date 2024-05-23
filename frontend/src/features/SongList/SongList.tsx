@@ -69,8 +69,10 @@ const SongList: React.FC = () => {
   const songs = useSelector((state: RootState) => state.songs.list);
   const searchQuery = useSelector((state: RootState) => state.search.query);
   const filteredSongs = searchQuery
-    ? songs.filter((song) =>
-        song.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ? songs.filter(
+        (song) =>
+          song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          song.artist.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : songs;
   const [isAddSongClicked, setIsAddSongClicked] = useState<boolean>(false);
