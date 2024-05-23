@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { BiSearch } from "react-icons/bi";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchQuery } from "../redux/slices/searchSlice";
+import RootState from "../redux/RootState";
 
 const StyledHeader = styled.header`
   /* background-color: #181818; */
@@ -63,12 +66,23 @@ const SearchIcon = styled(BiSearch)`
   font-size: 20px;
   color: #aaaaaa;
 `;
-
 const Header: React.FC = () => {
+  const dispatch = useDispatch();
+  const searchQuery = useSelector((state: RootState) => state.search.query);
+
+  function handleSearchQueryChange(event: React.ChangeEvent<HTMLInputElement>) {
+    dispatch(setSearchQuery(event.target.value));
+  }
+
   return (
     <StyledHeader>
       <SearchContainer>
-        <SearchInput type="text" placeholder="Search" />
+        <SearchInput
+          type="text"
+          placeholder="Search Here..."
+          value={searchQuery}
+          onChange={handleSearchQueryChange}
+        />
         <SearchIcon />
       </SearchContainer>
     </StyledHeader>
