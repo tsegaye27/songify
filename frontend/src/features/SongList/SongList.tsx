@@ -67,8 +67,15 @@ export const AddNewSongContainer = styled.div`
 const SongList: React.FC = () => {
   const dispatch = useDispatch();
   const songs = useSelector((state: RootState) => state.songs.list);
+  const searchQuery = useSelector((state: RootState) => state.search.query);
+  const filteredSongs = searchQuery
+    ? songs.filter((song) =>
+        song.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : songs;
   const [isAddSongClicked, setIsAddSongClicked] = useState<boolean>(false);
 
+  console.log(searchQuery);
   useEffect(() => {
     document.title = "Songs";
     dispatch(fetchSongsStart());
@@ -97,7 +104,7 @@ const SongList: React.FC = () => {
             <H2>Add a Song</H2>
           </AddNewSongContainer>
           <StyledSongList>
-            {songs.map((song) => (
+            {filteredSongs.map((song) => (
               <SongItem key={song._id} song={song} />
             ))}
           </StyledSongList>
