@@ -79,7 +79,7 @@ const Header: React.FC = () => {
       <SearchContainer>
         <SearchInput
           type="text"
-          placeholder="Search Here..."
+          placeholder="Type here to search..."
           value={searchQuery}
           onChange={handleSearchQueryChange}
         />

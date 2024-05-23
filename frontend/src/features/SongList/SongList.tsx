@@ -77,7 +77,6 @@ const SongList: React.FC = () => {
     : songs;
   const [isAddSongClicked, setIsAddSongClicked] = useState<boolean>(false);
 
-  console.log(searchQuery);
   useEffect(() => {
     document.title = "Songs";
     dispatch(fetchSongsStart());
