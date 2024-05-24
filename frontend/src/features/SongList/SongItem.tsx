@@ -14,7 +14,6 @@ import {
   removeFromFavorites,
 } from "../../redux/slices/favoriteSlice";
 import RootState from "../../redux/RootState";
-import AddPlaylist from "../Playlist/AddPlaylist";
 
 const StyledSongItem = styled.div`
   background-color: #222;
@@ -149,7 +148,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const [showPlaylist, setShowPlaylist] = useState<boolean>(false);
+  // const [showPlaylist, setShowPlaylist] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.favList);
@@ -182,7 +181,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
   }
 
   function handleAddToPlaylist() {
-    setShowPlaylist((show) => !show);
+    // setShowPlaylist((show) => !show);
   }
 
   return (
@@ -251,11 +250,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
           <DeleteSong onDelete={handleDelete} song_Id={song._id} />
         </Modal>
       )}
-      {showPlaylist && (
-        <Modal>
-          <AddPlaylist />
-        </Modal>
-      )}
+      {/* {showPlaylist && <Modal><AddPlaylist /></Modal>} */}
     </>
   );
 };

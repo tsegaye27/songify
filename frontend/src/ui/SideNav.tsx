@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import { BiHome, BiMusic, BiListPlus, BiStar, BiDisc } from "react-icons/bi";
+import { BiHome, BiMusic, BiStar, BiDisc } from "react-icons/bi";
 import logo from "../../public/logo.png";
 
 const StyledSideNav = styled.nav`
