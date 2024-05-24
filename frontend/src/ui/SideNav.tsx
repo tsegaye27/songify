@@ -1,13 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import {
-  BiHome,
-  BiMusic,
-  BiListPlus,
-  BiStar,
-  BiAlbum,
-  BiDisc,
-} from "react-icons/bi";
+import { BiHome, BiMusic, BiListPlus, BiStar, BiDisc } from "react-icons/bi";
 import logo from "../../public/logo.png";
 
 const StyledSideNav = styled.nav`
@@ -122,22 +115,7 @@ const SideNav: React.FC = () => {
             <NavLinkText>Artists</NavLinkText>
           </NavLinks>
         </NavItem>
-        <NavItem>
-          <NavLinks to="/albums">
-            <NavLinkIcon>
-              <BiAlbum />
-            </NavLinkIcon>
-            <NavLinkText>Albums</NavLinkText>
-          </NavLinks>
-        </NavItem>
-        <NavItem>
-          <NavLinks to="/playlists">
-            <NavLinkIcon>
-              <BiListPlus />
-            </NavLinkIcon>
-            <NavLinkText>Playlists</NavLinkText>
-          </NavLinks>
-        </NavItem>
+
         <NavItem>
           <NavLinks to="/favorites">
             <NavLinkIcon>
