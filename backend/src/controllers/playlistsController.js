@@ -85,7 +85,7 @@ const playlistsController = {
       if (!playlist) {
         return res.status(404).json({ message: "Playlist not found" });
       }
-      playlist.songs.pull(req.body.songId);
+      playlist.songs.pop(req.body.songId);
       await playlist.save();
       res.status(200).json(playlist);
     } catch (err) {
