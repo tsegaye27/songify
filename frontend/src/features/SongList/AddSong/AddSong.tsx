@@ -4,7 +4,7 @@ import { addSongStart } from "../../../redux/slices/slice";
 import { BiCheck, BiX } from "react-icons/bi";
 import styled from "@emotion/styled";
 
-const AddSongContainer = styled.div`
+export const AddSongContainer = styled.div`
   border-radius: 10px;
   width: 20rem;
   height: 20rem;
