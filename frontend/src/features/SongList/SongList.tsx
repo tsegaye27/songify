@@ -8,7 +8,7 @@ import { BiPlus } from "react-icons/bi";
 import AddSong from "./AddSong/AddSong";
 import Modal from "../../ui/Modal";
 
-const StyledSongList = styled.div`
+export const StyledSongList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   gap: 1rem;
