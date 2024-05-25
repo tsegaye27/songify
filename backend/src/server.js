@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config({ path: "config.env" });
 const songsRouter = require("./routes/songsRouter");
+const playlistsRouter = require("./routes/playlistsRouter");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cors());
 // });
 
 app.use("/songs", songsRouter);
+app.use("/playlists", playlistsRouter);
 
 mongoose
   .connect(db)
