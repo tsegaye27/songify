@@ -7,7 +7,7 @@ import RootState from "../redux/RootState";
 
 const StyledHeader = styled.header`
   /* background-color: #181818; */
-  background-image: url("../../public/banner.jpg");
+  background-image: url("/banner.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
