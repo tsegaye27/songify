@@ -8,8 +8,17 @@ import {
   watchFetchSongs,
   watchUpdateSong,
 } from "../sagas/saga";
+import {
+  watchAddPlaylist,
+  watchFetchPlaylists,
+  watchUpdatePlaylist,
+  watchDeletePlaylist,
+  watchAddSongToPlaylist,
+  watchRemoveSongFromPlaylist,
+} from "../sagas/playlistSaga";
 import searchReducer from "../slices/searchSlice";
 import favoritesReducer from "../slices/favoriteSlice";
+import playlistsReducer from "../slices/playlistSlice";
 
 function* rootSaga() {
   yield all([
@@ -17,12 +26,19 @@ function* rootSaga() {
     watchAddSong(),
     watchDeleteSong(),
     watchUpdateSong(),
+    watchFetchPlaylists(),
+    watchAddPlaylist(),
+    watchUpdatePlaylist(),
+    watchDeletePlaylist(),
+    watchAddSongToPlaylist(),
+    watchRemoveSongFromPlaylist(),
   ]);
 }
 
 const rootReducer = combineReducers({
   songs: songsReducer,
   favorites: favoritesReducer,
+  playlists: playlistsReducer,
   search: searchReducer,
 });
 

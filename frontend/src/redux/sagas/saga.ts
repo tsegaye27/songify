@@ -22,7 +22,7 @@ import { AddSongProp } from "../../api/songsAPI";
 
 function* fetchSongsSaga(): SagaIterator {
   try {
-    const songs = yield call(fetchSongsAPI);
+    const songs: Song[] = yield call(fetchSongsAPI);
     yield put(fetchSongsSuccess(songs));
   } catch (error) {
     yield put(fetchSongsFailure(`${error}`));
