@@ -5,6 +5,9 @@ export interface Song {
 }
 
 export interface TypePlaylist {
+  _id: string;
   name: string;
-  list: Song[];
+  songs: Song[];
+  createdAt: string;
+  updatedAt: string;
 }

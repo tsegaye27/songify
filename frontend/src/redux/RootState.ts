@@ -6,7 +6,7 @@ import { SearchState } from "./slices/searchSlice";
 interface RootState {
   songs: SongState;
   favorites: FavoriteSongState;
-  playlist: PlaylistState;
+  playlists: PlaylistState;
   search: SearchState;
 }
 
