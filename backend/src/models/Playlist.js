@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const playlistSchema = new mongoose.Schema(
   {
     name: {
-      type: string,
+      type: String,
       required: true,
       unique: true,
     },
