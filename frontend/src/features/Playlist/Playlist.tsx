@@ -7,16 +7,26 @@ import {
   Title,
   AddSongButton as AddPlaylistButton,
   AddNewSongContainer as AddNewPlaylistContainer,
-  StyledSongList as StyledPlaylists,
 } from "../SongList/SongList";
 import { BiPlus } from "react-icons/bi";
 import Modal from "../../ui/Modal";
 import AddPlaylist from "./AddPlaylist";
 import styled from "@emotion/styled";
+import PlaylistItem from "./PlaylistItem";
 
 const H2 = styled.h2`
   align-self: center;
   color: white;
+`;
+
+export const StyledPlaylists = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 `;
 
 const Playlist: React.FC = () => {
@@ -31,6 +41,10 @@ const Playlist: React.FC = () => {
 
   function handleAdd() {
     setIsAddPlaylistClicked((a) => !a);
+  }
+
+  function handleCloseModal() {
+    setIsAddPlaylistClicked(false);
   }
 
   return (
@@ -53,13 +67,13 @@ const Playlist: React.FC = () => {
           </AddNewPlaylistContainer>
           <StyledPlaylists>
             {playlists.map((playlist) => (
-              <div key={playlist._id}>{playlist.name}</div>
+              <PlaylistItem key={playlist._id} playlist={playlist} />
             ))}
           </StyledPlaylists>
         </>
       )}
       {isAddPlaylistClicked && (
-        <Modal>
+        <Modal onClose={handleCloseModal}>
           <AddPlaylist onAdd={handleAdd} />
         </Modal>
       )}
