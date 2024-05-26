@@ -61,8 +61,9 @@ export const addSongToPlaylist = async (
   try {
     const response = await axios.post<TypePlaylist>(
       `${BASE_URL}/playlists/${playlistId}/songs`,
-      songId
+      { songId }
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     throw new Error("failed to add song to playlist");
