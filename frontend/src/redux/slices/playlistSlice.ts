@@ -70,7 +70,10 @@ const playlistsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    addSongToPlaylistStart(state) {
+    addSongToPlaylistStart(
+      state,
+      action: PayloadAction<{ playlistId: string; songId: string }>
+    ) {
       state.loading = true;
       state.error = null;
     },
@@ -81,6 +84,23 @@ const playlistsSlice = createSlice({
       );
     },
     addSongToPlaylistFailure(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    removeSongFromPlaylistStart(
+      state,
+      action: PayloadAction<{ playlistId: string; songId: string }>
+    ) {
+      state.loading = true;
+      state.error = null;
+    },
+    removeSongFromPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
+      state.loading = false;
+      state.list = state.list.map((playlist) =>
+        playlist._id === action.payload._id ? action.payload : playlist
+      );
+    },
+    removeSongFromPlaylistFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -103,6 +123,9 @@ export const {
   addSongToPlaylistStart,
   addSongToPlaylistSuccess,
   addSongToPlaylistFailure,
+  removeSongFromPlaylistStart,
+  removeSongFromPlaylistSuccess,
+  removeSongFromPlaylistFailure,
 } = playlistsSlice.actions;
 
 export default playlistsSlice.reducer;

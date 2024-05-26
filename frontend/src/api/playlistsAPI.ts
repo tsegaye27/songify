@@ -60,7 +60,8 @@ export const addSongToPlaylist = async (
 ): Promise<TypePlaylist> => {
   try {
     const response = await axios.post<TypePlaylist>(
-      `${BASE_URL}/playlists/${playlistId}/songs/${songId}`
+      `${BASE_URL}/playlists/${playlistId}/songs`,
+      songId
     );
     return response.data;
   } catch (error) {

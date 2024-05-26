@@ -7,6 +7,7 @@ import {
   addSongToPlaylist,
   deletePlaylist,
   fetchPlaylists,
+  removeSongFromPlaylist,
   updatePlaylist,
 } from "../../api/playlistsAPI";
 import { AddPlaylistProp } from "../../api/playlistsAPI";
@@ -19,6 +20,10 @@ import {
   deletePlaylistSuccess,
   updatePlaylistFailure,
   updatePlaylistSuccess,
+  addSongToPlaylistSuccess,
+  addSongToPlaylistFailure,
+  removeSongFromPlaylistSuccess,
+  removeSongFromPlaylistFailure,
 } from "../slices/playlistSlice";
 
 function* fetchPlaylistsSaga(): SagaIterator {
@@ -86,9 +91,9 @@ export function* addSongToPlaylistSaga(
       action.payload.playlistId,
       action.payload.songId
     );
-    yield put(updatePlaylistSuccess(playlist));
+    yield put(addSongToPlaylistSuccess(playlist));
   } catch (error) {
-    yield put(updatePlaylistFailure(`${error}`));
+    yield put(addSongToPlaylistFailure(`${error}`));
   }
 }
 
@@ -101,13 +106,13 @@ export function* removeSongFromPlaylistSaga(
 ): SagaIterator {
   try {
     const playlist: TypePlaylist = yield call(
-      addSongToPlaylist,
+      removeSongFromPlaylist,
       action.payload.playlistId,
       action.payload.songId
     );
-    yield put(updatePlaylistSuccess(playlist));
+    yield put(removeSongFromPlaylistSuccess(playlist));
   } catch (error) {
-    yield put(updatePlaylistFailure(`${error}`));
+    yield put(removeSongFromPlaylistFailure(`${error}`));
   }
 }
 
