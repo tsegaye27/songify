@@ -32,7 +32,7 @@ const CancelButton = styled(BiX)`
   font-size: 20px;
 `;
 
-const StyledDeleteSong = styled.div`
+export const StyledDeleteSong = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;

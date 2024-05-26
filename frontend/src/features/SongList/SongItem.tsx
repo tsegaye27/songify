@@ -14,8 +14,9 @@ import {
   removeFromFavorites,
 } from "../../redux/slices/favoriteSlice";
 import RootState from "../../redux/RootState";
+import PlaylistListView from "../Playlist/PlaylistListView";
 
-const StyledSongItem = styled.div`
+export const StyledSongItem = styled.div`
   background-color: #222;
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
@@ -34,7 +35,10 @@ const StyledSongItem = styled.div`
 const SongLogo = styled(BsMusicNote)`
   font-size: 32px;
   color: #ccc;
-  margin-bottom: 20px;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 100%;
+  background-color: black;
 `;
 
 const Title = styled.h3`
@@ -86,14 +90,15 @@ const shakeAnimation = keyframes`
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   `;
-const DeleteButton = styled.button`
-  background-color: #222;
+export const DeleteButton = styled.button`
+  background: ${(props) => props["background-color"]};
   color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  margin-right: ${(props) => props["margin-right"]};
 
   &:hover {
     animation: ${shakeAnimation} 0.5s linear;
@@ -110,10 +115,12 @@ const AddToPlaylistButton = styled.button`
   transition: box-shadow 0.3s ease;
 
   &:hover {
+    color: #e97922;
   }
 `;
-const EditButton = styled.button`
-  background-color: #222;
+export const EditButton = styled.button`
+  background-color: ${(props) => props["background-color"]};
+  margin-right: ${(props) => props["margin-right"]};
   border: none;
   color: #fff;
   padding: 10px 20px;
@@ -125,7 +132,7 @@ const EditButton = styled.button`
   }
 `;
 
-const Icon = styled.span`
+export const Icon = styled.span`
   font-size: 20px;
 `;
 
@@ -148,7 +155,8 @@ const SongItem: React.FC<Props> = ({ song }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  // const [showPlaylist, setShowPlaylist] = useState<boolean>(false);
+  const [showPlaylist, setShowPlaylist] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(true);
 
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.favList);
@@ -163,6 +171,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
     else {
       setTimeout(() => {
         setIsSelected(true);
+        setShowModal(true);
       }, 300);
     }
   }
@@ -178,10 +187,19 @@ const SongItem: React.FC<Props> = ({ song }) => {
 
   function handleDelete() {
     setShowDelete((show) => !show);
+    setShowModal(true);
   }
 
   function handleAddToPlaylist() {
-    // setShowPlaylist((show) => !show);
+    setShowPlaylist(true);
+    setShowModal(true);
+  }
+
+  function handleCloseModal() {
+    setShowModal(false);
+    setShowDelete(false);
+    setShowPlaylist(false);
+    setIsSelected(false);
   }
 
   return (
@@ -191,12 +209,12 @@ const SongItem: React.FC<Props> = ({ song }) => {
         <Title>{song.title}</Title>
         <Body>{song.artist}</Body>
         <ButtonContainer>
-          <EditButton>
+          <EditButton background-color={"#222"}>
             <Icon onClick={() => handleEdit(song._id)}>
               <BiEdit />
             </Icon>
           </EditButton>
-          <DeleteButton>
+          <DeleteButton background-color={"#222"}>
             <Icon onClick={handleDelete}>
               <BiTrash />
             </Icon>
@@ -213,44 +231,21 @@ const SongItem: React.FC<Props> = ({ song }) => {
           </Icon>
         </FavoriteButton>
       </StyledSongItem>
-      {/* <StyledSongItem>
-        <SongLogo className="song-logo" />
-        <Title>{song.title}</Title>
-        <Body>{song.artist}</Body>
-        <ButtonContainer>
-          <EditButton>
-            <Icon onClick={() => handleEdit(song._id)}>
-              <BiEdit />
-            </Icon>
-          </EditButton>
-          <DeleteButton>
-            <Icon onClick={handleDelete}>
-              <BiTrash />
-            </Icon>
-          </DeleteButton>
-          <AddToPlaylistButton>
-            <Icon onClick={handleAddToPlaylist}>
-              <BiPlus />
-            </Icon>
-          </AddToPlaylistButton>
-        </ButtonContainer>
-        <FavoriteButton>
-          <Icon onClick={handleFavorite}>
-            {isFavorite ? <IsFavIcon /> : <IsNotFavIcon />}
-          </Icon>
-        </FavoriteButton>
-      </StyledSongItem> */}
-      {isSelected && (
-        <Modal>
+      {isSelected && showModal && (
+        <Modal onClose={handleCloseModal}>
           <EditSong onUpdate={handleEdit} song_Id={song._id} />
         </Modal>
       )}
-      {showDelete && (
-        <Modal>
+      {showDelete && showModal && (
+        <Modal onClose={handleCloseModal}>
           <DeleteSong onDelete={handleDelete} song_Id={song._id} />
         </Modal>
       )}
-      {/* {showPlaylist && <Modal><AddPlaylist /></Modal>} */}
+      {showPlaylist && showModal && (
+        <Modal onClose={handleCloseModal}>
+          <PlaylistListView songId={song._id} />
+        </Modal>
+      )}
     </>
   );
 };

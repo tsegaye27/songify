@@ -1,12 +1,10 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
-import Home from "./ui/Home";
 import SongList from "./features/SongList/SongList";
 import Error from "./ui/Error";
 import GlobalStyles from "./styles/GlobalStyles";
 import Favorite from "./features/Favorite/Favorite";
-import Artist from "./features/Artist/Artist";
 import Playlist from "./features/Playlist/Playlist";
 
 const router = createBrowserRouter([
@@ -20,11 +18,6 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/",
-        element: <Home />,
-        errorElement: <Error />,
-      },
-      {
         path: "/songs",
         element: <SongList />,
         errorElement: <Error />,
@@ -33,11 +26,6 @@ const router = createBrowserRouter([
       {
         path: "/favorites",
         element: <Favorite />,
-        errorElement: <Error />,
-      },
-      {
-        path: "/artists",
-        element: <Artist />,
         errorElement: <Error />,
       },
       {

@@ -19,21 +19,14 @@ const GlobalStyles: React.FC = () => {
         :root {
           --background-color: #44b2b2;
           --second-background-color: #0b1c1ce8;
-          --primary-color: #9ab9e0;
+          --primary-color: #5e6772;
           --secondary-color: #244e82;
-          --accent-color: #568fd4;
+          --accent-color: #161a1f;
           --text-color: #e7eef6;
         }
 
         body {
           font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .song-logo {
-          margin: 1.5rem 0;
-          padding: 1rem;
-          border-radius: 100%;
-          background-color: black;
         }
       `}
     />
