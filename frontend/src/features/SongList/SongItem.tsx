@@ -147,9 +147,9 @@ const IsNotFavIcon = styled(BiHeart)`
   }
 `;
 
-interface Props {
+type Props = {
   song: Song;
-}
+};
 
 const SongItem: React.FC<Props> = ({ song }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -233,7 +233,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
       </StyledSongItem>
       {isSelected && showModal && (
         <Modal onClose={handleCloseModal}>
-          <EditSong onUpdate={handleEdit} song_Id={song._id} />
+          <EditSong onUpdate={handleEdit} song={song} />
         </Modal>
       )}
       {showDelete && showModal && (

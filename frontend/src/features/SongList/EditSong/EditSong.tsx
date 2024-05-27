@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateSongStart } from "../../../redux/slices/slice";
 import styled from "@emotion/styled";
-import RootState from "../../../redux/RootState";
 import { BiCheck, BiX } from "react-icons/bi";
+import { Song } from "../../../redux/types";
 
-interface EditSongProps {
-  song_Id: string;
+type EditSongProps = {
+  song: Song;
   onUpdate: (id: string | null) => void;
-}
+};
 
 export const EditSongContainer = styled.div`
   border-radius: 10px;
@@ -77,18 +77,15 @@ const WrapperField = styled.div`
   flex-direction: column;
 `;
 
-const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
-  const songs = useSelector((state: RootState) => state.songs.list);
-  const filteredSong = songs.filter((song) => song._id === song_Id);
-  const { title: filteredTitle, artist: filteredArtist } = filteredSong[0];
-  const [title, setTitle] = useState(filteredTitle);
-  const [artist, setArtist] = useState(filteredArtist);
+const EditSong: React.FC<EditSongProps> = ({ song, onUpdate }) => {
+  const [title, setTitle] = useState(song.title);
+  const [artist, setArtist] = useState(song.artist);
   const dispatch = useDispatch();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (title.trim() === "" || artist.trim() === "") return;
-    dispatch(updateSongStart({ _id: song_Id, title, artist }));
+    dispatch(updateSongStart({ _id: song._id, title, artist }));
     onUpdate(null);
   }
 
