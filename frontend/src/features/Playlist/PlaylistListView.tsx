@@ -15,6 +15,7 @@ import Modal from "../../ui/Modal";
 
 interface Props {
   songId: string;
+  onClose: () => void;
 }
 
 const H2 = styled.h2`
@@ -22,7 +23,7 @@ const H2 = styled.h2`
   color: white;
 `;
 
-const PlaylistListView: React.FC<Props> = ({ songId }) => {
+const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const playlists = useSelector((state: RootState) => state.playlists.list);
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const PlaylistListView: React.FC<Props> = ({ songId }) => {
             key={playlist._id}
             playlist={playlist}
             songId={songId}
+            onClose={onClose}
           />
         ))}
       </StyledPlaylists>

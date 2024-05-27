@@ -28,14 +28,19 @@ const StyledPlaylistItem = styled.div`
 interface Props {
   playlist: TypePlaylist;
   songId: string;
+  onClose: () => void;
 }
 
-const PlaylistListViewItem: React.FC<Props> = ({ playlist, songId }) => {
+const PlaylistListViewItem: React.FC<Props> = ({
+  playlist,
+  songId,
+  onClose,
+}) => {
   const dispatch = useDispatch();
 
   function handleAddSongToPlaylist() {
     dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
-    console.log(playlist._id, songId)
+    onClose();
   }
   return (
     <StyledPlaylistItem onClick={handleAddSongToPlaylist}>
