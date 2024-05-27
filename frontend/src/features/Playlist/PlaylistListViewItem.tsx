@@ -39,8 +39,9 @@ const PlaylistListViewItem: React.FC<Props> = ({
   const dispatch = useDispatch();
 
   function handleAddSongToPlaylist() {
-    dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
-    onClose();
+    const songToBeAdded = playlist.songs.find((song) => song._id === songId);
+    songToBeAdded ? onClose() : dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
+      onClose();
   }
   return (
     <StyledPlaylistItem onClick={handleAddSongToPlaylist}>

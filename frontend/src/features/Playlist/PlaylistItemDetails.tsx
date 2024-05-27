@@ -27,25 +27,18 @@ const H2 = styled.h2`
   margin: 0 10px;
 `;
 
-const Button = styled.button`
+const ReturnButton = styled.button`
+  transition: background-color 0.3s;
   padding: 10px 20px;
   margin: 10px 0;
   border-radius: 5px;
   border: none;
-  background-color: #0073e6;
-  color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
-  &:hover {
-    background-color: #005bb5;
-  }
-`;
-
-const ReturnButton = styled(Button)`
-  background-color: #44567d;
+  background-color: #222;
+  display: flex;
   color: white;
   &:hover {
-    background-color: #44567dec;
+    background-color: #222222a0;
   }
 `;
 
@@ -67,6 +60,7 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
           <Title>{`${playlist?.name} is empty...`}</Title>
           <ReturnButton onClick={onReturn}>
             <BiLeftArrow />
+            <h3>Go Back</h3>
           </ReturnButton>
         </EmptyListContainer>
       ) : (
@@ -74,6 +68,7 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
           <AddNewSongContainer>
             <ReturnButton onClick={onReturn}>
               <BiLeftArrow />
+              <h3>Go Back</h3>
             </ReturnButton>
             <H2>
               {songsIn.length === 1

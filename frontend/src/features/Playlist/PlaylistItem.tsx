@@ -65,7 +65,6 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
   const [showEdit, setShowEdit] = useState<boolean>(false);
 
   function handleSelected() {
-    console.log(playlist);
     onSelected();
   }
 

@@ -23,14 +23,14 @@ const Title = styled.h3`
   text-align: center;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   height: 70%;
   margin: 3rem 0;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   padding: 10px 16px;
   text-align: center;
   border: 1px solid #5dfe3c;
@@ -38,7 +38,7 @@ const Input = styled.input`
   outline: none;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   padding: 10px 20px;
   background-color: #222;
   border: 1px solid #007bff;
@@ -47,32 +47,32 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   height: 100%;
   align-items: flex-end;
 `;
 
-const UpdateButton = styled(BiCheck)`
+export const UpdateButton = styled(BiCheck)`
   color: #00ff00;
   font-size: 20px;
   &:hover {
   }
 `;
-const CancelButton = styled(BiX)`
+export const CancelButton = styled(BiX)`
   color: red;
   font-size: 20px;
 `;
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 10px;
 `;
 
-const WrapperField = styled.div`
+export const WrapperField = styled.div`
   display: flex;
   flex-direction: column;
 `;

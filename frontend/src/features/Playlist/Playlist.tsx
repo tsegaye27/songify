@@ -33,6 +33,12 @@ export const StyledPlaylists = styled.div`
 
 const Playlist: React.FC = () => {
   const playlists = useSelector((state: RootState) => state.playlists.list);
+  const searchQuery = useSelector((state: RootState) => state.search.query);
+  const filteredPlaylist = searchQuery
+    ? playlists.filter((playlist) =>
+        playlist.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : playlists;
   const [isAddPlaylistClicked, setIsAddPlaylistClicked] =
     useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -83,7 +89,7 @@ const Playlist: React.FC = () => {
                 <H2>Create a Playlist</H2>
               </AddNewPlaylistContainer>
               <StyledPlaylists>
-                {playlists.map((playlist) => (
+                {filteredPlaylist.map((playlist) => (
                   <PlaylistItem
                     key={playlist._id}
                     playlist={playlist}
