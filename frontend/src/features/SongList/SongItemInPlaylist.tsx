@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Song, TypePlaylist } from "../../redux/types";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import EditSong from "./EditSong/EditSong";
 import { BsMusicNote } from "react-icons/bs";
-import { BiEdit, BiTrash } from "react-icons/bi";
+import {  BiTrash } from "react-icons/bi";
 import Modal from "../../ui/Modal";
 
 import RemoveFromPlaylist from "../Playlist/RemoveFromPlaylist";
@@ -104,19 +103,8 @@ type Props = {
 };
 
 const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
-  const [isSelected, setIsSelected] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(true);
-
-  function handleEdit(songId: string | null) {
-    if (songId === null) setIsSelected(false);
-    else {
-      setTimeout(() => {
-        setIsSelected(true);
-        setShowModal(true);
-      }, 300);
-    }
-  }
 
   function handleRemoveFromPlaylist() {
     setShowDelete((show) => !show);
@@ -126,7 +114,6 @@ const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
   function handleCloseModal() {
     setShowModal(false);
     setShowDelete(false);
-    setIsSelected(false);
   }
 
   return (
@@ -136,11 +123,6 @@ const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
         <Title>{song.title}</Title>
         <Body>{song.artist}</Body>
         <ButtonContainer>
-          <EditButton onClick={() => handleEdit(song._id)}>
-            <Icon>
-              <BiEdit />
-            </Icon>
-          </EditButton>
           <DeleteButton onClick={handleRemoveFromPlaylist}>
             <Icon>
               <BiTrash />
@@ -148,11 +130,6 @@ const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
           </DeleteButton>
         </ButtonContainer>
       </StyledSongItem>
-      {isSelected && showModal && (
-        <Modal onClose={handleCloseModal}>
-          <EditSong onUpdate={handleEdit} song={song} />
-        </Modal>
-      )}
       {showDelete && showModal && (
         <Modal onClose={handleCloseModal}>
           <RemoveFromPlaylist

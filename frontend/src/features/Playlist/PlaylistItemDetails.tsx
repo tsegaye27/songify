@@ -54,6 +54,7 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
   onReturn,
 }) => {
   const [songsIn, setSongsIn] = useState<Song[] | null>(playlist.songs);
+
   function handleDelete(song: Song) {
     const newSongs = songsIn?.filter((s) => s._id !== song._id);
     if (!newSongs) return;
@@ -76,8 +77,8 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
             </ReturnButton>
             <H2>
               {songsIn.length === 1
-                ? `There is ${songsIn.length} song`
-                : `There are ${songsIn.length} songs`}
+                ? `There is ${songsIn.length} song in ${playlist?.name}`
+                : `There are ${songsIn.length} songs in ${playlist?.name}`}
             </H2>
           </AddNewSongContainer>
           <StyledSongList>
