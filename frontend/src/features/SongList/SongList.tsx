@@ -86,6 +86,10 @@ const SongList: React.FC = () => {
     setIsAddSongClicked((a) => !a);
   }
 
+  function handleClose() {
+    setIsAddSongClicked(false);
+  }
+
   return (
     <div>
       {songs.length === 0 ? (
@@ -112,7 +116,7 @@ const SongList: React.FC = () => {
         </>
       )}
       {isAddSongClicked && (
-        <Modal>
+        <Modal onClose={handleClose}>
           <AddSong onAdd={handleAdd} />
         </Modal>
       )}
