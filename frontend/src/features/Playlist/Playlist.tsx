@@ -33,6 +33,7 @@ export const StyledPlaylists = styled.div`
 
 const Playlist: React.FC = () => {
   const playlists = useSelector((state: RootState) => state.playlists.list);
+  const isLoading = useSelector((state: RootState) => state.playlists.loading);
   const searchQuery = useSelector((state: RootState) => state.search.query);
   const filteredPlaylist = searchQuery
     ? playlists.filter((playlist) =>
@@ -62,6 +63,8 @@ const Playlist: React.FC = () => {
     if (playlist === null) return;
     setSelectedPlaylist(playlist);
   }
+
+  if (isLoading) return <Title>Loading...</Title>;
 
   return (
     <div>

@@ -12,6 +12,7 @@ const StyledAppLayout = styled.div`
 const StyledMain = styled.main`
   padding: 2rem;
   flex: 1;
+  overflow-x: hidden;
   overflow-y: auto;
   &::-webkit-scrollbar {
     background-color: var(--app-layout-color-hover);

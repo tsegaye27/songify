@@ -65,6 +65,7 @@ export const AddNewSongContainer = styled.div`
 
 const SongList: React.FC = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector((state: RootState) => state.songs.loading);
   const songs = useSelector((state: RootState) => state.songs.list);
   const searchQuery = useSelector((state: RootState) => state.search.query);
   const filteredSongs = searchQuery
@@ -88,6 +89,8 @@ const SongList: React.FC = () => {
   function handleClose() {
     setIsAddSongClicked(false);
   }
+
+  if (isLoading) return <Title>Loading...</Title>;
 
   return (
     <>
