@@ -6,8 +6,8 @@ import styled from "@emotion/styled";
 
 export const AddSongContainer = styled.div`
   border-radius: 10px;
-  width: 20rem;
-  height: 20rem;
+  width: 90%;
+  height: 70%;
   padding: 20px;
 `;
 const Title = styled.h3`
