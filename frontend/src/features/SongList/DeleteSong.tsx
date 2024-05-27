@@ -4,6 +4,7 @@ import RootState from "../../redux/RootState";
 import { deleteSongStart } from "../../redux/slices/slice";
 import styled from "@emotion/styled";
 import { BiCheck, BiX } from "react-icons/bi";
+import { removeFromFavorites } from "../../redux/slices/favoriteSlice";
 
 const Button = styled.button`
   padding: 10px 20px;
@@ -37,8 +38,8 @@ export const StyledDeleteSong = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 20rem;
-  height: 10rem;
+  width: 90%;
+  height: 70%;
 `;
 
 const Title = styled.h3`
@@ -57,6 +58,7 @@ const DeleteSong: React.FC<DeleteSongProps> = ({ onDelete, song_Id }) => {
   const dispatch = useDispatch();
 
   function handleDelete(songId: string) {
+    dispatch(removeFromFavorites(song_Id));
     dispatch(deleteSongStart(songId));
     onDelete();
   }
@@ -64,11 +66,11 @@ const DeleteSong: React.FC<DeleteSongProps> = ({ onDelete, song_Id }) => {
     <StyledDeleteSong>
       <Title>{`Delete ${filteredSong[0].title}?`}</Title>
       <ButtonContainer>
-        <Button onClick={() => handleDelete(filteredSong[0]._id)}>
-          <DeleteButton />
+        <Button>
+          <DeleteButton onClick={() => handleDelete(filteredSong[0]._id)} />
         </Button>
-        <Button onClick={onDelete}>
-          <CancelButton />
+        <Button>
+          <CancelButton onClick={onDelete} />
         </Button>
       </ButtonContainer>
     </StyledDeleteSong>
