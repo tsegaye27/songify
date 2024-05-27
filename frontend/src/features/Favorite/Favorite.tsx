@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import RootState from "../../redux/RootState";
 import SongItem from "../SongList/SongItem";
 import styled from "@emotion/styled";
+
 const StyledFavorite = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -21,11 +22,15 @@ const H2 = styled.h2`
 const Favorite: React.FC = () => {
   const favorites = useSelector((state: RootState) => state.favorites.favList);
   const searchQuery = useSelector((state: RootState) => state.search.query);
-  const filteredList = favorites.filter(
-    (song) =>
-      song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      song.artist.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+
+  const filteredList = favorites.filter((song) => {
+    const title = song.title || "";
+    const artist = song.artist || "";
+    return (
+      title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      artist.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     document.title = "Favorites";
@@ -33,8 +38,7 @@ const Favorite: React.FC = () => {
 
   return (
     <>
-      {" "}
-      {favorites.length === 0 ? (
+      {filteredList.length === 0 ? (
         <H2>No Favorite Songs yet...</H2>
       ) : (
         <StyledFavorite>
@@ -42,7 +46,7 @@ const Favorite: React.FC = () => {
             <SongItem key={song._id} song={song} />
           ))}
         </StyledFavorite>
-      )}{" "}
+      )}
     </>
   );
 };
