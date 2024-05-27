@@ -58,11 +58,11 @@ const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
     <StyledDeletePlaylist>
       <Title>{`Delete ${playlist.name}?`}</Title>
       <ButtonContainer>
-        <Button>
-          <DeleteButton onClick={() => handleDelete(playlist._id)} />
+        <Button onClick={() => handleDelete(playlist._id)}>
+          <DeleteButton />
         </Button>
-        <Button>
-          <CancelButton onClick={onDelete} />
+        <Button onClick={onDelete}>
+          <CancelButton />
         </Button>
       </ButtonContainer>
     </StyledDeletePlaylist>

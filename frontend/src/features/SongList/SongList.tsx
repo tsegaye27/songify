@@ -5,7 +5,7 @@ import { fetchSongsStart } from "../../redux/slices/slice";
 import SongItem from "./SongItem";
 import styled from "@emotion/styled";
 import { BiPlus } from "react-icons/bi";
-import AddSong from "./AddSong/AddSong";
+import AddSong from "./AddSong";
 import Modal from "../../ui/Modal";
 
 export const StyledSongList = styled.div`

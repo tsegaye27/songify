@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Title } from "./Modal";
 import styled from "@emotion/styled";
-import { Button } from "../features/SongList/EditSong/EditSong";
+import { Button } from "../features/SongList/EditSong";
 
 const StyledError = styled.div`
   display: flex;

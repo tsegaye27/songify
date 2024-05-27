@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addSongStart } from "../../../redux/slices/slice";
+import { addSongStart } from "../../redux/slices/slice";
 import { BiCheck, BiX } from "react-icons/bi";
 import styled from "@emotion/styled";
 

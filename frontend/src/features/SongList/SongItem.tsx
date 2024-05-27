@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Song } from "../../redux/types";
-import EditSong from "./EditSong/EditSong";
+import EditSong from "./EditSong";
 import styled from "@emotion/styled";
 import { BsMusicNote } from "react-icons/bs";
 import { BiEdit, BiTrash, BiPlus, BiHeart } from "react-icons/bi";

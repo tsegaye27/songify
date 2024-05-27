@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateSongStart } from "../../../redux/slices/slice";
+import { updateSongStart } from "../../redux/slices/slice";
 import styled from "@emotion/styled";
 import { BiCheck, BiX } from "react-icons/bi";
-import { Song } from "../../../redux/types";
+import { Song } from "../../redux/types";
 
 type EditSongProps = {
   song: Song;

@@ -11,7 +11,7 @@ import {
   InputContainer,
   UpdateButton,
   WrapperField,
-} from "../SongList/EditSong/EditSong";
+} from "../SongList/EditSong";
 
 const AddPlaylistContainer = styled.div`
   padding: 20px;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { TypePlaylist } from "../../redux/types";
-import { EditSongContainer } from "../SongList/EditSong/EditSong";
+import { EditSongContainer } from "../SongList/EditSong";
 import { BiCheck, BiX } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { updatePlaylistStart } from "../../redux/slices/playlistSlice";
