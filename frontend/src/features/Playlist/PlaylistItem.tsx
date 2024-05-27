@@ -10,6 +10,7 @@ import EditPlaylist from "./EditPlaylist";
 
 interface Props {
   playlist: TypePlaylist;
+  onSelected: () => void;
 }
 
 const Title = styled.h3`
@@ -59,14 +60,13 @@ const PlaylistDetailContainer = styled.div`
   width: 50%;
 `;
 
-const PlaylistItem: React.FC<Props> = ({ playlist }) => {
-  const [isSelected, setIsSelected] = useState<boolean>(false);
+const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [showEdit, setShowEdit] = useState<boolean>(false);
 
   function handleSelected() {
     console.log(playlist);
-    setIsSelected((prev) => !prev);
+    onSelected();
   }
 
   function handleDelete() {
@@ -76,7 +76,6 @@ const PlaylistItem: React.FC<Props> = ({ playlist }) => {
   function handleClose() {
     setShowDelete(false);
     setShowEdit(false);
-    setIsSelected(false);
   }
 
   function handleEdit() {
