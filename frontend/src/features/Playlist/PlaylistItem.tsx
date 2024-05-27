@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { TypePlaylist } from "../../redux/types";
-import { useDispatch } from "react-redux";
 import { CgPlayList } from "react-icons/cg";
 import styled from "@emotion/styled";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { DeleteButton, EditButton } from "../SongList/SongItem";
+import DeletePlaylist from "./DeletePlaylist";
+import Modal from "../../ui/Modal";
+import EditPlaylist from "./EditPlaylist";
 
 interface Props {
   playlist: TypePlaylist;
@@ -24,8 +26,7 @@ export const StyledPlaylistItem = styled.div`
   background-color: var(--accent-color);
   align-items: center;
   border-radius: 2rem;
-  cursor: pointer;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
@@ -52,6 +53,7 @@ const Icon = styled.span`
 
 const PlaylistDetailContainer = styled.div`
   display: flex;
+  cursor: pointer;
   justify-content: first baseline;
   align-items: center;
   width: 50%;
@@ -60,37 +62,63 @@ const PlaylistDetailContainer = styled.div`
 const PlaylistItem: React.FC<Props> = ({ playlist }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
-  const songsInsidePlaylist = playlist.songs;
-  const dispatch = useDispatch();
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
   function handleSelected() {
     console.log(playlist);
+    setIsSelected((prev) => !prev);
+  }
+
+  function handleDelete() {
+    setShowDelete((prev) => !prev);
+  }
+
+  function handleClose() {
+    setShowDelete(false);
+    setShowEdit(false);
+    setIsSelected(false);
+  }
+
+  function handleEdit() {
+    setShowEdit((prev) => !prev);
   }
   return (
-    <StyledPlaylistItem onClick={handleSelected}>
-      <PlaylistDetailContainer>
-        <PlaylistLogo />
-        <Title>{playlist.name}</Title>
-      </PlaylistDetailContainer>
-      <ButtonContainer>
-        <DeleteButton
-          background-color={`var(--accent-color)`}
-          margin-right={"5px"}
-        >
-          <Icon>
-            <BiTrash />
-          </Icon>
-        </DeleteButton>
-        <EditButton
-          background-color={`var(--accent-color)`}
-          margin-right={"5px"}
-        >
-          <Icon>
-            <BiEdit />
-          </Icon>
-        </EditButton>
-      </ButtonContainer>
-    </StyledPlaylistItem>
+    <>
+      <StyledPlaylistItem>
+        <PlaylistDetailContainer onClick={handleSelected}>
+          <PlaylistLogo />
+          <Title>{playlist.name}</Title>
+        </PlaylistDetailContainer>
+        <ButtonContainer>
+          <DeleteButton
+            background-color={`var(--accent-color)`}
+            margin-right={"5px"}
+          >
+            <Icon onClick={handleDelete}>
+              <BiTrash />
+            </Icon>
+          </DeleteButton>
+          <EditButton
+            background-color={`var(--accent-color)`}
+            margin-right={"5px"}
+          >
+            <Icon onClick={handleEdit}>
+              <BiEdit />
+            </Icon>
+          </EditButton>
+        </ButtonContainer>
+      </StyledPlaylistItem>
+      {showDelete && (
+        <Modal onClose={handleClose}>
+          <DeletePlaylist playlist={playlist} onDelete={handleDelete} />
+        </Modal>
+      )}
+      {showEdit && (
+        <Modal onClose={handleClose}>
+          <EditPlaylist playlist={playlist} onEdit={handleEdit} />
+        </Modal>
+      )}
+    </>
   );
 };
 
