@@ -1,12 +1,6 @@
 import { Global, css } from "@emotion/react";
 import React from "react";
 
-// background color #080f17
-// primary color #9ab9e0
-// text color #e7eef6
-// secondary color #244e82
-// accent color #568fd4
-
 const GlobalStyles: React.FC = () => {
   return (
     <Global
@@ -17,12 +11,18 @@ const GlobalStyles: React.FC = () => {
         }
 
         :root {
-          --background-color: #44b2b2;
-          --second-background-color: #0b1c1ce8;
-          --primary-color: #5e6772;
+          --background-color: #00ccff;
+          --second-background-color: #333;
+          --primary-color: #222;
           --secondary-color: #244e82;
-          --accent-color: #161a1f;
+          --tertiary-color: #aaa;
+          --accent-color: #006eff;
           --text-color: #e7eef6;
+          --green-primary: #00ff00;
+          --red-primary: #ff0000;
+          --text-color-secondary: #ccc;
+          --app-layout-color: #494949;
+          --app-layout-color-hover: #949494;
         }
 
         body {

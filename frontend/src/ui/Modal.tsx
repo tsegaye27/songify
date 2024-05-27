@@ -18,14 +18,14 @@ const ModalContainer = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background-color: #222;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px 2px rgba(0, 255, 123, 0.674);
-  max-height: 80%;
+  max-height: 70%;
   min-height: 40%;
-  min-width: 40%;
+  min-width: 25%;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 12px;
@@ -47,20 +47,20 @@ const ModalContent = styled.div`
   }
 `;
 
-interface ModalProps {
+type ModalProps = {
   children: React.ReactNode;
   onClose: () => void;
-}
+};
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: gray;
+  color: var(--text-color);
   cursor: pointer;
 `;
 
-const Title = styled.h2`
+export const Title = styled.h2`
   font-size: 18px;
 `;
 

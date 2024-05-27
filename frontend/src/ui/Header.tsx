@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0.1);
-  color: #ffffff;
+  color: var(--text-color);
   padding: 3rem 4rem 1rem 4rem;
   display: flex;
   height: 10%;
@@ -39,7 +39,7 @@ const StyledHeader = styled.header`
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  background-color: #333333;
+  background-color: var(--second-background-color);
   border-radius: 24px;
   padding: 8px 16px;
   width: 20rem;
@@ -52,19 +52,19 @@ const SearchContainer = styled.div`
 const SearchInput = styled.input`
   border: none;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--text-color);
   font-size: 16px;
   outline: none;
   margin-right: 10px;
 
   &::placeholder {
-    color: #aaaaaa;
+    color: var(--tertiary-color);
   }
 `;
 
 const SearchIcon = styled(BiSearch)`
   font-size: 20px;
-  color: #aaaaaa;
+  color: var(--tertiary-color);
 `;
 const Header: React.FC = () => {
   const dispatch = useDispatch();

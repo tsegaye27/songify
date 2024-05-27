@@ -11,7 +11,7 @@ export const AddSongContainer = styled.div`
   padding: 20px;
 `;
 const Title = styled.h3`
-  color: white;
+  color: var(--text-color);
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -35,8 +35,8 @@ const Button = styled.button`
   border: 1px solid #007bff;
   border-radius: 5px;
   padding: 10px 20px;
-  background-color: #222;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   cursor: pointer;
 `;
 const ButtonContainer = styled.div`
@@ -47,13 +47,13 @@ const ButtonContainer = styled.div`
 `;
 
 const AddButton = styled(BiCheck)`
-  color: #00ff00;
+  color: var(--green-primary);
   font-size: 20px;
   &:hover {
   }
 `;
 const CancelButton = styled(BiX)`
-  color: red;
+  color: var(--red-primary);
   font-size: 20px;
 `;
 

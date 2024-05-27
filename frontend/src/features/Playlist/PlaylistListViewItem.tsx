@@ -12,9 +12,9 @@ const Title = styled.h3`
 const StyledPlaylistItem = styled.div`
   margin: 0;
   padding: 0;
-  color: white;
+  color: var(--text-color);
   display: flex;
-  background-color: var(--accent-color);
+  background-color: var(--secondary-color);
   align-items: center;
   cursor: pointer;
   border-radius: 2rem;
@@ -40,8 +40,10 @@ const PlaylistListViewItem: React.FC<Props> = ({
 
   function handleAddSongToPlaylist() {
     const songToBeAdded = playlist.songs.find((song) => song._id === songId);
-    songToBeAdded ? onClose() : dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
-      onClose();
+    songToBeAdded
+      ? onClose()
+      : dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
+    onClose();
   }
   return (
     <StyledPlaylistItem onClick={handleAddSongToPlaylist}>

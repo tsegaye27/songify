@@ -4,8 +4,8 @@ import { BiMusic, BiStar, BiSolidPlaylist } from "react-icons/bi";
 import logo from "../../public/logo.png";
 
 const StyledSideNav = styled.nav`
-  background-color: #333333;
-  color: #ffffff;
+  background-color: var(--second-background-color);
+  color: var(--text-color);
   width: 250px;
 `;
 
@@ -55,7 +55,7 @@ const NavLinks = styled(NavLink)`
     color: var(--accent-color);
   }
   &.active {
-    color: #00ccff;
+    color: var(--background-color);
     &::before {
       content: "";
       margin-right: 2.5rem;

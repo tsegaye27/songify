@@ -18,7 +18,7 @@ export const EditSongContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  color: white;
+  color: var(--text-color);
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -40,9 +40,9 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   padding: 10px 20px;
-  background-color: #222;
+  background-color: var(--primary-color);
   border: 1px solid #007bff;
-  color: white;
+  color: var(--text-color);
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -55,13 +55,13 @@ export const ButtonContainer = styled.div`
 `;
 
 export const UpdateButton = styled(BiCheck)`
-  color: #00ff00;
+  color: var(--green-primary);
   font-size: 20px;
   &:hover {
   }
 `;
 export const CancelButton = styled(BiX)`
-  color: red;
+  color: var(--red-primary);
   font-size: 20px;
 `;
 

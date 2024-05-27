@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import { TypePlaylist } from "../../redux/types";
 import { CgPlayList } from "react-icons/cg";
 import styled from "@emotion/styled";
@@ -22,9 +24,9 @@ const Title = styled.h3`
 export const StyledPlaylistItem = styled.div`
   margin: 0;
   padding: 0;
-  color: white;
+  color: var(--text-color);
   display: flex;
-  background-color: var(--accent-color);
+  background-color: var(--secondary-color);
   align-items: center;
   border-radius: 2rem;
   transition: transform 0.3s ease;
@@ -36,7 +38,7 @@ export const StyledPlaylistItem = styled.div`
 
 export const PlaylistLogo = styled(CgPlayList)`
   font-size: 3rem;
-  color: white;
+  color: var(--text-color);
   margin: 0;
   padding: 1rem;
 `;
@@ -89,21 +91,29 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
         </PlaylistDetailContainer>
         <ButtonContainer>
           <DeleteButton
-            background-color={`var(--accent-color)`}
+            data-tooltip-id="deletePlaylist"
+            data-tooltip-content="Delete Playlist"
+            data-tooltip-place="bottom"
+            background-color={`var(--secondary-color)`}
             margin-right={"5px"}
           >
             <Icon onClick={handleDelete}>
               <BiTrash />
             </Icon>
           </DeleteButton>
+          <ReactTooltip id="deletePlaylist" />
           <EditButton
-            background-color={`var(--accent-color)`}
+            data-tooltip-id="editPlaylist"
+            data-tooltip-content="Edit Playlist"
+            data-tooltip-place="bottom"
+            background-color={`var(--secondary-color)`}
             margin-right={"5px"}
           >
             <Icon onClick={handleEdit}>
               <BiEdit />
             </Icon>
           </EditButton>
+          <ReactTooltip id="editPlaylist" />
         </ButtonContainer>
       </StyledPlaylistItem>
       {showDelete && (

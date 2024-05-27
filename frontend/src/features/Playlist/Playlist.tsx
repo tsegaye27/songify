@@ -18,7 +18,7 @@ import { TypePlaylist } from "../../redux/types";
 
 const H2 = styled.h2`
   align-self: center;
-  color: white;
+  color: var(--text-color);
 `;
 
 export const StyledPlaylists = styled.div`

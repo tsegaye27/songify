@@ -6,30 +6,30 @@ import styled from "@emotion/styled";
 import { BiCheck, BiX } from "react-icons/bi";
 import { removeFromFavorites } from "../../redux/slices/favoriteSlice";
 
-const Button = styled.button`
+export const Button = styled.button`
   padding: 10px 20px;
-  background-color: #222;
+  background-color: var(--primary-color);
   border: 1px solid #007bff;
-  color: white;
+  color: var(--text-color);
   border-radius: 5px;
   cursor: pointer;
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   height: 100%;
   align-items: flex-end;
 `;
 
-const DeleteButton = styled(BiCheck)`
-  color: #00ff00;
+export const DeleteButton = styled(BiCheck)`
+  color: var(--green-primary);
   font-size: 20px;
   &:hover {
   }
 `;
-const CancelButton = styled(BiX)`
-  color: red;
+export const CancelButton = styled(BiX)`
+  color: var(--red-primary);
   font-size: 20px;
 `;
 
@@ -42,8 +42,8 @@ export const StyledDeleteSong = styled.div`
   height: 70%;
 `;
 
-const Title = styled.h3`
-  color: white;
+export const Title = styled.h3`
+  color: var(--text-color);
   margin-bottom: 20px;
   text-align: center;
 `;

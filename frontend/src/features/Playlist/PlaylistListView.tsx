@@ -20,7 +20,7 @@ interface Props {
 
 const H2 = styled.h2`
   align-self: center;
-  color: white;
+  color: var(--text-color);
 `;
 
 const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {

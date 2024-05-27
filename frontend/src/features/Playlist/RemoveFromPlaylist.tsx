@@ -3,7 +3,13 @@ import { useDispatch } from "react-redux";
 import { removeSongFromPlaylistStart } from "../../redux/slices/playlistSlice";
 import styled from "@emotion/styled";
 import { Song, TypePlaylist } from "../../redux/types";
-import { BiCheck, BiX } from "react-icons/bi";
+import {
+  Button,
+  ButtonContainer,
+  CancelButton,
+  DeleteButton,
+  Title,
+} from "../SongList/DeleteSong";
 
 type Props = {
   song: Song;
@@ -13,43 +19,12 @@ type Props = {
 };
 
 const Container = styled.div`
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 20px;
   width: 90%;
-  height: 80%;
-  justify-content: center;
-  padding: 16px;
-  border-radius: 4px;
-  text-align: center;
-`;
-
-const Message = styled.div`
-  font-size: 16px;
-  margin-bottom: 12px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-  background-color: #0073e6;
-  color: white;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #005bb5;
-  }
-
-  &:first-of-type {
-    margin-right: 8px;
-  }
+  height: 70%;
 `;
 
 const RemoveFromPlaylist: React.FC<Props> = ({
@@ -73,13 +48,13 @@ const RemoveFromPlaylist: React.FC<Props> = ({
 
   return (
     <Container>
-      <Message>{`Remove ${song.title} from ${playlist.name}`}</Message>
+      <Title>{`Remove ${song.title} from ${playlist.name}`}</Title>
       <ButtonContainer>
         <Button onClick={handleRemove}>
-          <BiCheck />
+          <DeleteButton />
         </Button>
         <Button onClick={onClose}>
-          <BiX />
+          <CancelButton />
         </Button>
       </ButtonContainer>
     </Container>

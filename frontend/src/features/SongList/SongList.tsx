@@ -21,7 +21,7 @@ export const StyledSongList = styled.div`
 export const Title = styled.h3`
   font-size: 20px;
   font-family: monospace;
-  color: #ccc;
+  color: var(--text-color-secondary);
   margin: 1rem;
   width: 100%;
   text-align: center;
@@ -40,7 +40,7 @@ export const AddSongButton = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  color: #222;
+  color: var(--primary-color);
   background-color: #09d371;
   width: 3rem;
   height: 3rem;
@@ -55,7 +55,7 @@ export const AddSongButton = styled.div`
 
 const H2 = styled.h2`
   align-self: center;
-  color: white;
+  color: var(--text-color);
 `;
 
 export const AddNewSongContainer = styled.div`

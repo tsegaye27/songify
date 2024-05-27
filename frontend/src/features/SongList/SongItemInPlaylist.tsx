@@ -3,13 +3,14 @@ import { Song, TypePlaylist } from "../../redux/types";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import { BsMusicNote } from "react-icons/bs";
-import {  BiTrash } from "react-icons/bi";
+import { BiTrash } from "react-icons/bi";
 import Modal from "../../ui/Modal";
-
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import RemoveFromPlaylist from "../Playlist/RemoveFromPlaylist";
 
 export const StyledSongItem = styled.div`
-  background-color: #222;
+  background-color: var(--primary-color);
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
   padding: 20px;
@@ -26,7 +27,7 @@ export const StyledSongItem = styled.div`
 
 const SongLogo = styled(BsMusicNote)`
   font-size: 32px;
-  color: #ccc;
+  color: var(--text-color-secondary);
   margin: 1.5rem 0;
   padding: 1rem;
   border-radius: 100%;
@@ -35,14 +36,14 @@ const SongLogo = styled(BsMusicNote)`
 
 const Title = styled.h3`
   font-size: 20px;
-  color: #ccc;
+  color: var(--text-color-secondary);
   margin: 0;
   text-align: center;
 `;
 
 const Body = styled.p`
   font-size: 16px;
-  color: #aaa;
+  color: var(--tertiary-color);
   margin: 10px 0;
   text-align: center;
 `;
@@ -67,8 +68,8 @@ const shakeAnimation = keyframes`
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   `;
 export const DeleteButton = styled.button`
-  background-color: #222;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -76,19 +77,6 @@ export const DeleteButton = styled.button`
   transition: box-shadow 0.3s ease;
   &:hover {
     animation: ${shakeAnimation} 0.5s linear;
-  }
-`;
-
-export const EditButton = styled.button`
-  background-color: #222;
-  border: none;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  &:hover {
-    color: #006eff;
   }
 `;
 
@@ -125,11 +113,17 @@ const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
         <ButtonContainer>
           <DeleteButton onClick={handleRemoveFromPlaylist}>
             <Icon>
-              <BiTrash />
+              <BiTrash
+                data-tooltip-id="removeFromPlaylist"
+                data-tooltip-place="bottom"
+                data-tooltip-content="remove song from playlist"
+              />
+              <ReactTooltip id="removeFromPlaylist" />
             </Icon>
           </DeleteButton>
         </ButtonContainer>
       </StyledSongItem>
+
       {showDelete && showModal && (
         <Modal onClose={handleCloseModal}>
           <RemoveFromPlaylist

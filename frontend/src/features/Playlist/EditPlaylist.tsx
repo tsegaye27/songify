@@ -12,7 +12,7 @@ type EditPlaylistProps = {
 };
 
 const Title = styled.h3`
-  color: white;
+  color: var(--text-color);
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -34,9 +34,9 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 10px 20px;
-  background-color: #222;
+  background-color: var(--primary-color);
   border: 1px solid #007bff;
-  color: white;
+  color: var(--text-color);
   border-radius: 5px;
   cursor: pointer;
 `;
@@ -49,13 +49,13 @@ const ButtonContainer = styled.div`
 `;
 
 const UpdateButton = styled(BiCheck)`
-  color: #00ff00;
+  color: var(--green-primary);
   font-size: 20px;
   &:hover {
   }
 `;
 const CancelButton = styled(BiX)`
-  color: red;
+  color: var(--red-primary);
   font-size: 20px;
 `;
 

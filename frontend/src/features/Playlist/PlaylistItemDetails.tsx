@@ -7,8 +7,11 @@ import {
   StyledSongList,
   Title,
 } from "../SongList/SongList";
+import { Container as BtnContainer, Title as BtnTitle } from "../../ui/Modal";
 import { BiLeftArrow } from "react-icons/bi";
 import SongItemInPlaylist from "../SongList/SongItemInPlaylist";
+import { useSelector } from "react-redux";
+import RootState from "../../redux/RootState";
 
 type PlaylistItemDetailsProps = {
   playlist: TypePlaylist;
@@ -18,12 +21,12 @@ type PlaylistItemDetailsProps = {
 const Container = styled.div`
   padding: 20px;
   border-radius: 10px;
-  color: white;
+  color: var(--text-color);
 `;
 
 const H2 = styled.h2`
   align-self: center;
-  color: white;
+  color: var(--text-color);
   margin: 0 10px;
 `;
 
@@ -34,11 +37,11 @@ const ReturnButton = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color: #222;
+  background-color: var(--primary-color);
   display: flex;
-  color: white;
+  color: var(--text-color);
   &:hover {
-    background-color: #222222a0;
+    background-color: var(--primary-color);
   }
 `;
 
@@ -47,6 +50,15 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
   onReturn,
 }) => {
   const [songsIn, setSongsIn] = useState<Song[] | null>(playlist.songs);
+  const searchQuery = useSelector((state: RootState) => state.search.query);
+
+  const filteredSongsIn = searchQuery
+    ? songsIn?.filter(
+        (song) =>
+          song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          song.artist.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : songsIn;
 
   function handleDelete(song: Song) {
     const newSongs = songsIn?.filter((s) => s._id !== song._id);
@@ -55,29 +67,33 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
   }
   return (
     <Container>
-      {songsIn === null || songsIn.length === 0 ? (
+      {filteredSongsIn === null || filteredSongsIn?.length === 0 ? (
         <EmptyListContainer>
           <Title>{`${playlist?.name} is empty...`}</Title>
           <ReturnButton onClick={onReturn}>
-            <BiLeftArrow />
-            <h3>Go Back</h3>
+            <BtnContainer>
+              <BiLeftArrow />
+              <BtnTitle>Go Back</BtnTitle>
+            </BtnContainer>
           </ReturnButton>
         </EmptyListContainer>
       ) : (
         <>
           <AddNewSongContainer>
             <ReturnButton onClick={onReturn}>
-              <BiLeftArrow />
-              <h3>Go Back</h3>
+              <BtnContainer>
+                <BiLeftArrow />
+                <BtnTitle>Go Back</BtnTitle>
+              </BtnContainer>
             </ReturnButton>
             <H2>
-              {songsIn.length === 1
-                ? `There is ${songsIn.length} song in ${playlist?.name}`
-                : `There are ${songsIn.length} songs in ${playlist?.name}`}
+              {filteredSongsIn?.length === 1
+                ? `There is ${filteredSongsIn?.length} song in ${playlist?.name}`
+                : `There are ${filteredSongsIn?.length} songs in ${playlist?.name}`}
             </H2>
           </AddNewSongContainer>
           <StyledSongList>
-            {songsIn.map((song) => (
+            {filteredSongsIn?.map((song) => (
               <SongItemInPlaylist
                 key={song._id}
                 song={song}
