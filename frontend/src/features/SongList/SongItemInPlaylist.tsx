@@ -100,9 +100,10 @@ export const Icon = styled.span`
 interface Props {
   song: Song;
   playlist: TypePlaylist;
+  onDelete: (song: Song) => void;
 }
 
-const SongItemInPlaylist: React.FC<Props> = ({ song, playlist }) => {
+const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(true);
@@ -156,6 +157,7 @@ const SongItemInPlaylist: React.FC<Props> = ({ song, playlist }) => {
         <Modal onClose={handleCloseModal}>
           <RemoveFromPlaylist
             onClose={handleRemoveFromPlaylist}
+            onUpdateList={() => onDelete(song)}
             song={song}
             playlist={playlist}
           />

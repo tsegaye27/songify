@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { TypePlaylist } from "../../redux/types";
+import { Song, TypePlaylist } from "../../redux/types";
 import {
   AddNewSongContainer,
   EmptyListContainer,
@@ -11,7 +11,7 @@ import { BiLeftArrow } from "react-icons/bi";
 import SongItemInPlaylist from "../SongList/SongItemInPlaylist";
 
 type PlaylistItemDetailsProps = {
-  playlist: TypePlaylist | null;
+  playlist: TypePlaylist;
   onReturn: () => void;
 };
 
@@ -53,13 +53,20 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
   playlist,
   onReturn,
 }) => {
-  const songLength = playlist?.songs.length;
+  const [songsIn, setSongsIn] = useState<Song[] | null>(playlist.songs);
+  function handleDelete(song: Song) {
+    const newSongs = songsIn?.filter((s) => s._id !== song._id);
+    if (!newSongs) return;
+    setSongsIn(newSongs);
+  }
   return (
     <Container>
-      {!playlist?.songs || playlist.songs.length === 0 ? (
+      {songsIn === null || songsIn.length === 0 ? (
         <EmptyListContainer>
           <Title>{`${playlist?.name} is empty...`}</Title>
-          <ReturnButton onClick={onReturn}>Return</ReturnButton>
+          <ReturnButton onClick={onReturn}>
+            <BiLeftArrow />
+          </ReturnButton>
         </EmptyListContainer>
       ) : (
         <>
@@ -68,17 +75,18 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
               <BiLeftArrow />
             </ReturnButton>
             <H2>
-              {songLength === 1
-                ? `There is ${songLength} song`
-                : `There are ${songLength} songs`}
+              {songsIn.length === 1
+                ? `There is ${songsIn.length} song`
+                : `There are ${songsIn.length} songs`}
             </H2>
           </AddNewSongContainer>
           <StyledSongList>
-            {playlist.songs.map((song) => (
+            {songsIn.map((song) => (
               <SongItemInPlaylist
                 key={song._id}
                 song={song}
                 playlist={playlist}
+                onDelete={() => handleDelete(song)}
               />
             ))}
           </StyledSongList>

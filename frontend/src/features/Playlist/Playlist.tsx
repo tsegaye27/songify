@@ -36,8 +36,7 @@ const Playlist: React.FC = () => {
   const [isAddPlaylistClicked, setIsAddPlaylistClicked] =
     useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
-  const [selectedPlaylist, setSelectedPlaylist] =
-    useState<TypePlaylist | null>();
+  const [selectedPlaylist, setSelectedPlaylist] = useState<TypePlaylist>();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,6 +53,7 @@ const Playlist: React.FC = () => {
 
   function handleSelected(playlist: TypePlaylist | null) {
     setIsSelected((prev) => !prev);
+    if (playlist === null) return;
     setSelectedPlaylist(playlist);
   }
 

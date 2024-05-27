@@ -3,11 +3,13 @@ import { useDispatch } from "react-redux";
 import { removeSongFromPlaylistStart } from "../../redux/slices/playlistSlice";
 import styled from "@emotion/styled";
 import { Song, TypePlaylist } from "../../redux/types";
+import { BiCheck, BiX } from "react-icons/bi";
 
 type Props = {
   song: Song;
   playlist: TypePlaylist;
   onClose: () => void;
+  onUpdateList: () => void;
 };
 
 const Container = styled.div`
@@ -50,7 +52,12 @@ const Button = styled.button`
   }
 `;
 
-const RemoveFromPlaylist: React.FC<Props> = ({ song, playlist, onClose }) => {
+const RemoveFromPlaylist: React.FC<Props> = ({
+  song,
+  playlist,
+  onClose,
+  onUpdateList,
+}) => {
   const dispatch = useDispatch();
 
   function handleRemove() {
@@ -60,6 +67,7 @@ const RemoveFromPlaylist: React.FC<Props> = ({ song, playlist, onClose }) => {
         songId: song._id,
       })
     );
+    onUpdateList();
     onClose();
   }
 
@@ -67,8 +75,12 @@ const RemoveFromPlaylist: React.FC<Props> = ({ song, playlist, onClose }) => {
     <Container>
       <Message>{`Remove ${song.title} from ${playlist.name}`}</Message>
       <ButtonContainer>
-        <Button onClick={handleRemove}>Yes</Button>
-        <Button onClick={onClose}>No</Button>
+        <Button onClick={handleRemove}>
+          <BiCheck />
+        </Button>
+        <Button onClick={onClose}>
+          <BiX />
+        </Button>
       </ButtonContainer>
     </Container>
   );
