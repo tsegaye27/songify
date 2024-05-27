@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../types";
 import { AddSongProp } from "../../api/songsAPI";
 
-export interface SongState {
+export type SongState = {
   list: Song[];
   loading: boolean;
   error: string | null;
-}
+};
 
 const initialState: SongState = {
   list: [],
@@ -33,6 +33,7 @@ const songsSlice = createSlice({
     addSongStart(state, action: PayloadAction<AddSongProp>) {
       state.loading = true;
       state.error = null;
+      void action.payload;
     },
     addSongSuccess(state, action: PayloadAction<Song>) {
       state.list.push(action.payload);
@@ -45,6 +46,7 @@ const songsSlice = createSlice({
     deleteSongStart(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
+      void action.payload;
     },
     deleteSongSuccess(state, action: PayloadAction<string>) {
       state.list = state.list.filter((song) => song._id !== action.payload);
@@ -57,6 +59,7 @@ const songsSlice = createSlice({
     updateSongStart(state, action: PayloadAction<Song>) {
       state.loading = true;
       state.error = null;
+      void action.payload;
     },
     updateSongSuccess(state, action: PayloadAction<Song>) {
       const index = state.list.findIndex(

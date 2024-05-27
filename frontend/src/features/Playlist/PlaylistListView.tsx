@@ -14,10 +14,10 @@ import { BiPlus } from "react-icons/bi";
 import AddPlaylist from "./AddPlaylist";
 import Modal from "../../ui/Modal";
 
-interface Props {
+type Props = {
   songId: string;
   onClose: () => void;
-}
+};
 
 const H2 = styled.h2`
   align-self: center;

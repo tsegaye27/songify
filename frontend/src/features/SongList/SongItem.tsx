@@ -91,20 +91,25 @@ const shakeAnimation = keyframes`
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   `;
-export const DeleteButton = styled.button`
-  background: ${(props) => props["background-color"]};
+const DeleteButtonStyles = (props: {
+  bgColor?: string;
+  marginRight?: string;
+}) => `
+  background: ${props.bgColor};
   color: var(--text-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
-  margin-right: ${(props) => props["margin-right"]};
+  margin-right: ${props.marginRight};
 
   &:hover {
     animation: ${shakeAnimation} 0.5s linear;
   }
 `;
+
+export const DeleteButton = styled.button(DeleteButtonStyles);
 
 const AddToPlaylistButton = styled.button`
   background-color: var(--primary-color);
@@ -119,9 +124,12 @@ const AddToPlaylistButton = styled.button`
     color: #e97922;
   }
 `;
-export const EditButton = styled.button`
-  background-color: ${(props) => props["background-color"]};
-  margin-right: ${(props) => props["margin-right"]};
+const EditButtonStyles = (props: {
+  bgColor?: string;
+  marginRight?: string;
+}) => `
+  background-color: ${props.bgColor};
+  margin-right: ${props.marginRight};
   border: none;
   color: var(--text-color);
   padding: 10px 20px;
@@ -132,6 +140,7 @@ export const EditButton = styled.button`
     color: hotpink;
   }
 `;
+export const EditButton = styled.button(EditButtonStyles);
 
 export const Icon = styled.span`
   font-size: 20px;
@@ -211,7 +220,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
         <Body>{song.artist}</Body>
         <ButtonContainer>
           <EditButton
-            background-color={"#222"}
+            bgColor="#222"
             data-tooltip-id="editSongButton"
             data-tooltip-content="Edit Song"
             data-tooltip-place="bottom"
@@ -225,7 +234,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
             data-tooltip-id="deleteSongButton"
             data-tooltip-content="Delete Song"
             data-tooltip-place="bottom"
-            background-color={"#222"}
+            bgColor="#222"
           >
             <Icon onClick={handleDelete}>
               <BiTrash />

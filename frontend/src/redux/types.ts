@@ -1,13 +1,13 @@
-export interface Song {
+export type Song = {
   _id: string;
   title: string;
   artist: string;
-}
+};
 
-export interface TypePlaylist {
+export type TypePlaylist = {
   _id: string;
   name: string;
   songs: Song[];
   createdAt: string;
   updatedAt: string;
-}
+};

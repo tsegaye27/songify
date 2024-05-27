@@ -69,9 +69,9 @@ export const WrapperField = styled.div`
   flex-direction: column;
 `;
 
-interface AddSongFProps {
+type AddSongFProps = {
   onAdd: () => void;
-}
+};
 
 const AddSong: React.FC<AddSongFProps> = ({ onAdd }) => {
   const [title, setTitle] = useState("");

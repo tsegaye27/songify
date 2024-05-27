@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TypePlaylist } from "../types";
 import { AddPlaylistProp } from "../../api/playlistsAPI";
 
-export interface PlaylistState {
+export type PlaylistState = {
   list: TypePlaylist[];
   loading: boolean;
   error: string | null;
-}
+};
 
 const initialState: PlaylistState = {
   list: [],
@@ -33,6 +33,7 @@ const playlistsSlice = createSlice({
     addPlaylistStart(state, action: PayloadAction<AddPlaylistProp>) {
       state.loading = true;
       state.error = null;
+      void action.payload;
     },
     addPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
       state.list.push(action.payload);
@@ -45,6 +46,7 @@ const playlistsSlice = createSlice({
     deletePlaylistStart(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
+      void action.payload;
     },
     deletePlaylistSuccess(state, action: PayloadAction<string>) {
       state.list = state.list.filter(
@@ -58,6 +60,8 @@ const playlistsSlice = createSlice({
     },
     updatePlaylistStart(state, action: PayloadAction<TypePlaylist>) {
       state.loading = true;
+      void action.payload;
+
       state.error = null;
     },
     updatePlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
@@ -76,6 +80,7 @@ const playlistsSlice = createSlice({
     ) {
       state.loading = true;
       state.error = null;
+      void action.payload;
     },
     addSongToPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
       state.loading = false;
@@ -92,6 +97,8 @@ const playlistsSlice = createSlice({
       action: PayloadAction<{ playlistId: string; songId: string }>
     ) {
       state.loading = true;
+      void action.payload;
+
       state.error = null;
     },
     removeSongFromPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {

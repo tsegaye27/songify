@@ -3,11 +3,11 @@ import { FavoriteSongState } from "./slices/favoriteSlice";
 import { PlaylistState } from "./slices/playlistSlice";
 import { SearchState } from "./slices/searchSlice";
 
-interface RootState {
+type RootState = {
   songs: SongState;
   favorites: FavoriteSongState;
   playlists: PlaylistState;
   search: SearchState;
-}
+};
 
 export default RootState;

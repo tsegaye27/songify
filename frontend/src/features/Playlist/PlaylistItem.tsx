@@ -10,10 +10,10 @@ import DeletePlaylist from "./DeletePlaylist";
 import Modal from "../../ui/Modal";
 import EditPlaylist from "./EditPlaylist";
 
-interface Props {
+type Props = {
   playlist: TypePlaylist;
   onSelected: () => void;
-}
+};
 
 const Title = styled.h3`
   font-size: 20px;
@@ -94,8 +94,8 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
             data-tooltip-id="deletePlaylist"
             data-tooltip-content="Delete Playlist"
             data-tooltip-place="bottom"
-            background-color={`var(--secondary-color)`}
-            margin-right={"5px"}
+            bgColor={`var(--secondary-color)`}
+            marginRight={"5px"}
           >
             <Icon onClick={handleDelete}>
               <BiTrash />
@@ -106,8 +106,8 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
             data-tooltip-id="editPlaylist"
             data-tooltip-content="Edit Playlist"
             data-tooltip-place="bottom"
-            background-color={`var(--secondary-color)`}
-            margin-right={"5px"}
+            bgColor={`var(--secondary-color)`}
+            marginRight={"5px"}
           >
             <Icon onClick={handleEdit}>
               <BiEdit />

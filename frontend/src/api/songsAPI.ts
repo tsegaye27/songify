@@ -2,10 +2,10 @@ import axios from "axios";
 import { Song } from "../redux/types";
 import { url } from "./config.ts";
 
-export interface AddSongProp {
+export type AddSongProp = {
   title: string;
   artist: string;
-}
+};
 
 const BASE_URL = url;
 

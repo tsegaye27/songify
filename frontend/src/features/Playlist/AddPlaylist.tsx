@@ -25,9 +25,9 @@ const Title = styled.h2`
   margin-bottom: 20px;
 `;
 
-interface AddPlaylistProps {
+type AddPlaylistProps = {
   onAdd: () => void;
-}
+};
 
 const AddPlaylist: React.FC<AddPlaylistProps> = ({ onAdd }) => {
   const [name, setName] = useState("");

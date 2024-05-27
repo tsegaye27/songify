@@ -25,11 +25,11 @@ const StyledPlaylistItem = styled.div`
   }
 `;
 
-interface Props {
+type Props = {
   playlist: TypePlaylist;
   songId: string;
   onClose: () => void;
-}
+};
 
 const PlaylistListViewItem: React.FC<Props> = ({
   playlist,

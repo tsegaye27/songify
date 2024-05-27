@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../types";
 
-export interface FavoriteSongState {
+export type FavoriteSongState = {
   favList: Song[];
-}
+};
 
 const loadToLocalStorage = (): Song[] => {
   const favList = localStorage.getItem("favorites");

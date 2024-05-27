@@ -2,9 +2,9 @@ import axios from "axios";
 import { TypePlaylist } from "../redux/types";
 import { url } from "./config";
 
-export interface AddPlaylistProp {
+export type AddPlaylistProp = {
   name: string;
-}
+};
 
 const BASE_URL = url;
 
