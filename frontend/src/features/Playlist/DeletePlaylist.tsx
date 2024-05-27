@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { StyledDeleteSong as StyledDeletePlaylist } from "../SongList/DeleteSong";
-import { BiCheck } from "react-icons/bi";
+import { BiCheck, BiX } from "react-icons/bi";
+import { TypePlaylist } from "../../redux/types";
+import { useDispatch } from "react-redux";
+import { deletePlaylistStart } from "../../redux/slices/playlistSlice";
 
 const Title = styled.h3`
   color: white;
@@ -23,7 +26,7 @@ const DeleteButton = styled(BiCheck)`
   }
 `;
 
-const CancelButton = styled(BiCheck)`
+const CancelButton = styled(BiX)`
   color: red;
   font-size: 20px;
 `;
@@ -37,16 +40,29 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const DeletePlaylist: React.FC = () => {
+type DeletePlaylistProps = {
+  playlist: TypePlaylist;
+  onDelete: () => void;
+};
+
+const DeletePlaylist: React.FC<DeletePlaylistProps> = ({
+  playlist,
+  onDelete,
+}) => {
+  const dispatch = useDispatch();
+  function handleDelete(playlistId: string) {
+    dispatch(deletePlaylistStart(playlistId));
+    onDelete();
+  }
   return (
     <StyledDeletePlaylist>
-      <Title>{`Delete playlist?`}</Title>
+      <Title>{`Delete ${playlist.name}?`}</Title>
       <ButtonContainer>
         <Button>
-          <DeleteButton />
+          <DeleteButton onClick={() => handleDelete(playlist._id)} />
         </Button>
         <Button>
-          <CancelButton />
+          <CancelButton onClick={onDelete} />
         </Button>
       </ButtonContainer>
     </StyledDeletePlaylist>

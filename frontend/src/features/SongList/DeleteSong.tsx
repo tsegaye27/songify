@@ -46,10 +46,10 @@ const Title = styled.h3`
   margin-bottom: 20px;
   text-align: center;
 `;
-interface DeleteSongProps {
+type DeleteSongProps = {
   onDelete: () => void;
   song_Id: string;
-}
+};
 
 const DeleteSong: React.FC<DeleteSongProps> = ({ onDelete, song_Id }) => {
   const songs = useSelector((state: RootState) => state.songs.list);

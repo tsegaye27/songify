@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateSongStart } from "../../../redux/slices/slice";
 import styled from "@emotion/styled";
-import RootState from "../../../redux/RootState";
+import { TypePlaylist } from "../../redux/types";
+import { EditSongContainer } from "../SongList/EditSong/EditSong";
 import { BiCheck, BiX } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { updatePlaylistStart } from "../../redux/slices/playlistSlice";
 
-interface EditSongProps {
-  song_Id: string;
-  onUpdate: (id: string | null) => void;
-}
-
-export const EditSongContainer = styled.div`
-  border-radius: 10px;
-  padding: 20px;
-  width: 20rem;
-  height: 20rem;
-`;
+type EditPlaylistProps = {
+  playlist: TypePlaylist;
+  onEdit: () => void;
+};
 
 const Title = styled.h3`
   color: white;
@@ -77,21 +71,13 @@ const WrapperField = styled.div`
   flex-direction: column;
 `;
 
-const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
-  const songs = useSelector((state: RootState) => state.songs.list);
-  const filteredSong = songs.filter((song) => song._id === song_Id);
-  const { title: filteredTitle, artist: filteredArtist } = filteredSong[0];
-  const [title, setTitle] = useState(filteredTitle);
-  const [artist, setArtist] = useState(filteredArtist);
+const EditPlaylist: React.FC<EditPlaylistProps> = ({ playlist, onEdit }) => {
+  const [name, setName] = useState(playlist.name);
   const dispatch = useDispatch();
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (title.trim() === "" || artist.trim() === "") return;
-    dispatch(updateSongStart({ _id: song_Id, title, artist }));
-    onUpdate(null);
+  function handleSubmit() {
+    dispatch(updatePlaylistStart({ ...playlist, name }));
+    onEdit();
   }
-
   return (
     <EditSongContainer>
       <Title>Edit Song</Title>
@@ -101,17 +87,8 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
             <Input
               type="text"
               placeholder="Enter the Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </WrapperField>
-          <WrapperField>
-            <Input
-              type="text"
-              placeholder="Enter the Artist"
-              value={artist}
-              onChange={(e) => setArtist(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </WrapperField>
@@ -120,7 +97,7 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
           <Button type="submit">
             <UpdateButton />
           </Button>
-          <Button onClick={() => onUpdate(null)}>
+          <Button onClick={onEdit}>
             <CancelButton />
           </Button>
         </ButtonContainer>
@@ -129,4 +106,4 @@ const EditSong: React.FC<EditSongProps> = ({ song_Id, onUpdate }) => {
   );
 };
 
-export default EditSong;
+export default EditPlaylist;
