@@ -80,7 +80,7 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({ playlist, onEdit }) => {
   }
   return (
     <EditSongContainer>
-      <Title>Edit Song</Title>
+      <Title>Edit {playlist.name}</Title>
       <Form onSubmit={handleSubmit}>
         <InputContainer>
           <WrapperField>

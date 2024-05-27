@@ -13,6 +13,8 @@ import Modal from "../../ui/Modal";
 import AddPlaylist from "./AddPlaylist";
 import styled from "@emotion/styled";
 import PlaylistItem from "./PlaylistItem";
+import PlaylistItemDetails from "./PlaylistItemDetails";
+import { TypePlaylist } from "../../redux/types";
 
 const H2 = styled.h2`
   align-self: center;
@@ -33,6 +35,9 @@ const Playlist: React.FC = () => {
   const playlists = useSelector((state: RootState) => state.playlists.list);
   const [isAddPlaylistClicked, setIsAddPlaylistClicked] =
     useState<boolean>(false);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [selectedPlaylist, setSelectedPlaylist] =
+    useState<TypePlaylist | null>();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +52,11 @@ const Playlist: React.FC = () => {
     setIsAddPlaylistClicked(false);
   }
 
+  function handleSelected(playlist: TypePlaylist | null) {
+    setIsSelected((prev) => !prev);
+    setSelectedPlaylist(playlist);
+  }
+
   return (
     <div>
       {playlists.length === 0 ? (
@@ -59,17 +69,30 @@ const Playlist: React.FC = () => {
         </EmptyListContainer>
       ) : (
         <>
-          <AddNewPlaylistContainer>
-            <AddPlaylistButton onClick={handleAdd}>
-              <BiPlus />
-            </AddPlaylistButton>
-            <H2>Create a Playlist</H2>
-          </AddNewPlaylistContainer>
-          <StyledPlaylists>
-            {playlists.map((playlist) => (
-              <PlaylistItem key={playlist._id} playlist={playlist} />
-            ))}
-          </StyledPlaylists>
+          {isSelected ? (
+            <PlaylistItemDetails
+              playlist={selectedPlaylist!}
+              onReturn={() => handleSelected(null)}
+            />
+          ) : (
+            <>
+              <AddNewPlaylistContainer>
+                <AddPlaylistButton onClick={handleAdd}>
+                  <BiPlus />
+                </AddPlaylistButton>
+                <H2>Create a Playlist</H2>
+              </AddNewPlaylistContainer>
+              <StyledPlaylists>
+                {playlists.map((playlist) => (
+                  <PlaylistItem
+                    key={playlist._id}
+                    playlist={playlist}
+                    onSelected={() => handleSelected(playlist)}
+                  />
+                ))}
+              </StyledPlaylists>
+            </>
+          )}
         </>
       )}
       {isAddPlaylistClicked && (
