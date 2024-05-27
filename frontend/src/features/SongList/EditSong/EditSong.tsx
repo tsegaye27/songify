@@ -13,8 +13,8 @@ interface EditSongProps {
 export const EditSongContainer = styled.div`
   border-radius: 10px;
   padding: 20px;
-  width: 20rem;
-  height: 20rem;
+  width: 90%;
+  height: 70%;
 `;
 
 const Title = styled.h3`

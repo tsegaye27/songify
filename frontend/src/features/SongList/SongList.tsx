@@ -30,7 +30,6 @@ export const Title = styled.h3`
 export const EmptyListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -91,7 +90,7 @@ const SongList: React.FC = () => {
   }
 
   return (
-    <div>
+    <>
       {songs.length === 0 ? (
         <EmptyListContainer>
           <Title>No Songs yet...</Title>
@@ -120,7 +119,7 @@ const SongList: React.FC = () => {
           <AddSong onAdd={handleAdd} />
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 
