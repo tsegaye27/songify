@@ -8,6 +8,7 @@ import { fetchPlaylistsStart } from "../../redux/slices/playlistSlice";
 import {
   AddNewSongContainer as AddNewPlaylistContainer,
   AddSongButton as AddPlaylistButton,
+  Title,
 } from "../SongList/SongList";
 import { BiPlus } from "react-icons/bi";
 import AddPlaylist from "./AddPlaylist";
@@ -26,6 +27,7 @@ const H2 = styled.h2`
 const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const playlists = useSelector((state: RootState) => state.playlists.list);
+  const isLoading = useSelector((state: RootState) => state.playlists.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +37,8 @@ const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {
   function handleAdd() {
     setShowAdd((a) => !a);
   }
+
+  if (isLoading) return <Title>Loading...</Title>;
 
   return (
     <>
