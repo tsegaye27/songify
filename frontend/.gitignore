@@ -5,10 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+config.env
 lerna-debug.log*
 
 node_modules
-src/api/config.ts
 dist
 dist-ssr
 *.local
