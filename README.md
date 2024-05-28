@@ -8,7 +8,6 @@
 - [💻 Technologies Used](#-technologies-used)
 - [🚀 Installation](#-installation)
 - [📖 Usage](#-usage)
-- [🤝 Contributing](#-contributing)
 
 ## ✨ Features
 
@@ -93,19 +92,5 @@ npm start
 cd frontend
 npm start
 ```
-
-The frontend will be available at `http://localhost:5173` and the backend API will run on `http://localhost:8000`.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any bugs, features, or improvements.
-
-1. 🍴 Fork the repository.
-2. 🌱 Create your feature branch (`git checkout -b feature/your-feature-name`).
-3. 💾 Commit your changes (`git commit -m 'Add some feature'`).
-4. 🚀 Push to the branch (`git push origin feature/your-feature-name`).
-5. 🔁 Open a pull request.
-
----
 
 Thank you for using Songify! If you have any questions or feedback, feel free to reach out. Happy coding! 🎶
