@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import { BiMusic, BiStar, BiSolidPlaylist } from "react-icons/bi";
-import logo from "../../logo.png";
+import logo from "../../public/logo.png";
 
 const StyledSideNav = styled.nav`
   background-color: var(--second-background-color);
