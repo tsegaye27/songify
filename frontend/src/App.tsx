@@ -1,5 +1,9 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import SongList from "./features/SongList/SongList";
 import Error from "./ui/Error";
@@ -17,6 +21,10 @@ const router = createBrowserRouter([
     ),
     errorElement: <Error />,
     children: [
+      {
+        path: "/",
+        element: <Navigate to="/songs" replace />,
+      },
       {
         path: "/songs",
         element: <SongList />,
