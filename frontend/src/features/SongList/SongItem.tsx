@@ -6,7 +6,7 @@ import { BsMusicNote } from "react-icons/bs";
 import { BiEdit, BiTrash, BiPlus, BiHeart } from "react-icons/bi";
 import Modal from "../../ui/Modal";
 import { AiFillHeart } from "react-icons/ai";
-import { keyframes } from "@emotion/react";
+import { keyframes, css } from "@emotion/react";
 import DeleteSong from "./DeleteSong";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -79,22 +79,23 @@ const FavoriteButton = styled.button`
 `;
 
 const shakeAnimation = keyframes`
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
-  `;
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+`;
+
 const DeleteButtonStyles = (props: {
   bgColor?: string;
   marginRight?: string;
-}) => `
+}) => css`
   background: ${props.bgColor};
   color: var(--text-color);
   border: none;

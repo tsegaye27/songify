@@ -7,6 +7,14 @@ const StyledSideNav = styled.nav`
   background-color: var(--second-background-color);
   color: var(--text-color);
   width: 250px;
+
+  @media (max-width: 768px) {
+    width: 200px;
+  }
+
+  @media (max-width: 480px) {
+    width: 150px;
+  }
 `;
 
 const LogoContainer = styled.div`

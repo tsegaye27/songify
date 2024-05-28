@@ -10,21 +10,34 @@ import Modal from "../../ui/Modal";
 
 export const StyledSongList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: clamp(0.5rem, 1vw, 1rem);
+  padding: clamp(0.5rem, 1vw, 1rem);
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
-`;
+  margin-top: clamp(0.5rem, 1vw, 1rem);
 
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  }
+`;
 export const Title = styled.h3`
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
   font-family: monospace;
   color: var(--text-color-secondary);
   margin: 1rem;
   width: 100%;
   text-align: center;
+`;
+
+const H2 = styled.h2`
+  align-self: center;
+  color: var(--text-color);
+  font-size: clamp(18px, 2.5vw, 24px);
 `;
 
 export const EmptyListContainer = styled.div`
@@ -39,11 +52,11 @@ export const AddSongButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   color: var(--primary-color);
   background-color: #09d371;
-  width: 3rem;
-  height: 3rem;
+  width: clamp(2.5rem, 5vw, 3rem);
+  height: clamp(2.5rem, 5vw, 3rem);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s;
@@ -51,11 +64,6 @@ export const AddSongButton = styled.div`
   &:hover {
     background-color: #5fe4a4;
   }
-`;
-
-const H2 = styled.h2`
-  align-self: center;
-  color: var(--text-color);
 `;
 
 export const AddNewSongContainer = styled.div`

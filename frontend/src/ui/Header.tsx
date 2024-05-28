@@ -6,7 +6,7 @@ import { setSearchQuery } from "../redux/slices/searchSlice";
 import RootState from "../redux/RootState";
 
 const StyledHeader = styled.header`
-  /* background-color: #181818; */
+  position: relative;
   background-image: url("/banner.jpg");
   background-position: center;
   background-size: cover;
@@ -15,7 +15,6 @@ const StyledHeader = styled.header`
   color: var(--text-color);
   padding: 3rem 4rem 1rem 4rem;
   display: flex;
-  height: 10%;
   align-items: center;
   justify-content: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -28,11 +27,19 @@ const StyledHeader = styled.header`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("../../public/banner.jpg");
+    background-image: url("/banner.jpg");
     background-position: center;
     background-size: cover;
     filter: blur(5px);
     z-index: -1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 1rem 0.5rem 1rem;
   }
 `;
 
@@ -44,9 +51,16 @@ const SearchContainer = styled.div`
   padding: 8px 16px;
   width: 20rem;
   justify-content: space-between;
-  /* z-index: 1000; */
   border: 1px solid #00e1ff;
-  /* border: 1px solid #00e1ff; */
+
+  @media (max-width: 768px) {
+    width: 15rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 10rem;
+    padding: 6px 12px;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -60,12 +74,22 @@ const SearchInput = styled.input`
   &::placeholder {
     color: var(--tertiary-color);
   }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-right: 5px;
+  }
 `;
 
 const SearchIcon = styled(BiSearch)`
   font-size: 20px;
   color: var(--tertiary-color);
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
+
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const searchQuery = useSelector((state: RootState) => state.search.query);
