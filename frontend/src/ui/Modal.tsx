@@ -39,7 +39,7 @@ const ModalContent = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #555;
     border-radius: 10px;
-    border: 3px solid #333; /* Adds padding around thumb */
+    border: 3px solid #333;
   }
 
   &::-webkit-scrollbar-thumb:hover {

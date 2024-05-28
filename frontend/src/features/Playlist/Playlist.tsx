@@ -64,7 +64,7 @@ const Playlist: React.FC = () => {
   }
 
   return (
-    <div>
+    <>
       {playlists.length === 0 ? (
         <EmptyListContainer>
           <Title>No Playlists yet...</Title>
@@ -106,7 +106,7 @@ const Playlist: React.FC = () => {
           <AddPlaylist onAdd={handleAdd} />
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 

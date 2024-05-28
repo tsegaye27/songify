@@ -23,6 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        errorElement: <Error />,
         element: <Navigate to="/songs" replace />,
       },
       {

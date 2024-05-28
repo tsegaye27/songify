@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import { BiPlus } from "react-icons/bi";
 import AddSong from "./AddSong";
 import Modal from "../../ui/Modal";
+import Loader from "../../ui/Loader";
 
 export const StyledSongList = styled.div`
   display: grid;
@@ -98,37 +99,41 @@ const SongList: React.FC = () => {
     setIsAddSongClicked(false);
   }
 
-  if (isLoading) return <Title>Loading...</Title>;
-
   return (
     <>
-      {songs.length === 0 ? (
-        <EmptyListContainer>
-          <Title>No Songs yet...</Title>
-          <Title>Try adding some!</Title>
-          <AddSongButton onClick={handleAdd}>
-            <BiPlus />
-          </AddSongButton>
-        </EmptyListContainer>
+      {isLoading ? (
+        <Loader />
       ) : (
         <>
-          <AddNewSongContainer>
-            <AddSongButton onClick={handleAdd}>
-              <BiPlus />
-            </AddSongButton>
-            <H2>Add a Song</H2>
-          </AddNewSongContainer>
-          <StyledSongList>
-            {filteredSongs.map((song) => (
-              <SongItem key={song._id} song={song} />
-            ))}
-          </StyledSongList>
+          {songs.length === 0 ? (
+            <EmptyListContainer>
+              <Title>No Songs yet...</Title>
+              <Title>Try adding some!</Title>
+              <AddSongButton onClick={handleAdd}>
+                <BiPlus />
+              </AddSongButton>
+            </EmptyListContainer>
+          ) : (
+            <>
+              <AddNewSongContainer>
+                <AddSongButton onClick={handleAdd}>
+                  <BiPlus />
+                </AddSongButton>
+                <H2>Add a Song</H2>
+              </AddNewSongContainer>
+              <StyledSongList>
+                {filteredSongs.map((song) => (
+                  <SongItem key={song._id} song={song} />
+                ))}
+              </StyledSongList>
+            </>
+          )}
+          {isAddSongClicked && (
+            <Modal onClose={handleClose}>
+              <AddSong onAdd={handleAdd} />
+            </Modal>
+          )}
         </>
-      )}
-      {isAddSongClicked && (
-        <Modal onClose={handleClose}>
-          <AddSong onAdd={handleAdd} />
-        </Modal>
       )}
     </>
   );
