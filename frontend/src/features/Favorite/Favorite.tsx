@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import RootState from "../../redux/RootState";
 import SongItem from "../SongList/SongItem";
@@ -22,15 +22,31 @@ const H2 = styled.h2`
 const Favorite: React.FC = () => {
   const favorites = useSelector((state: RootState) => state.favorites.favList);
   const searchQuery = useSelector((state: RootState) => state.search.query);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] =
+    useState<string>(searchQuery);
 
-  const filteredList = favorites.filter((song) => {
-    const title = song.title || "";
-    const artist = song.artist || "";
-    return (
-      title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      artist.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
+
+  const filteredList = useMemo(
+    () =>
+      favorites.filter((song) => {
+        const title = song.title || "";
+        const artist = song.artist || "";
+        return (
+          title.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+          artist.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
+        );
+      }),
+    [favorites, debouncedSearchQuery],
+  );
 
   useEffect(() => {
     document.title = "Favorites";
