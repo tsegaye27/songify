@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { addPlaylistStart } from "../../redux/slices/playlistSlice";
 import styled from "@emotion/styled";
 import {
-  Button,
   ButtonContainer,
   CancelButton,
   Form,
@@ -12,6 +11,7 @@ import {
   UpdateButton,
   WrapperField,
 } from "../SongList/EditSong";
+import { Button } from "../../ui/Button";
 
 const AddPlaylistContainer = styled.div`
   padding: 20px;
