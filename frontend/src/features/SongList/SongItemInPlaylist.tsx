@@ -125,7 +125,7 @@ const SongItemInPlaylist: React.FC<Props> = ({ song, playlist, onDelete }) => {
       </StyledSongItem>
 
       {showDelete && showModal && (
-        <Modal onClose={handleCloseModal}>
+        <Modal isOpen={true} onClose={handleCloseModal}>
           <RemoveFromPlaylist
             onClose={handleRemoveFromPlaylist}
             onUpdateList={() => onDelete(song)}
