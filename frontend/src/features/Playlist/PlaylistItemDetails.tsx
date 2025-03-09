@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Song, TypePlaylist } from "../../redux/types";
+import { Title as BtnTitle, Title } from "../../ui/Modal";
 import {
   AddNewSongContainer,
+  Container as BtnContainer,
   EmptyListContainer,
   StyledSongList,
-  Title,
-} from "../SongList/SongList";
-import { Container as BtnContainer, Title as BtnTitle } from "../../ui/Modal";
+} from "../../ui/CommonComponents";
 import { BiLeftArrow } from "react-icons/bi";
 import SongItemInPlaylist from "../SongList/SongItemInPlaylist";
 import { useSelector } from "react-redux";
@@ -56,7 +56,7 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
     ? songsIn?.filter(
         (song) =>
           song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          song.artist.toLowerCase().includes(searchQuery.toLowerCase())
+          song.artist.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : songsIn;
 
