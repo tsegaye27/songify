@@ -267,17 +267,17 @@ const SongItem: React.FC<Props> = ({ song }) => {
         <ReactTooltip id="FavoriteButton" />
       </StyledSongItem>
       {isSelected && showModal && (
-        <Modal onClose={handleCloseModal}>
+        <Modal isOpen={true} onClose={handleCloseModal}>
           <EditSong onUpdate={handleEdit} song={song} />
         </Modal>
       )}
       {showDelete && showModal && (
-        <Modal onClose={handleCloseModal}>
+        <Modal isOpen={true} onClose={handleCloseModal}>
           <DeleteSong onDelete={handleDelete} song_Id={song._id} />
         </Modal>
       )}
       {showPlaylist && showModal && (
-        <Modal onClose={handleCloseModal}>
+        <Modal isOpen={true} onClose={handleCloseModal}>
           <PlaylistListView songId={song._id} onClose={handleCloseModal} />
         </Modal>
       )}
