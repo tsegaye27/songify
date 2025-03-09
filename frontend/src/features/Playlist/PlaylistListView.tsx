@@ -8,11 +8,10 @@ import { fetchPlaylistsStart } from "../../redux/slices/playlistSlice";
 import {
   AddNewSongContainer as AddNewPlaylistContainer,
   AddSongButton as AddPlaylistButton,
-  Title,
-} from "../SongList/SongList";
+} from "../../ui/CommonComponents";
 import { BiPlus } from "react-icons/bi";
 import AddPlaylist from "./AddPlaylist";
-import Modal from "../../ui/Modal";
+import Modal, { Title } from "../../ui/Modal";
 
 type Props = {
   songId: string;
@@ -59,7 +58,7 @@ const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {
         ))}
       </StyledPlaylists>
       {showAdd && (
-        <Modal onClose={handleAdd}>
+        <Modal isOpen={true} onClose={handleAdd}>
           <AddPlaylist onAdd={handleAdd} />
         </Modal>
       )}
