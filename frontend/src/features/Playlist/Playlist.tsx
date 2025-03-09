@@ -4,17 +4,17 @@ import RootState from "../../redux/RootState";
 import { fetchPlaylistsStart } from "../../redux/slices/playlistSlice";
 import {
   EmptyListContainer,
-  Title,
   AddSongButton as AddPlaylistButton,
   AddNewSongContainer as AddNewPlaylistContainer,
-} from "../SongList/SongList";
+} from "../../ui/CommonComponents";
 import { BiPlus } from "react-icons/bi";
-import Modal from "../../ui/Modal";
-import AddPlaylist from "./AddPlaylist";
+import Modal, { Title } from "../../ui/Modal";
 import styled from "@emotion/styled";
-import PlaylistItem from "./PlaylistItem";
-import PlaylistItemDetails from "./PlaylistItemDetails";
 import { TypePlaylist } from "../../redux/types";
+
+const PlaylistItem = React.lazy(() => import("./PlaylistItem"));
+const PlaylistItemDetails = React.lazy(() => import("./PlaylistItemDetails"));
+const AddPlaylist = React.lazy(() => import("./AddPlaylist"));
 
 const H2 = styled.h2`
   align-self: center;
@@ -36,7 +36,7 @@ const Playlist: React.FC = () => {
   const searchQuery = useSelector((state: RootState) => state.search.query);
   const filteredPlaylist = searchQuery
     ? playlists.filter((playlist) =>
-        playlist.name.toLowerCase().includes(searchQuery.toLowerCase())
+        playlist.name.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : playlists;
   const [isAddPlaylistClicked, setIsAddPlaylistClicked] =
@@ -102,7 +102,7 @@ const Playlist: React.FC = () => {
         </>
       )}
       {isAddPlaylistClicked && (
-        <Modal onClose={handleCloseModal}>
+        <Modal isOpen={true} onClose={handleCloseModal}>
           <AddPlaylist onAdd={handleAdd} />
         </Modal>
       )}
