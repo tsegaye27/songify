@@ -4,6 +4,7 @@ import { updateSongStart } from "../../redux/slices/slice";
 import styled from "@emotion/styled";
 import { BiCheck, BiX } from "react-icons/bi";
 import { Song } from "../../redux/types";
+import { Button } from "../../ui/Button";
 
 type EditSongProps = {
   song: Song;
@@ -36,15 +37,6 @@ export const Input = styled.input`
   border: 1px solid #5dfe3c;
   border-radius: 1rem;
   outline: none;
-`;
-
-export const Button = styled.button`
-  padding: 10px 20px;
-  background-color: var(--primary-color);
-  border: 1px solid #007bff;
-  color: var(--text-color);
-  border-radius: 5px;
-  cursor: pointer;
 `;
 
 export const ButtonContainer = styled.div`
