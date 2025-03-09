@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import SideNav from "./SideNav";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styled from "@emotion/styled";
 import Header from "./Header";
 
@@ -14,38 +14,43 @@ const StyledMain = styled.main`
   flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
+  scrollbar-width: thin; /* Firefox support */
+  scrollbar-color: var(--app-layout-color-hover) transparent;
+
   &::-webkit-scrollbar {
     background-color: var(--app-layout-color-hover);
     border-radius: 10px;
   }
 `;
 
-const MiniContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--app-layout-color);
-`;
-
-const Footer = styled(NavLink)`
+const Footer = styled.footer`
   background-color: var(--second-background-color);
   color: var(--tertiary-color);
   text-align: center;
   padding: 10px;
-  text-decoration: none;
 `;
+
+const MemoizedSideNav = memo(SideNav);
+const MemoizedHeader = memo(Header);
 
 const AppLayout: React.FC = () => {
   return (
     <StyledAppLayout>
-      <SideNav />
-      <MiniContainer>
-        <Header />
+      <MemoizedSideNav />
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "var(--app-layout-color)",
+        }}
+      >
+        <MemoizedHeader />
         <StyledMain>
           <Outlet />
         </StyledMain>
-        <Footer to="/">Songify | All Rights Reserved</Footer>
-      </MiniContainer>
+        <Footer>Songify | All Rights Reserved</Footer>
+      </div>
     </StyledAppLayout>
   );
 };

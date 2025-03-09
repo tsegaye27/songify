@@ -2,14 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Title } from "./Modal";
 import styled from "@emotion/styled";
-import { Button } from "../features/SongList/EditSong";
+import { Button } from "./Button";
 
 const StyledError = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 2rem;
 `;
 
 const Error: React.FC = () => {
