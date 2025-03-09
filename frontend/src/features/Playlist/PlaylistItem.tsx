@@ -117,12 +117,12 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
         </ButtonContainer>
       </StyledPlaylistItem>
       {showDelete && (
-        <Modal onClose={handleClose}>
+        <Modal isOpen={true} onClose={handleClose}>
           <DeletePlaylist playlist={playlist} onDelete={handleDelete} />
         </Modal>
       )}
       {showEdit && (
-        <Modal onClose={handleClose}>
+        <Modal isOpen={true} onClose={handleClose}>
           <EditPlaylist playlist={playlist} onEdit={handleEdit} />
         </Modal>
       )}
