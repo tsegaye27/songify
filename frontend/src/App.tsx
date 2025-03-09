@@ -1,15 +1,16 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import {
   Navigate,
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
-import SongList from "./features/SongList/SongList";
-import Error from "./ui/Error";
 import GlobalStyles from "./styles/GlobalStyles";
-import Favorite from "./features/Favorite/Favorite";
-import Playlist from "./features/Playlist/Playlist";
+import Error from "./ui/Error";
+
+const SongList = lazy(() => import("./features/SongList/SongList"));
+const Favorite = lazy(() => import("./features/Favorite/Favorite"));
+const Playlist = lazy(() => import("./features/Playlist/Playlist"));
 
 const router = createBrowserRouter([
   {
@@ -28,18 +29,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/songs",
-        element: <SongList />,
+        element: (
+          <Suspense fallback={<div>Loading Songs...</div>}>
+            <SongList />
+          </Suspense>
+        ),
         errorElement: <Error />,
       },
-
       {
         path: "/favorites",
-        element: <Favorite />,
+        element: (
+          <Suspense fallback={<div>Loading Favorites...</div>}>
+            <Favorite />
+          </Suspense>
+        ),
         errorElement: <Error />,
       },
       {
         path: "/playlists",
-        element: <Playlist />,
+        element: (
+          <Suspense fallback={<div>Loading Playlists...</div>}>
+            <Playlist />
+          </Suspense>
+        ),
         errorElement: <Error />,
       },
     ],
