@@ -6,11 +6,12 @@ import {
   EmptyListContainer,
   AddSongButton as AddPlaylistButton,
   AddNewSongContainer as AddNewPlaylistContainer,
-} from "../../ui/CommonComponents";
+} from "../SongList/SongList";
 import { BiPlus } from "react-icons/bi";
 import Modal, { Title } from "../../ui/Modal";
 import styled from "@emotion/styled";
 import { TypePlaylist } from "../../redux/types";
+import Loader from "../../ui/Loader";
 
 const PlaylistItem = React.lazy(() => import("./PlaylistItem"));
 const PlaylistItemDetails = React.lazy(() => import("./PlaylistItemDetails"));
@@ -33,6 +34,7 @@ export const StyledPlaylists = styled.div`
 
 const Playlist: React.FC = () => {
   const playlists = useSelector((state: RootState) => state.playlists.list);
+  const { loading } = useSelector((state: RootState) => state.playlists);
   const searchQuery = useSelector((state: RootState) => state.search.query);
   const filteredPlaylist = searchQuery
     ? playlists.filter((playlist) =>
@@ -63,15 +65,17 @@ const Playlist: React.FC = () => {
     setSelectedPlaylist(playlist);
   }
 
+  if (loading) return <Loader />;
+
   return (
     <>
       {playlists.length === 0 ? (
         <EmptyListContainer>
-          <Title>No Playlists yet...</Title>
-          <Title>Try adding some!</Title>
-          <AddPlaylistButton onClick={handleAdd}>
+          <AddPlaylistButton title="Add Playlist" onClick={handleAdd}>
             <BiPlus />
           </AddPlaylistButton>
+          <br />
+          <Title>No Playlists yet...</Title>
         </EmptyListContainer>
       ) : (
         <>
