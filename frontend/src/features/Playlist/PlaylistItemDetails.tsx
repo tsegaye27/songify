@@ -4,45 +4,59 @@ import { Song, TypePlaylist } from "../../redux/types";
 import { Title as BtnTitle, Title } from "../../ui/Modal";
 import {
   AddNewSongContainer,
-  Container as BtnContainer,
   EmptyListContainer,
   StyledSongList,
 } from "../../ui/CommonComponents";
-import { BiLeftArrow } from "react-icons/bi";
 import SongItemInPlaylist from "../SongList/SongItemInPlaylist";
 import { useSelector } from "react-redux";
 import RootState from "../../redux/RootState";
+import { IoChevronBackSharp } from "react-icons/io5";
 
 type PlaylistItemDetailsProps = {
   playlist: TypePlaylist;
   onReturn: () => void;
 };
 
+// Styled Components
 const Container = styled.div`
   padding: 20px;
   border-radius: 10px;
-  color: var(--text-color);
+  background-color: #2c2c2c; /* Darker background for a modern look */
+  color: #ffffff; /* White text for better contrast */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
 `;
 
 const H2 = styled.h2`
-  align-self: center;
-  color: var(--text-color);
-  margin: 0 10px;
+  color: #ffffff; /* White for contrast */
+  margin: 20px 0; /* Increased margin for spacing */
+  font-size: 1.5rem; /* Large font size for headings */
+  text-align: center; /* Centering the text */
 `;
 
 const ReturnButton = styled.button`
-  transition: background-color 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
   padding: 10px 20px;
   margin: 10px 0;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color: var(--primary-color);
+  background-color: #444; /* Green background for modern look */
   display: flex;
-  color: var(--text-color);
+  align-items: center; /* Center align icon and text */
+  color: #ffffff; /* White text for contrast */
+  font-size: 1rem; /* Consistent font size */
+
   &:hover {
-    background-color: var(--primary-color);
+    background-color: #333; /* Darker green on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
   }
+`;
+
+const EmptyMessageContainer = styled.div`
+  text-align: center; /* Center the text */
+  margin-top: 20px; /* Space from the button */
 `;
 
 const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
@@ -65,26 +79,24 @@ const PlaylistItemDetails: React.FC<PlaylistItemDetailsProps> = ({
     if (!newSongs) return;
     setSongsIn(newSongs);
   }
+
   return (
     <Container>
       {filteredSongsIn === null || filteredSongsIn?.length === 0 ? (
         <EmptyListContainer>
-          <Title>{`${playlist?.name} is empty...`}</Title>
           <ReturnButton onClick={onReturn}>
-            <BtnContainer>
-              <BiLeftArrow />
-              <BtnTitle>Go Back</BtnTitle>
-            </BtnContainer>
+            <IoChevronBackSharp title="Back" />
+            <BtnTitle>Back</BtnTitle>
           </ReturnButton>
+          <EmptyMessageContainer>
+            <Title>{`${playlist?.name} is empty...`}</Title>
+          </EmptyMessageContainer>
         </EmptyListContainer>
       ) : (
         <>
           <AddNewSongContainer>
             <ReturnButton onClick={onReturn}>
-              <BtnContainer>
-                <BiLeftArrow />
-                <BtnTitle>Go Back</BtnTitle>
-              </BtnContainer>
+              <IoChevronBackSharp title="Back" />
             </ReturnButton>
             <H2>
               {filteredSongsIn?.length === 1
