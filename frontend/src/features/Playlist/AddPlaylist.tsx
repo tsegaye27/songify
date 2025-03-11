@@ -9,9 +9,13 @@ import {
   Input,
   InputContainer,
   UpdateButton,
-  WrapperField,
 } from "../SongList/EditSong";
 import { Button } from "../../ui/Button";
+
+export const WrapperField = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const AddPlaylistContainer = styled.div`
   padding: 20px;
