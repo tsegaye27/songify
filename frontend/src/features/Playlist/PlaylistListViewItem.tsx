@@ -5,23 +5,41 @@ import { TypePlaylist } from "../../redux/types";
 import { useDispatch } from "react-redux";
 import { addSongToPlaylistStart } from "../../redux/slices/playlistSlice";
 
+// Styled Components
 const Title = styled.h3`
-  font-size: 20px;
+  font-size: 18px; /* Slightly smaller font size for better readability */
+  margin: 0; /* Remove margin for better alignment */
+  color: var(--text-color);
+`;
+
+const SongCount = styled.p`
+  font-size: 14px; /* Smaller font size for song count */
+  margin: 0; /* Remove margin for better alignment */
+  color: var(--text-color);
+  opacity: 0.7; /* Slightly faded for subtlety */
+`;
+
+const PlaylistInfo = styled.div`
+  display: flex;
+  flex-direction: column; /* Stack title and song count vertically */
+  margin-left: 12px; /* Space between logo and info */
 `;
 
 const StyledPlaylistItem = styled.div`
-  margin: 0;
-  padding: 0;
-  color: var(--text-color);
   display: flex;
-  background-color: var(--secondary-color);
-  align-items: center;
+  align-items: center; /* Align items in the center */
+  background-color: #333;
+  color: var(--text-color);
+  padding: 10px; /* Increased padding for better touch targets */
+  margin: 2px 0; /* Space between playlist items */
+  border-radius: 10px; /* More pronounced rounding for modern look */
   cursor: pointer;
-  border-radius: 2rem;
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    background-color: #444; /* Change background on hover */
   }
 `;
 
@@ -40,15 +58,21 @@ const PlaylistListViewItem: React.FC<Props> = ({
 
   function handleAddSongToPlaylist() {
     const songToBeAdded = playlist.songs.find((song) => song._id === songId);
-    songToBeAdded
-      ? onClose()
-      : dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
-    onClose();
+    if (songToBeAdded) {
+      onClose();
+    } else {
+      dispatch(addSongToPlaylistStart({ playlistId: playlist._id, songId }));
+      onClose();
+    }
   }
+
   return (
     <StyledPlaylistItem onClick={handleAddSongToPlaylist}>
       <PlaylistLogo />
-      <Title>{playlist.name}</Title>
+      <PlaylistInfo>
+        <Title>{playlist.name}</Title>
+        <SongCount>{playlist.songs?.length} Songs</SongCount>
+      </PlaylistInfo>
     </StyledPlaylistItem>
   );
 };
