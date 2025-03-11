@@ -14,8 +14,10 @@ const spin = keyframes`
 const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start; /* Align items to the top */
+  height: full; /* Full viewport height */
+  position: relative; /* Or absolute */
+  padding-top: 20px; /* Add padding to offset from the top */
 `;
 
 const Spinner = styled.div`
@@ -26,8 +28,8 @@ const Spinner = styled.div`
   height: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   animation: ${css`
-    ${spin} 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite
-  `};
+    ${spin} 1s linear infinite
+  `}; /* Smoother spin */
 `;
 
 const Loader: React.FC = () => (
