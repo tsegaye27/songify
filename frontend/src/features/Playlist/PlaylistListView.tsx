@@ -5,13 +5,11 @@ import PlaylistListViewItem from "./PlaylistListViewItem";
 import { useDispatch, useSelector } from "react-redux";
 import RootState from "../../redux/RootState";
 import { fetchPlaylistsStart } from "../../redux/slices/playlistSlice";
-import {
-  AddNewSongContainer as AddNewPlaylistContainer,
-  AddSongButton as AddPlaylistButton,
-} from "../../ui/CommonComponents";
+import { AddNewSongContainer as AddNewPlaylistContainer } from "../../ui/CommonComponents";
 import { BiPlus } from "react-icons/bi";
 import AddPlaylist from "./AddPlaylist";
-import Modal, { Title } from "../../ui/Modal";
+import Modal from "../../ui/Modal";
+import Loader from "../../ui/Loader";
 
 type Props = {
   songId: string;
@@ -21,6 +19,26 @@ type Props = {
 const H2 = styled.h2`
   align-self: center;
   color: var(--text-color);
+`;
+
+const AddSongButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #000; /* Text color */
+  background-color: var(--green-primary); /* Set to the green color */
+  width: clamp(2.5rem, 5vw, 3rem);
+  height: clamp(2.5rem, 5vw, 3rem);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+
+  &:hover {
+    transform: scale(1.1); /* Slight scaling effect */
+  }
 `;
 
 const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {
@@ -37,14 +55,14 @@ const PlaylistListView: React.FC<Props> = ({ songId, onClose }) => {
     setShowAdd((a) => !a);
   }
 
-  if (isLoading) return <Title>Loading...</Title>;
+  if (isLoading) return <Loader />;
 
   return (
     <>
       <AddNewPlaylistContainer>
-        <AddPlaylistButton onClick={handleAdd}>
+        <AddSongButton onClick={handleAdd}>
           <BiPlus />
-        </AddPlaylistButton>
+        </AddSongButton>
         <H2>Create a Playlist</H2>
       </AddNewPlaylistContainer>
       <StyledPlaylists>
