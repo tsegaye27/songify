@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import { BiMusic, BiHeart } from "react-icons/bi";
 import { BsCollectionPlay } from "react-icons/bs";
-import logo from "../../public/logo.png";
+import logo from "../../public/logo.webp";
 
 const StyledNav = styled.nav`
   width: 240px;

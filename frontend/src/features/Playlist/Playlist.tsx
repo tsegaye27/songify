@@ -12,8 +12,8 @@ import Modal, { Title } from "../../ui/Modal";
 import styled from "@emotion/styled";
 import { TypePlaylist } from "../../redux/types";
 import Loader from "../../ui/Loader";
+import PlaylistItem from "./PlaylistItem";
 
-const PlaylistItem = React.lazy(() => import("./PlaylistItem"));
 const PlaylistItemDetails = React.lazy(() => import("./PlaylistItemDetails"));
 const AddPlaylist = React.lazy(() => import("./AddPlaylist"));
 

@@ -7,9 +7,10 @@ import RootState from "../../redux/RootState";
 import { fetchPlaylistsStart } from "../../redux/slices/playlistSlice";
 import { AddNewSongContainer as AddNewPlaylistContainer } from "../../ui/CommonComponents";
 import { BiPlus } from "react-icons/bi";
-import AddPlaylist from "./AddPlaylist";
 import Modal from "../../ui/Modal";
 import Loader from "../../ui/Loader";
+
+const AddPlaylist = React.lazy(() => import("./AddPlaylist"));
 
 type Props = {
   songId: string;
