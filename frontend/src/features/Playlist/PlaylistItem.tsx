@@ -16,23 +16,39 @@ type Props = {
 };
 
 const Title = styled.h3`
-  font-size: 20px;
-  margin: 0;
-  text-align: center;
+  font-size: 18px; /* Slightly smaller font size for better readability */
+  margin: 0; /* Remove margin for better alignment */
+  color: var(--text-color);
 `;
 
-export const StyledPlaylistItem = styled.div`
-  margin: 0;
-  padding: 0;
+const SongCount = styled.p`
+  font-size: 14px; /* Smaller font size for song count */
+  margin: 0; /* Remove margin for better alignment */
   color: var(--text-color);
+  opacity: 0.7; /* Slightly faded for subtlety */
+`;
+
+const PlaylistInfo = styled.div`
   display: flex;
-  background-color: var(--secondary-color);
-  align-items: center;
-  border-radius: 2rem;
-  transition: transform 0.3s ease;
+  flex-direction: column; /* Stack title and song count vertically */
+  margin-left: 12px; /* Space between logo and info */
+`;
+
+const StyledPlaylistItem = styled.div`
+  display: flex;
+  align-items: center; /* Align items in the center */
+  background-color: var(--second-background-color);
+  color: var(--text-color);
+  padding: 10px; /* Increased padding for better touch targets */
+  margin: 2px 0; /* Space between playlist items */
+  border-radius: 10px; /* More pronounced rounding for modern look */
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    color 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    color: #222; /* Change background on hover */
   }
 `;
 
@@ -87,17 +103,21 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
       <StyledPlaylistItem>
         <PlaylistDetailContainer onClick={handleSelected}>
           <PlaylistLogo />
-          <Title>{playlist.name}</Title>
+          <PlaylistInfo>
+            <Title>{playlist.name}</Title>
+            <SongCount>{playlist.songs?.length} Songs</SongCount>
+          </PlaylistInfo>
         </PlaylistDetailContainer>
         <ButtonContainer>
           <DeleteButton
             data-tooltip-id="deletePlaylist"
             data-tooltip-content="Delete Playlist"
             data-tooltip-place="bottom"
-            bgColor={`var(--secondary-color)`}
+            bgColor={`transparent`}
             marginRight={"5px"}
+            onClick={handleDelete}
           >
-            <Icon onClick={handleDelete}>
+            <Icon>
               <BiTrash />
             </Icon>
           </DeleteButton>
@@ -106,10 +126,11 @@ const PlaylistItem: React.FC<Props> = ({ playlist, onSelected }) => {
             data-tooltip-id="editPlaylist"
             data-tooltip-content="Edit Playlist"
             data-tooltip-place="bottom"
-            bgColor={`var(--secondary-color)`}
+            bgColor={`transparent`}
             marginRight={"5px"}
+            onClick={handleEdit}
           >
-            <Icon onClick={handleEdit}>
+            <Icon>
               <BiEdit />
             </Icon>
           </EditButton>
