@@ -11,22 +11,24 @@ const GlobalStyles: React.FC = () => {
         }
 
         :root {
-          --background-color: #00ccff;
-          --second-background-color: #333;
-          --primary-color: #222;
-          --secondary-color: #244e82;
-          --tertiary-color: #aaa;
-          --accent-color: #006eff;
-          --text-color: #e7eef6;
-          --green-primary: #00ff00;
-          --red-primary: #ff0000;
-          --text-color-secondary: #ccc;
-          --app-layout-color: #494949;
-          --app-layout-color-hover: #949494;
+          --background-color: #1a1a2e; /* Darker primary background */
+          --second-background-color: #0f0f1a; /* Darker secondary background */
+          --primary-color: #4a90e2; /* Smooth blue primary color */
+          --secondary-color: #5cdb95; /* Subtle green for balance */
+          --tertiary-color: #ff6f61; /* Muted coral for emphasis */
+          --accent-color: #a8e6cf; /* Light green accent color */
+          --text-color: #e0e0e0; /* Light text color */
+          --green-primary: #32ff7e; /* Smooth green */
+          --red-primary: #ff4e50; /* Smooth red */
+          --text-color-secondary: #a0a0a0; /* Softer secondary text color */
+          --app-layout-color: #222; /* Dark layout color */
+          --app-layout-color-hover: #333; /* Slightly lighter on hover */
         }
 
         body {
           font-family: Arial, Helvetica, sans-serif;
+          background-color: var(--background-color);
+          color: var(--text-color);
         }
       `}
     />
