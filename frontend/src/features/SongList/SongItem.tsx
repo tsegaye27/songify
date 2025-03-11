@@ -18,9 +18,9 @@ import PlaylistListView from "../Playlist/PlaylistListView";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 export const StyledSongItem = styled.div`
-  background-color: var(--primary-color);
+  background-color: var(--second-background-color); /* Darker background */
   border-radius: 10px;
-  box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   padding: 20px;
   display: flex;
   position: relative;
@@ -35,23 +35,23 @@ export const StyledSongItem = styled.div`
 
 const SongLogo = styled(BsMusicNote)`
   font-size: 32px;
-  color: var(--text-color-secondary);
+  color: var(--green-primary); /* Set the color to --green-primary */
   margin: 1.5rem 0;
   padding: 1rem;
   border-radius: 100%;
-  background-color: black;
+  background-color: #222; /* Dark background for logo */
 `;
 
 const Title = styled.h3`
   font-size: 20px;
-  color: var(--text-color-secondary);
+  color: var(--text-color); /* Light text color */
   margin: 0;
   text-align: center;
 `;
 
 const Body = styled.p`
   font-size: 16px;
-  color: var(--tertiary-color);
+  color: var(--text-color-secondary); /* Softer secondary text color */
   margin: 10px 0;
   text-align: center;
 `;
@@ -63,7 +63,7 @@ const ButtonContainer = styled.div`
 `;
 
 const FavoriteButton = styled.button`
-  background-color: var(--primary-color);
+  background-color: transparent; /* Transparent for better visual flow */
   color: var(--text-color);
   border: none;
   padding: 10px;
@@ -74,7 +74,7 @@ const FavoriteButton = styled.button`
   right: 10px;
 
   &:hover {
-    color: var(--red-primary);
+    color: var(--red-primary); /* Accent color on hover */
   }
 `;
 
@@ -113,18 +113,18 @@ const DeleteButtonStyles = (props: {
 export const DeleteButton = styled.button(DeleteButtonStyles);
 
 const AddToPlaylistButton = styled.button`
-  background-color: var(--primary-color);
+  background-color: #222; /* Match the Edit and Delete button background */
   color: var(--text-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
-
   &:hover {
-    color: #e97922;
+    color: var(--green-primary); /* Accent color on hover */
   }
 `;
+
 const EditButtonStyles = (props: {
   bgColor?: string;
   marginRight?: string;
@@ -137,8 +137,9 @@ const EditButtonStyles = (props: {
   border-radius: 5px;
   cursor: pointer;
   transition: color 0.3s ease;
+
   &:hover {
-    color: hotpink;
+    color: var(--red-primary); /* Use accent color on hover */
   }
 `;
 export const EditButton = styled.button(EditButtonStyles);
@@ -148,13 +149,14 @@ export const Icon = styled.span`
 `;
 
 const IsFavIcon = styled(AiFillHeart)`
-  color: var(--red-primary);
+  color: var(--red-primary); /* Use accent color for favorites */
 `;
 
 const IsNotFavIcon = styled(BiHeart)`
   transition: color 0.3s ease;
+
   &:hover {
-    color: var(--red-primary);
+    color: var(--red-primary); /* Use accent color on hover */
   }
 `;
 
@@ -167,7 +169,7 @@ const SongItem: React.FC<Props> = ({ song }) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [showPlaylist, setShowPlaylist] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.favList);
@@ -221,12 +223,13 @@ const SongItem: React.FC<Props> = ({ song }) => {
         <Body>{song.artist}</Body>
         <ButtonContainer>
           <EditButton
-            bgColor="#222"
+            bgColor="#222" /* Darker button background */
             data-tooltip-id="editSongButton"
             data-tooltip-content="Edit Song"
             data-tooltip-place="bottom"
+            onClick={() => handleEdit(song._id)}
           >
-            <Icon onClick={() => handleEdit(song._id)}>
+            <Icon>
               <BiEdit />
             </Icon>
           </EditButton>
@@ -235,9 +238,10 @@ const SongItem: React.FC<Props> = ({ song }) => {
             data-tooltip-id="deleteSongButton"
             data-tooltip-content="Delete Song"
             data-tooltip-place="bottom"
-            bgColor="#222"
+            bgColor="#222" /* Darker button background */
+            onClick={handleDelete}
           >
-            <Icon onClick={handleDelete}>
+            <Icon>
               <BiTrash />
             </Icon>
           </DeleteButton>
@@ -246,8 +250,9 @@ const SongItem: React.FC<Props> = ({ song }) => {
             data-tooltip-id="AddSongToPlaylistButton"
             data-tooltip-content="Add To Playlist"
             data-tooltip-place="bottom"
+            onClick={handleAddToPlaylist}
           >
-            <Icon onClick={handleAddToPlaylist}>
+            <Icon>
               <BiPlus />
             </Icon>
           </AddToPlaylistButton>
