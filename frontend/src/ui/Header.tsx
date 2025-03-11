@@ -7,13 +7,13 @@ import RootState from "../redux/RootState";
 
 const StyledHeader = styled.header`
   position: relative;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.3); /* Darker background */
   color: var(--text-color);
   padding: 3rem 4rem 1rem 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); /* Increased shadow for depth */
 
   &::before {
     content: "";
@@ -24,7 +24,7 @@ const StyledHeader = styled.header`
     bottom: 0;
     background-image: url("/banner.jpg");
     background-size: cover;
-    opacity: 0.5; /* Instead of blur */
+    opacity: 0.4; /* Adjusted opacity for better visibility */
     z-index: -1;
   }
 
@@ -42,9 +42,14 @@ const SearchContainer = styled.div`
   align-items: center;
   background-color: var(--second-background-color);
   border-radius: 24px;
-  padding: 8px 16px;
+  padding: 0.1rem 1rem;
   width: 20rem;
-  border: 1px solid #00e1ff;
+  border: 1px solid var(--accent-color); /* Updated border color */
+  transition: border 0.3s ease;
+
+  &:hover {
+    border-color: var(--primary-color); /* Border change on hover */
+  }
 `;
 
 const SearchInput = styled.input`
@@ -53,16 +58,19 @@ const SearchInput = styled.input`
   color: var(--text-color);
   font-size: 16px;
   outline: none;
-  margin-right: 10px;
+  padding: 8px 0; /* Vertical padding for input */
+  flex: 1; /* Allows input to use available space */
 
   &::placeholder {
-    color: var(--tertiary-color);
+    color: var(--text-color); /* Different color for placeholder */
+    opacity: 0.8; /* Slight transparency for placeholder */
   }
 `;
 
 const SearchIcon = styled(BiSearch)`
   font-size: 20px;
   color: var(--tertiary-color);
+  margin-left: 10px; /* Space between the input and icon */
 `;
 
 const Header: React.FC = () => {
