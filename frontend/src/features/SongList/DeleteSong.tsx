@@ -6,31 +6,36 @@ import styled from "@emotion/styled";
 import { BiCheck, BiX } from "react-icons/bi";
 import { removeFromFavorites } from "../../redux/slices/favoriteSlice";
 
+// Styled Components
 export const Button = styled.button`
   padding: 10px 20px;
-  background-color: var(--primary-color);
-  border: 1px solid #007bff;
-  color: var(--text-color);
+  background-color: #333; /* Green background */
+  border: none; /* No border for a cleaner look */
+  color: #ffffff; /* White text for contrast */
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #222; /* Darker green on hover */
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  height: 100%;
-  align-items: flex-end;
+  justify-content: space-between; /* Space buttons evenly */
+  align-items: center; /* Center align buttons */
+  margin-top: 20px; /* Space above buttons */
 `;
 
 export const DeleteButton = styled(BiCheck)`
-  color: var(--green-primary);
-  font-size: 20px;
-  &:hover {
-  }
+  color: var(--green-primary); /* Green for delete action */
+  font-size: 24px; /* Increased size for visibility */
 `;
+
 export const CancelButton = styled(BiX)`
-  color: var(--red-primary);
-  font-size: 20px;
+  color: var(--red-primary); /* Red for cancel action */
+  font-size: 24px; /* Increased size for visibility */
 `;
 
 export const StyledDeleteSong = styled.div`
@@ -39,7 +44,9 @@ export const StyledDeleteSong = styled.div`
   flex-direction: column;
   padding: 20px;
   width: 90%;
-  height: 70%;
+  max-width: 400px; /* Limit width for better aesthetics */
+  background-color: transparent; /* Dark background for contrast */
+  margin: 0 auto; /* Center the container */
 `;
 
 export const Title = styled.h3`
@@ -47,6 +54,7 @@ export const Title = styled.h3`
   margin-bottom: 20px;
   text-align: center;
 `;
+
 type DeleteSongProps = {
   onDelete: () => void;
   song_Id: string;
@@ -62,15 +70,16 @@ const DeleteSong: React.FC<DeleteSongProps> = ({ onDelete, song_Id }) => {
     dispatch(deleteSongStart(songId));
     onDelete();
   }
+
   return (
     <StyledDeleteSong>
-      <Title>{`Delete ${filteredSong[0].title}?`}</Title>
+      <Title>{`Delete ${filteredSong[0]?.title}?`}</Title>
       <ButtonContainer>
-        <Button>
-          <DeleteButton onClick={() => handleDelete(filteredSong[0]._id)} />
+        <Button onClick={() => handleDelete(filteredSong[0]._id)}>
+          <DeleteButton />
         </Button>
-        <Button>
-          <CancelButton onClick={onDelete} />
+        <Button onClick={onDelete}>
+          <CancelButton />
         </Button>
       </ButtonContainer>
     </StyledDeleteSong>

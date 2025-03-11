@@ -8,65 +8,76 @@ import { Button } from "../../ui/Button";
 
 type EditSongProps = {
   song: Song;
-  onUpdate: (id: string | null) => void;
+  onUpdate: (songId: string | null) => void;
 };
 
 export const EditSongContainer = styled.div`
-  border-radius: 10px;
+  background-color: transparent; /* Dark background for a modern look */
+  border-radius: 8px; /* Reduced border radius */
   padding: 20px;
-  width: 90%;
-  height: 70%;
+  height: auto; /* Allow height to adjust based on content */
+  max-width: 400px; /* Limit the width for better aesthetics */
+  margin: 0 auto; /* Center the container */
 `;
 
 const Title = styled.h3`
-  color: var(--text-color);
-  margin-bottom: 20px;
+  color: #ffffff; /* White for contrast */
+  margin-bottom: 15px; /* Reduced margin */
   text-align: center;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  height: 70%;
-  margin: 3rem 0;
 `;
 
 export const Input = styled.input`
-  padding: 10px 16px;
+  padding: 10px;
+  background-color: #444;
+  color: #ffffff; /* White text for contrast */
   text-align: center;
-  border: 1px solid #5dfe3c;
-  border-radius: 1rem;
+  border: none;
+  border-radius: 4px; /* Reduced border radius */
   outline: none;
+  margin-bottom: 5px; /* Space between fields */
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: #4caf50; /* Darker green on focus */
+  }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 100%;
-  align-items: flex-end;
+  margin-top: 10px; /* Space above buttons */
 `;
 
 export const UpdateButton = styled(BiCheck)`
-  color: var(--green-primary);
-  font-size: 20px;
+  color: #5dfe3c; /* Green for the update action */
+  font-size: 24px; /* Larger icon size for better visibility */
+  transition: color 0.3s;
+
   &:hover {
+    color: #4caf50; /* Darker green on hover */
   }
 `;
+
 export const CancelButton = styled(BiX)`
-  color: var(--red-primary);
-  font-size: 20px;
+  color: #ff4d4d; /* Red for the cancel action */
+  font-size: 24px; /* Larger icon size for better visibility */
+  transition: color 0.3s;
+
+  &:hover {
+    color: #ff1a1a; /* Darker red on hover */
+  }
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 10px;
-`;
-
-export const WrapperField = styled.div`
-  display: flex;
-  flex-direction: column;
+  gap: 5px; /* Space between input fields */
+  margin-bottom: 10px;
 `;
 
 const EditSong: React.FC<EditSongProps> = ({ song, onUpdate }) => {
@@ -86,30 +97,26 @@ const EditSong: React.FC<EditSongProps> = ({ song, onUpdate }) => {
       <Title>Edit Song</Title>
       <Form onSubmit={handleSubmit}>
         <InputContainer>
-          <WrapperField>
-            <Input
-              type="text"
-              placeholder="Enter the Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </WrapperField>
-          <WrapperField>
-            <Input
-              type="text"
-              placeholder="Enter the Artist"
-              value={artist}
-              onChange={(e) => setArtist(e.target.value)}
-              required
-            />
-          </WrapperField>
+          <Input
+            type="text"
+            placeholder="Enter the Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <Input
+            type="text"
+            placeholder="Enter the Artist"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+            required
+          />
         </InputContainer>
         <ButtonContainer>
           <Button type="submit">
             <UpdateButton />
           </Button>
-          <Button onClick={() => onUpdate(null)}>
+          <Button type="button" onClick={() => onUpdate(null)}>
             <CancelButton />
           </Button>
         </ButtonContainer>
