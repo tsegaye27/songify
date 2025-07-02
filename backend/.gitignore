@@ -1,2 +1,8 @@
 node_modules
-config.env
+.env
+pnpm-lock.yaml
+pnpm-workspace.yaml
+logs
+config
+.dockerignore
+src/services/*
