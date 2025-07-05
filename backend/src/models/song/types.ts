@@ -4,10 +4,8 @@ export interface SongInterface extends Document {
   _id: string;
   title: string;
   artist: string;
-  duration?: number;
-  genre?: string;
   album?: string;
-  year?: number;
+  genre?: string;
   createdAt: Date;
   updatedAt: Date;
 }
