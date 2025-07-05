@@ -22,8 +22,8 @@ const signUpUser = async (req: Request, res: Response, next: NextFunction) => {
 
     res.cookie("jwt", loginToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === NodeEnv.Production,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: MAX_COOKIE_AGE,
     });
 
