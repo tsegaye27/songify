@@ -8,6 +8,8 @@ pnpm-debug.log*
 .env
 lerna-debug.log*
 
+.dockerignore
+
 node_modules
 dist
 dist-ssr
