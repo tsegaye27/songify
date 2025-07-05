@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import playlistSchema from "@/models/playlist/schema";
+import playlistSchema from "../playlist/schema";
 import { PlaylistInterface, PlaylistModelInterface } from "./types";
 
 const Playlist = mongoose.model<PlaylistInterface, PlaylistModelInterface>(
