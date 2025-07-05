@@ -7,8 +7,8 @@ import httpStatus from "http-status";
 import { errorMessages } from "../../utils/messages/errorMessages";
 import { logMessages } from "../../utils/messages/logMessages";
 import { responseMessages } from "../../utils/messages/responseMessages";
-import { ENVIRONMENT, MAX_COOKIE_AGE } from "../../utils/constants";
-import { AuthenticationStrategy, NodeEnv, Status } from "../../utils/enums";
+import { MAX_COOKIE_AGE } from "../../utils/constants";
+import { AuthenticationStrategy, Status } from "../../utils/enums";
 
 export const authenticateLocal = async (
   req: Request,
@@ -51,8 +51,8 @@ export const authenticateLocal = async (
 
         res.cookie("jwt", token, {
           httpOnly: true,
-          secure: ENVIRONMENT === NodeEnv.Production,
-          sameSite: "strict",
+          secure: true,
+          sameSite: "none",
           maxAge: MAX_COOKIE_AGE,
         });
 
