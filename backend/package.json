@@ -2,6 +2,7 @@
   "name": "songify",
   "version": "1.0.0",
   "description": "Professional music playlist management API built with TypeScript, Express, and MongoDB",
+  "packageManager": "pnpm@10.9.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
