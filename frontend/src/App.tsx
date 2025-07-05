@@ -1,71 +1,104 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import {
   Navigate,
   RouterProvider,
   createBrowserRouter,
+  Outlet,
 } from "react-router-dom";
-import AppLayout from "./ui/AppLayout";
+import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
+import { AppLayout, Loader } from "./ui";
+import RootState from "./redux/RootState";
 import GlobalStyles from "./styles/GlobalStyles";
-import Error from "./ui/Error";
-import Loader from "./ui/Loader";
+import { routes } from "./router";
 
-const SongList = lazy(() => import("./features/SongList/SongList"));
-const Favorite = lazy(() => import("./features/Favorite/Favorite"));
-const Playlist = lazy(() => import("./features/Playlist/Playlist"));
+const ProtectedRoute: React.FC = () => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
 
-const router = createBrowserRouter(
-  [
-    {
-      element: (
-        <>
-          <AppLayout />
-          <GlobalStyles />
-        </>
-      ),
-      errorElement: <Error />,
-      children: [
-        {
-          path: "/",
-          errorElement: <Error />,
-          element: <Navigate to="/songs" replace />,
-        },
-        {
-          path: "/songs",
-          element: (
-            <Suspense fallback={<Loader />}>
-              <SongList />
-            </Suspense>
-          ),
-          errorElement: <Error />,
-        },
-        {
-          path: "/favorites",
-          element: (
-            <Suspense fallback={<Loader />}>
-              <Favorite />
-            </Suspense>
-          ),
-          errorElement: <Error />,
-        },
-        {
-          path: "/playlists",
-          element: (
-            <Suspense fallback={<Loader />}>
-              <Playlist />
-            </Suspense>
-          ),
-          errorElement: <Error />,
-        },
-      ],
-    },
-  ],
-  {},
-);
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
+  return <AppLayout />;
+};
+
+const PublicRoute: React.FC = () => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
+
+  if (isAuthenticated) {
+    return <Navigate to="/songs" replace />;
+  }
+
+  return (
+    <Suspense fallback={<Loader />}>
+      <Outlet />
+    </Suspense>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/auth",
+    element: <PublicRoute />,
+    children: routes
+      .filter((route) => !route.isAuthenticated)
+      .map((route) => ({
+        path: route.path.replace("/auth/", ""),
+        element: <Suspense fallback={<Loader />}>{route.element}</Suspense>,
+      })),
+  },
+  {
+    path: "/",
+    element: <ProtectedRoute />,
+    children: routes
+      .filter((route) => route.isAuthenticated)
+      .map((route) => ({
+        index: route.path === "/",
+        path: route.path === "/" ? undefined : route.path.substring(1),
+        element: <Suspense fallback={<Loader />}>{route.element}</Suspense>,
+      })),
+  },
+  { path: "*", element: <Navigate to="/" replace /> },
+]);
 
 const App: React.FC = () => {
+  const appLoading = useSelector((state: RootState) => state.auth.appLoading);
+
+  if (appLoading) {
+    return <Loader message="Authenticating..." isFullScreen />;
+  }
+
   return (
     <>
       <GlobalStyles />
+      <Toaster
+        position="top-center"
+        gutter={8}
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "var(--background-color)",
+            color: "var(--text-color)",
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: "var(--green-primary)",
+              secondary: "var(--background-color)",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "var(--red-primary)",
+              secondary: "var(--background-color)",
+            },
+          },
+        }}
+      />
       <RouterProvider router={router} />
     </>
   );
