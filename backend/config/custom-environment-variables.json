@@ -1,0 +1,9 @@
+{
+  "port": "PORT",
+  "db": {
+    "mongoUri": "MONGO_URI"
+  },
+  "jwt": {
+    "secret": "JWT_SECRET"
+  }
+}
