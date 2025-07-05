@@ -1,19 +1,20 @@
-import ac from "@/config/accessControl";
+import ac from "../config/accessControl";
 import { NextFunction, Request, Response } from "express";
-import AppError from "@/errors/appErrors";
+import AppError from "../errors/appErrors";
 import httpStatus from "http-status";
-import { errorMessages } from "@/utils/messages/errorMessages";
-import { UserInterface } from "@/models/user/types";
-
-interface AuthenticatedRequest extends Request {
-  user: UserInterface;
-}
+import { errorMessages } from "../utils/messages/errorMessages";
 
 export const checkPermission = (action: string, resource: string) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  return (req: Request, _res: Response, next: NextFunction) => {
     try {
-      const userRole = req.user.role || "user";
-      const permission = ac.can(userRole)[action](resource);
+      if (!req.user) {
+        return next(
+          new AppError(errorMessages.unauthorized, httpStatus.UNAUTHORIZED),
+        );
+      }
+
+      const userRole = (req.user as any).role || "user";
+      const permission = executePermissionCheck(userRole, action, resource);
 
       if (!permission.granted) {
         return next(
@@ -35,6 +36,35 @@ export const checkPermission = (action: string, resource: string) => {
       );
     }
   };
+};
+
+const executePermissionCheck = (
+  userRole: string,
+  action: string,
+  resource: string,
+) => {
+  const query = ac.can(userRole);
+
+  switch (action) {
+    case "createAny":
+      return query.createAny(resource);
+    case "readAny":
+      return query.readAny(resource);
+    case "updateAny":
+      return query.updateAny(resource);
+    case "deleteAny":
+      return query.deleteAny(resource);
+    case "createOwn":
+      return query.createOwn(resource);
+    case "readOwn":
+      return query.readOwn(resource);
+    case "updateOwn":
+      return query.updateOwn(resource);
+    case "deleteOwn":
+      return query.deleteOwn(resource);
+    default:
+      throw new Error(`Unknown action: ${action}`);
+  }
 };
 
 export const canCreateSong = checkPermission("createAny", "song");
