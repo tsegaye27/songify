@@ -1,24 +1,20 @@
 import { Request, Response, NextFunction } from "express";
-import Playlist from "@/models/playlist";
-import Song from "@/models/song";
-import { UserInterface } from "@/models/user/types";
-import { Status } from "@/utils/enums";
+import Playlist from "../models/playlist";
+import Song from "../models/song";
+import { UserInterface } from "../models/user/types";
+import { Status } from "../utils/enums";
 import httpStatus from "http-status";
-import { responseMessages } from "@/utils/messages/responseMessages";
-import AppError from "@/errors/appErrors";
-import { errorMessages } from "@/utils/messages/errorMessages";
-
-interface AuthenticatedRequest extends Request {
-  user: UserInterface;
-}
+import { responseMessages } from "../utils/messages/responseMessages";
+import AppError from "../errors/appErrors";
+import { errorMessages } from "../utils/messages/errorMessages";
 
 export const getUserPlaylists = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const userId = req.user._id;
+    const userId = (req.user as UserInterface)._id;
     const playlists = await Playlist.findPlaylistsByOwner(userId);
 
     res.status(httpStatus.OK).json({
@@ -32,7 +28,7 @@ export const getUserPlaylists = async (
 };
 
 export const getPublicPlaylists = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -64,7 +60,7 @@ export const getPublicPlaylists = async (
 };
 
 export const getPlaylistById = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -78,10 +74,9 @@ export const getPlaylistById = async (
       );
     }
 
-    // Check if user can access this playlist
     const isOwner =
       (playlist.owner as unknown as UserInterface)._id.toString() ===
-      req.user._id.toString();
+      (req.user as UserInterface)._id.toString();
     if (!playlist.isPublic && !isOwner) {
       return next(
         new AppError(errorMessages.playlistAccessDenied, httpStatus.FORBIDDEN),
@@ -99,14 +94,14 @@ export const getPlaylistById = async (
 };
 
 export const createPlaylist = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
     const playlistData = {
       ...req.body,
-      owner: req.user._id,
+      owner: (req.user as UserInterface)._id,
     };
 
     const playlist = await Playlist.createPlaylist(playlistData);
@@ -123,7 +118,7 @@ export const createPlaylist = async (
 };
 
 export const updatePlaylist = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -139,7 +134,10 @@ export const updatePlaylist = async (
       );
     }
 
-    if (existingPlaylist.owner.toString() !== req.user._id.toString()) {
+    if (
+      existingPlaylist.owner.toString() !==
+      (req.user as UserInterface)._id.toString()
+    ) {
       return next(
         new AppError(errorMessages.playlistAccessDenied, httpStatus.FORBIDDEN),
       );
@@ -158,7 +156,7 @@ export const updatePlaylist = async (
 };
 
 export const deletePlaylist = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -173,7 +171,10 @@ export const deletePlaylist = async (
       );
     }
 
-    if (existingPlaylist.owner.toString() !== req.user._id.toString()) {
+    if (
+      existingPlaylist.owner.toString() !==
+      (req.user as UserInterface)._id.toString()
+    ) {
       return next(
         new AppError(errorMessages.playlistAccessDenied, httpStatus.FORBIDDEN),
       );
@@ -191,7 +192,7 @@ export const deletePlaylist = async (
 };
 
 export const addSongToPlaylist = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -207,7 +208,10 @@ export const addSongToPlaylist = async (
       );
     }
 
-    if (existingPlaylist.owner.toString() !== req.user._id.toString()) {
+    if (
+      existingPlaylist.owner.toString() !==
+      (req.user as UserInterface)._id.toString()
+    ) {
       return next(
         new AppError(errorMessages.playlistAccessDenied, httpStatus.FORBIDDEN),
       );
@@ -234,7 +238,7 @@ export const addSongToPlaylist = async (
 };
 
 export const removeSongFromPlaylist = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -249,7 +253,10 @@ export const removeSongFromPlaylist = async (
       );
     }
 
-    if (existingPlaylist.owner.toString() !== req.user._id.toString()) {
+    if (
+      existingPlaylist.owner.toString() !==
+      (req.user as UserInterface)._id.toString()
+    ) {
       return next(
         new AppError(errorMessages.playlistAccessDenied, httpStatus.FORBIDDEN),
       );
@@ -268,7 +275,7 @@ export const removeSongFromPlaylist = async (
 };
 
 export const searchPlaylists = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
