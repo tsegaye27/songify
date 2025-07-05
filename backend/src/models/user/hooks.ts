@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 import { NextFunction } from "express";
 import { SALT_ROUNDS } from "../../utils/constants";
 import { UserInterface } from "./types";

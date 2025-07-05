@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { UserInterface } from "./types";
 
 const Schema = mongoose.Schema;
 
@@ -7,40 +6,33 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: true,
+      required: [true, "Email is required."],
       unique: true,
+      lowercase: true,
+      trim: true,
     },
     password: {
       type: String,
-      required: function (this: UserInterface) {
-        return !this.googleId;
-      },
+      required: [true, "Password is required."],
+      minlength: 8,
+      select: false,
     },
     passwordConfirm: {
       type: String,
-      required: function (this: UserInterface) {
-        return !this.googleId;
+      required: [true, "Password confirmation is required."],
+      validate: {
+        validator: function (this: any, el: string) {
+          return el === this.password;
+        },
+        message: "Passwords do not match.",
       },
     },
-    googleId: {
+    role: {
       type: String,
-      unique: true,
-      sparse: true,
+      enum: ["user", "admin"],
+      default: "user",
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-    },
-    verificationTokenExpiry: {
-      type: Date,
-    },
-    passwordResetToken: String,
-    passwordResetTokenExpiry: Date,
   },
-
   {
     timestamps: true,
   },
