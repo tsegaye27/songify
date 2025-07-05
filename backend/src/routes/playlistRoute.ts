@@ -9,20 +9,20 @@ import {
   removeSongFromPlaylist,
   searchPlaylists,
   updatePlaylist,
-} from "@/controllers/playlistController";
+} from "../controllers/playlistController";
 import {
   canCreateOwnPlaylist,
   canDeleteOwnPlaylist,
   canReadAnyPlaylist,
   canReadOwnPlaylist,
   canUpdateOwnPlaylist,
-} from "@/middlewares/checkPermissions";
+} from "../middlewares/checkPermissions";
 import {
   validateAddSong,
   validateCreatePlaylist,
   validateUpdatePlaylist,
-} from "@/validators/validatePlaylists";
-import { authenticateJwt } from "@/middlewares/passport/authenticateJwt";
+} from "../validators/validatePlaylists";
+import { authenticateJwt } from "../middlewares/passport/authenticateJwt";
 
 const router: Router = express.Router();
 
