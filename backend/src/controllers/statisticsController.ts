@@ -1,4 +1,4 @@
-import { Status } from "@/utils/enums";
+import { Status } from "../utils/enums";
 import Song from "../models/song";
 import httpStatus from "http-status";
 import { NextFunction, Request, Response } from "express";
