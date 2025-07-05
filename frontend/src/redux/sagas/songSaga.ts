@@ -18,15 +18,8 @@ import {
   addSong,
   updateSong,
   deleteSong,
+  FetchSongsParams,
 } from "../../api/songsAPI";
-
-interface FetchSongsParams {
-  page?: number;
-  limit?: number;
-  search?: string;
-  artist?: string;
-  genre?: string;
-}
 
 function* fetchSongsSaga(
   action: PayloadAction<FetchSongsParams | undefined>,

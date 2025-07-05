@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../app/models/user";
+import { ILoginData, IUser } from "../../app/models/user";
 
 export interface AuthState {
   user: IUser | null;
@@ -34,7 +34,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.appLoading = false;
     },
-    loginStart: (state) => {
+    loginStart: (state, _action: PayloadAction<ILoginData>) => {
       state.loading = true;
       state.error = null;
     },

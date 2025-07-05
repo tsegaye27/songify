@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICreateSongData, ISong, IUpdateSongData } from "../../app/models/song";
+import { FetchSongsParams } from "../../api/songsAPI";
 
 export interface SongState {
   songs: ISong[];
@@ -25,7 +26,10 @@ const songSlice = createSlice({
   name: "songs",
   initialState,
   reducers: {
-    fetchSongsStart: (state, _action: PayloadAction<any>) => {
+    fetchSongsStart: (
+      state,
+      _action: PayloadAction<FetchSongsParams | undefined>,
+    ) => {
       state.loading = true;
       state.error = null;
     },
@@ -49,7 +53,7 @@ const songSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    addSongSuccess: (state, action: PayloadAction<ISong>) => {
+    addSongSuccess: (state, _action: PayloadAction<ISong>) => {
       state.loading = false;
     },
     addSongFailure: (state, action: PayloadAction<string>) => {
@@ -75,7 +79,7 @@ const songSlice = createSlice({
       state.error = action.payload;
     },
 
-    deleteSongStart: (state) => {
+    deleteSongStart: (state, _action: PayloadAction<string>) => {
       state.loading = true;
       state.error = null;
     },
