@@ -6,20 +6,25 @@ import {
   getSongById,
   searchSongs,
   updateSong,
-} from "@/controllers/songController";
+  getDistinctAlbums,
+  getDistinctGenres,
+} from "../controllers/songController";
 import {
   canCreateSong,
   canDeleteSong,
   canReadSongs,
   canUpdateSong,
-} from "@/middlewares/checkPermissions";
+} from "../middlewares/checkPermissions";
 import {
   validateCreateSong,
   validateUpdateSong,
-} from "@/validators/validateSongs";
-import { authenticateJwt } from "@/middlewares/passport/authenticateJwt";
+} from "../validators/validateSongs";
+import { authenticateJwt } from "../middlewares/passport/authenticateJwt";
 
 const router: Router = express.Router();
+
+router.get("/meta/genres", authenticateJwt, getDistinctGenres);
+router.get("/meta/albums", authenticateJwt, getDistinctAlbums);
 
 router.get("/search", authenticateJwt, searchSongs);
 router.get("/", authenticateJwt, canReadSongs, getAllSongs);
