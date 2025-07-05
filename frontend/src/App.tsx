@@ -30,7 +30,7 @@ const PublicRoute: React.FC = () => {
   );
 
   if (isAuthenticated) {
-    return <Navigate to="/songs" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return (
