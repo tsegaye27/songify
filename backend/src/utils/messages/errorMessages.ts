@@ -1,5 +1,4 @@
 export const errorMessages = {
-  // Environment and Database Connection Errors
   envValidationErr: (err: string) => `Env vars validation error: ${err}`,
   mongoConnectionFailed: "MongoDB connection failed!",
   dbConnectionFailed: (errorMessage: string) =>
@@ -30,16 +29,7 @@ export const errorMessages = {
   invalidEmail: "Unauthorized: Invalid email",
   expiredToken: "Unauthorized: Token has expired",
   noToken: "Unauthorized: No token provided",
-
-  googleUserNotFound:
-    "Unauthorized: User not found during Google authentication",
   authFailed: "Authentication failed",
-
-  // Google Authentication Errors
-  googleStrategy: "Error in google strategy",
-  googleAuthError: (errorMessage: string) =>
-    `Error during Google authentication: ${errorMessage}`,
-  googleProfileError: "Error retrieving Google profile information",
 
   // User Retrieval and Authentication Errors
   retrievingUser: (errorMessage: string) =>
@@ -50,15 +40,6 @@ export const errorMessages = {
   loginError: (errorMessage: string) => `Login process error: ${errorMessage}`,
   localAuthFailed: (errorMessage: string) =>
     `Local authentication failed: ${errorMessage}`,
-
-  // Email and Nodemailer Errors
-  transportError: "Error occurred while creating nodemailer transport",
-  nodemailerVerificationFailed: (errorMessage: string) =>
-    `[Nodemailer Loader] Verifying mailing account failed: ${errorMessage}`,
-  nodemailerTransportError: (errorMessage: string) =>
-    `[Nodemailer Loader] Error occurred while creating nodemailer transport: ${errorMessage}`,
-  emailSendingFailed: (errorMessage: string) =>
-    `Failed to send email: ${errorMessage}`,
 
   // Duplicate Email Error
   duplicateEmailError: (errorMessage: string) =>
