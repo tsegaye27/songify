@@ -4,14 +4,18 @@ import { IApiResponse } from "../app/models/shared";
 
 export type AddSongProp = ICreateSongData;
 
-export const fetchSongs = async (params: {
+export interface FetchSongsParams {
   page?: number;
   limit?: number;
   search?: string;
   artist?: string;
   genre?: string;
   album?: string;
-}): Promise<{ songs: ISong[]; pagination: any }> => {
+}
+
+export const fetchSongs = async (
+  params: FetchSongsParams,
+): Promise<{ songs: ISong[]; pagination: any }> => {
   try {
     const response = await apiClient.get<
       IApiResponse<{
