@@ -13,7 +13,7 @@ import { AuthenticationStrategy, NodeEnv, Status } from "../../utils/enums";
 export const authenticateLocal = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   passport.authenticate(
     AuthenticationStrategy.Local,
@@ -25,23 +25,23 @@ export const authenticateLocal = async (
           return next(
             new AppError(
               errorMessages.internalServerError,
-              httpStatus.INTERNAL_SERVER_ERROR
-            )
+              httpStatus.INTERNAL_SERVER_ERROR,
+            ),
           );
         }
 
         if (!user) {
           logger.warn(
             errorMessages.localAuthFailed(
-              info?.message || errorMessages.authFailed
-            )
+              info?.message || errorMessages.authFailed,
+            ),
           );
 
           return next(
             new AppError(
               errorMessages.invalidCredentials,
-              httpStatus.BAD_REQUEST
-            )
+              httpStatus.BAD_REQUEST,
+            ),
           );
         }
 
@@ -63,7 +63,6 @@ export const authenticateLocal = async (
             user: {
               id: user._id,
               email: user.email,
-              isVerified: user.isVerified,
             },
           },
         });
@@ -72,10 +71,10 @@ export const authenticateLocal = async (
         return next(
           new AppError(
             errorMessages.internalServerError,
-            httpStatus.INTERNAL_SERVER_ERROR
-          )
+            httpStatus.INTERNAL_SERVER_ERROR,
+          ),
         );
       }
-    }
+    },
   )(req, res, next);
 };

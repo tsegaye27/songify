@@ -4,3 +4,4 @@ pnpm-workspace.yaml
 logs
 .dockerignore
 src/services/*
+dist
