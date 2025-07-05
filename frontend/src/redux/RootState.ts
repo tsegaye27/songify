@@ -1,13 +1,15 @@
-import { SongState } from "./slices/slice";
-import { FavoriteSongState } from "./slices/favoriteSlice";
+import { SongState } from "./slices/songSlice";
 import { PlaylistState } from "./slices/playlistSlice";
-import { SearchState } from "./slices/searchSlice";
+import { AuthState } from "./slices/authSlice";
+import { StatisticsState } from "./slices/statisticsSlice";
+import { FavoritesState } from "./slices/favoritesSlice";
 
-type RootState = {
+interface RootState {
   songs: SongState;
-  favorites: FavoriteSongState;
   playlists: PlaylistState;
-  search: SearchState;
-};
+  auth: AuthState;
+  statistics: StatisticsState;
+  favorites: FavoritesState;
+}
 
 export default RootState;
