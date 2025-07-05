@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TypePlaylist } from "../types";
-import { AddPlaylistProp } from "../../api/playlistsAPI";
+import {
+  IPlaylist,
+  ICreatePlaylistData,
+  IUpdatePlaylistData,
+} from "../../app/models/playlist";
 
-export type PlaylistState = {
-  list: TypePlaylist[];
+export interface PlaylistState {
+  list: IPlaylist[];
   loading: boolean;
   error: string | null;
-};
+}
 
 const initialState: PlaylistState = {
   list: [],
@@ -22,7 +25,7 @@ const playlistsSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchPlaylistsSuccess(state, action: PayloadAction<TypePlaylist[]>) {
+    fetchPlaylistsSuccess(state, action: PayloadAction<IPlaylist[]>) {
       state.list = action.payload;
       state.loading = false;
     },
@@ -30,12 +33,12 @@ const playlistsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    addPlaylistStart(state, action: PayloadAction<AddPlaylistProp>) {
+    addPlaylistStart(state, action: PayloadAction<ICreatePlaylistData>) {
       state.loading = true;
       state.error = null;
       void action.payload;
     },
-    addPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
+    addPlaylistSuccess(state, action: PayloadAction<IPlaylist>) {
       state.list.push(action.payload);
       state.loading = false;
     },
@@ -50,7 +53,7 @@ const playlistsSlice = createSlice({
     },
     deletePlaylistSuccess(state, action: PayloadAction<string>) {
       state.list = state.list.filter(
-        (playlist) => playlist._id !== action.payload
+        (playlist) => playlist._id !== action.payload,
       );
       state.loading = false;
     },
@@ -58,15 +61,14 @@ const playlistsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    updatePlaylistStart(state, action: PayloadAction<TypePlaylist>) {
+    updatePlaylistStart(state, action: PayloadAction<IUpdatePlaylistData>) {
       state.loading = true;
       void action.payload;
-
       state.error = null;
     },
-    updatePlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
+    updatePlaylistSuccess(state, action: PayloadAction<IPlaylist>) {
       state.list = state.list.map((playlist) =>
-        playlist._id === action.payload._id ? action.payload : playlist
+        playlist._id === action.payload._id ? action.payload : playlist,
       );
       state.loading = false;
     },
@@ -76,16 +78,16 @@ const playlistsSlice = createSlice({
     },
     addSongToPlaylistStart(
       state,
-      action: PayloadAction<{ playlistId: string; songId: string }>
+      action: PayloadAction<{ playlistId: string; songId: string }>,
     ) {
       state.loading = true;
       state.error = null;
       void action.payload;
     },
-    addSongToPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
+    addSongToPlaylistSuccess(state, action: PayloadAction<IPlaylist>) {
       state.loading = false;
       state.list = state.list.map((playlist) =>
-        playlist._id === action.payload._id ? action.payload : playlist
+        playlist._id === action.payload._id ? action.payload : playlist,
       );
     },
     addSongToPlaylistFailure(state, action: PayloadAction<string>) {
@@ -94,17 +96,16 @@ const playlistsSlice = createSlice({
     },
     removeSongFromPlaylistStart(
       state,
-      action: PayloadAction<{ playlistId: string; songId: string }>
+      action: PayloadAction<{ playlistId: string; songId: string }>,
     ) {
       state.loading = true;
       void action.payload;
-
       state.error = null;
     },
-    removeSongFromPlaylistSuccess(state, action: PayloadAction<TypePlaylist>) {
+    removeSongFromPlaylistSuccess(state, action: PayloadAction<IPlaylist>) {
       state.loading = false;
       state.list = state.list.map((playlist) =>
-        playlist._id === action.payload._id ? action.payload : playlist
+        playlist._id === action.payload._id ? action.payload : playlist,
       );
     },
     removeSongFromPlaylistFailure(state, action: PayloadAction<string>) {
