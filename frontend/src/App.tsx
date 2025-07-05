@@ -34,7 +34,7 @@ const PublicRoute: React.FC = () => {
   }
 
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader isFullScreen />}>
       <Outlet />
     </Suspense>
   );
@@ -48,7 +48,11 @@ const router = createBrowserRouter([
       .filter((route) => !route.isAuthenticated)
       .map((route) => ({
         path: route.path.replace("/auth/", ""),
-        element: <Suspense fallback={<Loader />}>{route.element}</Suspense>,
+        element: (
+          <Suspense fallback={<Loader isFullScreen />}>
+            {route.element}
+          </Suspense>
+        ),
       })),
   },
   {
@@ -59,7 +63,11 @@ const router = createBrowserRouter([
       .map((route) => ({
         index: route.path === "/",
         path: route.path === "/" ? undefined : route.path.substring(1),
-        element: <Suspense fallback={<Loader />}>{route.element}</Suspense>,
+        element: (
+          <Suspense fallback={<Loader isFullScreen />}>
+            {route.element}
+          </Suspense>
+        ),
       })),
   },
   { path: "*", element: <Navigate to="/" replace /> },
