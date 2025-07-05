@@ -1,8 +1,8 @@
-import { NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import Joi, { Schema, ValidationErrorItem } from "joi";
-import AppError from "@/errors/appErrors";
+import AppError from "../errors/appErrors";
 import httpStatus from "http-status";
-import { errorMessages } from "@/utils/messages/errorMessages";
+import { errorMessages } from "../utils/messages/errorMessages";
 
 const validateSchema = (
   schema: Schema,

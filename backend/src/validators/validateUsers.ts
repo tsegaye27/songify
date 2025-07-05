@@ -60,41 +60,10 @@ const userSignupSchema = Joi.object({
   passwordConfirm: passwordConfirmField,
 });
 
-const resetPasswordSchema = Joi.object({
-  password: passwordField,
-  passwordConfirm: passwordConfirmField,
-});
-
-const forgetPasswordSchema = Joi.object({
-  email: emailField,
-});
-
-const validateUserSignup = (
+export const validateUserSignup = (
   req: Request,
   res: Response,
   next: NextFunction,
 ): void => {
   validateSchema(userSignupSchema, req, next);
-};
-
-const validateUserResetPassword = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void => {
-  validateSchema(resetPasswordSchema, req, next);
-};
-
-const validateUserForgetPassword = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void => {
-  validateSchema(forgetPasswordSchema, req, next);
-};
-
-export {
-  validateUserSignup,
-  validateUserResetPassword,
-  validateUserForgetPassword,
 };
