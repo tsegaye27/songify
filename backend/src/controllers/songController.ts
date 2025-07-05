@@ -1,23 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import Song from "@/models/song";
+import Song from "../models/song";
 import httpStatus from "http-status";
-import { UserInterface } from "@/models/user/types";
-import { responseMessages } from "@/utils/messages/responseMessages";
-import { Status } from "@/utils/enums";
-import AppError from "@/errors/appErrors";
-import { errorMessages } from "@/utils/messages/errorMessages";
-
-interface AuthenticatedRequest extends Request {
-  user: UserInterface;
-}
+import { responseMessages } from "../utils/messages/responseMessages";
+import { Status } from "../utils/enums";
+import AppError from "../errors/appErrors";
+import { errorMessages } from "../utils/messages/errorMessages";
 
 export const getAllSongs = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const { page = 1, limit = 10, search, artist, genre } = req.query;
+    const { page = 1, limit = 10, search, artist, genre, album } = req.query;
 
     const pageNum = parseInt(page as string);
     const limitNum = parseInt(limit as string);
@@ -35,6 +30,10 @@ export const getAllSongs = async (
 
     if (genre) {
       query.genre = { $regex: genre as string, $options: "i" };
+    }
+
+    if (album) {
+      query.album = { $regex: album as string, $options: "i" };
     }
 
     const songs = await Song.find(query)
@@ -64,7 +63,7 @@ export const getAllSongs = async (
 };
 
 export const getSongById = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -89,7 +88,7 @@ export const getSongById = async (
 };
 
 export const createSong = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -108,7 +107,7 @@ export const createSong = async (
 };
 
 export const updateSong = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -135,7 +134,7 @@ export const updateSong = async (
 };
 
 export const deleteSong = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -159,7 +158,7 @@ export const deleteSong = async (
 };
 
 export const searchSongs = async (
-  req: AuthenticatedRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
@@ -178,6 +177,42 @@ export const searchSongs = async (
       status: Status.Success,
       message: responseMessages.songApi.searchSuccess,
       data: { songs, query: q },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getDistinctGenres = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const genres = await Song.distinct("genre");
+
+    const filteredGenres = genres.filter((g) => g && g.trim() !== "");
+    res.status(httpStatus.OK).json({
+      status: Status.Success,
+      data: { genres: filteredGenres },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getDistinctAlbums = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const albums = await Song.distinct("album");
+
+    const filteredGenres = albums.filter((a) => a && a.trim() !== "");
+    res.status(httpStatus.OK).json({
+      status: Status.Success,
+      data: { albums: filteredGenres },
     });
   } catch (error) {
     next(error);
