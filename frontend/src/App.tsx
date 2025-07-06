@@ -77,7 +77,7 @@ const App: React.FC = () => {
   const appLoading = useSelector((state: RootState) => state.auth.appLoading);
 
   if (appLoading) {
-    return <Loader message="Authenticating..." isFullScreen />;
+    return <Loader message="Loading..." isFullScreen />;
   }
 
   return (

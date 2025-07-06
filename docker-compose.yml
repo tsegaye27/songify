@@ -9,18 +9,6 @@ services:
     networks:
       - app-network
 
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:80"
-    env_file:
-      - ./frontend/.env
-    depends_on:
-      - backend
-    networks:
-      - app-network
-
 networks:
   app-network:
     driver: bridge
