@@ -26,39 +26,6 @@ const Input = styled.input`
   }
 `;
 
-//const Textarea = styled.textarea`
-//  width: 100%;
-//  padding: 0.75rem;
-//  border: 1px solid var(--accent-color);
-//  border-radius: var(--radius-md);
-//  background-color: var(--background-color);
-//  color: var(--text-color);
-//  font-size: 1rem;
-//  min-height: 80px;
-//  resize: vertical;
-//
-//  &:focus {
-//    outline: none;
-//    border-color: var(--primary-color);
-//  }
-//`;
-//
-//const CheckboxContainer = styled.div`
-//  display: flex;
-//  align-items: center;
-//  gap: 0.5rem;
-//`;
-//
-//const Checkbox = styled.input`
-//  width: 18px;
-//  height: 18px;
-//`;
-//
-//const Label = styled.label`
-//  color: var(--text-color);
-//  font-size: 0.875rem;
-//`;
-
 interface EditPlaylistModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -133,28 +100,6 @@ const EditPlaylistModal: React.FC<EditPlaylistModalProps> = ({
           onChange={handleChange}
           required
         />
-        {/*       //<Textarea
-        //  name="description"
-        //  placeholder="Playlist Description (optional)"
-        //  value={formData.description}
-        //  onChange={handleChange}
-        ///>
-        //<CheckboxContainer>
-        //  <Checkbox
-        //    type="checkbox"
-        //    name="isPublic"
-        //    checked={formData.isPublic}
-        //    onChange={handleChange}
-        //  />
-        //  <Label>Make this playlist public</Label>
-        //</CheckboxContainer>
-        //<Input
-        //  type="text"
-        //  name="tags"
-        //  placeholder="Tags (comma separated)"
-        //  value={formData.tags}
-        //  onChange={handleChange}
-        ///> */}
         <Button type="submit" variant="primary" fullWidth>
           Save Changes
         </Button>
