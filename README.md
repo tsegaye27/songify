@@ -160,33 +160,3 @@ frontend/
 ├─ vite.config.ts
 └─ package.json
 ```
-
----
-
-## Deployment
-
-**Frontend:** Netlify / Vercel
-
-- Set `VITE_API_URL` to your backend’s public URL
-
-**Backend:** Render / Koyeb / Heroku
-
-- Build from `backend/Dockerfile` or Node
-- Set `MONGO_URI`, `JWT_SECRET`, `FRONTEND_URL` env vars
-
----
-
-## Common Scripts
-
-```bash
-# Backend
-pnpm run dev           # start dev server
-pnpm run build         # transpile TS (if needed)
-pnpm run start         # run production build
-pnpm run seed -- --import    # seed sample data
-
-# Frontend
-pnpm run dev           # start HMR dev server
-pnpm run build         # build for production
-pnpm run preview       # serve built files locally
-```
