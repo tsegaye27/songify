@@ -71,13 +71,6 @@ const ActionButton = styled(Button)`
   }
 `;
 
-//const IconWrapper = styled.div`
-//  position: absolute;
-//  top: 1rem;
-//  left: 1rem;
-//  color: var(--text-color-secondary);
-//`;
-
 const FavoriteButton = styled.button`
   position: absolute;
   top: 1rem;
