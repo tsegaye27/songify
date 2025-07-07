@@ -12,7 +12,6 @@ export interface PlaylistInterface extends Document {
   tags?: string[];
   createdAt: Date;
   updatedAt: Date;
-  getTotalDuration(): number;
 }
 
 export interface PlaylistModelInterface extends Model<PlaylistInterface> {
