@@ -14,7 +14,7 @@ import {
   validateUpdateSong,
 } from "../validators/validateSongs";
 import { authenticateJwt } from "../middlewares/passport/authenticateJwt";
-import { checkPermission } from "@/middlewares/checkPermissions";
+import { checkPermission } from "../middlewares/checkPermissions";
 
 const router: Router = express.Router();
 
