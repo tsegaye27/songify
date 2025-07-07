@@ -10,16 +10,11 @@ import {
   getDistinctGenres,
 } from "../controllers/songController";
 import {
-  canCreateSong,
-  canDeleteSong,
-  canReadSongs,
-  canUpdateSong,
-} from "../middlewares/checkPermissions";
-import {
   validateCreateSong,
   validateUpdateSong,
 } from "../validators/validateSongs";
 import { authenticateJwt } from "../middlewares/passport/authenticateJwt";
+import { checkPermission } from "@/middlewares/checkPermissions";
 
 const router: Router = express.Router();
 
@@ -27,23 +22,38 @@ router.get("/meta/genres", authenticateJwt, getDistinctGenres);
 router.get("/meta/albums", authenticateJwt, getDistinctAlbums);
 
 router.get("/search", authenticateJwt, searchSongs);
-router.get("/", authenticateJwt, canReadSongs, getAllSongs);
-router.get("/:id", authenticateJwt, canReadSongs, getSongById);
+router.get(
+  "/",
+  authenticateJwt,
+  checkPermission("readAny", "song"),
+  getAllSongs,
+);
+router.get(
+  "/:id",
+  authenticateJwt,
+  checkPermission("readAny", "song"),
+  getSongById,
+);
 
 router.post(
   "/",
   authenticateJwt,
-  canCreateSong,
+  checkPermission("createAny", "song"),
   validateCreateSong,
   createSong,
 );
 router.patch(
   "/:id",
   authenticateJwt,
-  canUpdateSong,
+  checkPermission("updateAny", "song"),
   validateUpdateSong,
   updateSong,
 );
-router.delete("/:id", authenticateJwt, canDeleteSong, deleteSong);
+router.delete(
+  "/:id",
+  authenticateJwt,
+  checkPermission("deleteAny", "song"),
+  deleteSong,
+);
 
 export default router;

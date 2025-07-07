@@ -11,54 +11,63 @@ import {
   updatePlaylist,
 } from "../controllers/playlistController";
 import {
-  canCreateOwnPlaylist,
-  canDeleteOwnPlaylist,
-  canReadAnyPlaylist,
-  canReadOwnPlaylist,
-  canUpdateOwnPlaylist,
-} from "../middlewares/checkPermissions";
-import {
   validateAddSong,
   validateCreatePlaylist,
   validateUpdatePlaylist,
 } from "../validators/validatePlaylists";
 import { authenticateJwt } from "../middlewares/passport/authenticateJwt";
+import { checkPermission } from "@/middlewares/checkPermissions";
 
 const router: Router = express.Router();
 
 router.get("/search", authenticateJwt, searchPlaylists);
-router.get("/public", authenticateJwt, canReadAnyPlaylist, getPublicPlaylists);
+router.get(
+  "/public",
+  authenticateJwt,
+  checkPermission("readAny", "playlist"),
+  getPublicPlaylists,
+);
 
-router.get("/my", authenticateJwt, canReadOwnPlaylist, getUserPlaylists);
+router.get(
+  "/my",
+  authenticateJwt,
+  checkPermission("readOwn", "playlist"),
+  getUserPlaylists,
+);
 
 router.get("/:id", authenticateJwt, getPlaylistById);
 router.post(
   "/",
   authenticateJwt,
-  canCreateOwnPlaylist,
+  checkPermission("createOwn", "playlist"),
   validateCreatePlaylist,
   createPlaylist,
 );
 router.patch(
   "/:id",
   authenticateJwt,
-  canUpdateOwnPlaylist,
+  checkPermission("updateOwn", "playlist"),
   validateUpdatePlaylist,
   updatePlaylist,
 );
-router.delete("/:id", authenticateJwt, canDeleteOwnPlaylist, deletePlaylist);
+router.delete(
+  "/:id",
+  authenticateJwt,
+  checkPermission("deleteOwn", "playlist"),
+  deletePlaylist,
+);
 
 router.post(
   "/:id/songs",
   authenticateJwt,
-  canUpdateOwnPlaylist,
+  checkPermission("updateOwn", "playlist"),
   validateAddSong,
   addSongToPlaylist,
 );
 router.delete(
   "/:id/songs/:songId",
   authenticateJwt,
-  canUpdateOwnPlaylist,
+  checkPermission("updateOwn", "playlist"),
   removeSongFromPlaylist,
 );
 
