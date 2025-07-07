@@ -5,7 +5,6 @@ import { registerHooks } from "./hooks";
 import { SongInterface, SongModelInterface } from "./types";
 
 songSchema.static(Statics);
-songSchema.method(Methods);
 
 registerHooks(songSchema);
 
