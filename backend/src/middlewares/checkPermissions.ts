@@ -66,14 +66,3 @@ const executePermissionCheck = (
       throw new Error(`Unknown action: ${action}`);
   }
 };
-
-export const canCreateSong = checkPermission("createAny", "song");
-export const canReadSongs = checkPermission("readAny", "song");
-export const canUpdateSong = checkPermission("updateAny", "song");
-export const canDeleteSong = checkPermission("deleteAny", "song");
-
-export const canCreateOwnPlaylist = checkPermission("createOwn", "playlist");
-export const canReadOwnPlaylist = checkPermission("readOwn", "playlist");
-export const canUpdateOwnPlaylist = checkPermission("updateOwn", "playlist");
-export const canDeleteOwnPlaylist = checkPermission("deleteOwn", "playlist");
-export const canReadAnyPlaylist = checkPermission("readAny", "playlist");
