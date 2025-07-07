@@ -1,0 +1,9 @@
+{
+  "environment": "production",
+
+  "logging": {
+    "morgan": "combined",
+
+    "level": "error"
+  }
+}

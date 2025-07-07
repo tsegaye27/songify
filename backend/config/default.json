@@ -1,0 +1,9 @@
+{
+  "environment": "development",
+
+  "logging": {
+    "morgan": "dev",
+
+    "level": "info"
+  }
+}
