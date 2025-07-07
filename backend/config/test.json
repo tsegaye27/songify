@@ -1,7 +1,0 @@
-{
-  "environment": "test",
-  "logging": {
-    "morgan": "dev",
-    "level": "error"
-  }
-}
