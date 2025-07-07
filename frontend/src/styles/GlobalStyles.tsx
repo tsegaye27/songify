@@ -5,16 +5,13 @@ const GlobalStyles: React.FC = () => {
   return (
     <Global
       styles={css`
-        /* Reset */
         * {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
         }
 
-        /* CSS Variables */
         :root {
-          /* Colors */
           --background-color: #0a0a0a;
           --second-background-color: #121212;
           --primary-color: #1db954;
@@ -25,32 +22,27 @@ const GlobalStyles: React.FC = () => {
           --red-primary: #e22134;
           --green-primary: #1db954;
 
-          /* Gradients */
           --gradient-primary: linear-gradient(
             135deg,
             var(--primary-color),
             var(--secondary-color)
           );
 
-          /* Shadows */
           --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
           --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
           --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
           --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 
-          /* Transitions */
           --transition-fast: 150ms ease-in-out;
           --transition-base: 300ms ease-in-out;
           --transition-slow: 500ms ease-in-out;
 
-          /* Border Radius */
           --radius-sm: 4px;
           --radius-md: 8px;
           --radius-lg: 12px;
           --radius-xl: 16px;
           --radius-full: 50%;
 
-          /* Spacing */
           --space-xs: 0.25rem;
           --space-sm: 0.5rem;
           --space-md: 1rem;
@@ -59,7 +51,6 @@ const GlobalStyles: React.FC = () => {
           --space-2xl: 3rem;
         }
 
-        /* Base Styles */
         html {
           font-size: 16px;
           line-height: 1.5;
@@ -77,7 +68,6 @@ const GlobalStyles: React.FC = () => {
           overflow-x: hidden;
         }
 
-        /* Typography */
         h1,
         h2,
         h3,
@@ -94,7 +84,6 @@ const GlobalStyles: React.FC = () => {
           line-height: 1.6;
         }
 
-        /* Links */
         a {
           color: var(--primary-color);
           text-decoration: none;
@@ -105,19 +94,16 @@ const GlobalStyles: React.FC = () => {
           }
         }
 
-        /* Focus Styles */
         *:focus {
           outline: 2px solid var(--primary-color);
           outline-offset: 2px;
         }
 
-        /* Selection */
         ::selection {
           background-color: var(--primary-color);
           color: white;
         }
 
-        /* Scrollbar Styles */
         ::-webkit-scrollbar {
           width: 8px;
           height: 8px;
@@ -136,13 +122,11 @@ const GlobalStyles: React.FC = () => {
           background: var(--primary-color);
         }
 
-        /* Firefox Scrollbar */
         * {
           scrollbar-width: thin;
           scrollbar-color: var(--accent-color) var(--background-color);
         }
 
-        /* Utility Classes */
         .sr-only {
           position: absolute;
           width: 1px;
@@ -167,7 +151,6 @@ const GlobalStyles: React.FC = () => {
           text-align: right;
         }
 
-        /* Animation Classes */
         .fade-in {
           animation: fadeIn 0.3s ease-in-out;
         }
@@ -196,7 +179,6 @@ const GlobalStyles: React.FC = () => {
           }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
           :root {
             font-size: 14px;

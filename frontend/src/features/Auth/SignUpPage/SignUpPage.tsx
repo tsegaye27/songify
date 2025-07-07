@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { signUp } from "../../../api/authAPI";
 import { ISignUpData } from "../../../app/models/user";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store/store";
+import { clearError, signUpStart } from "../../../redux/slices/authSlice";
 
 const Container = styled.div`
   display: flex;
@@ -98,7 +102,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-// New styled components for password requirements
 const PasswordRequirements = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -120,22 +123,31 @@ const Requirement = styled.span<{ valid: boolean }>`
 `;
 
 const SignUpPage: React.FC = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state: RootState) => state.auth);
   const [formData, setFormData] = useState<ISignUpData>({
     email: "",
     password: "",
     passwordConfirm: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [passwordValidity, setPasswordValidity] = useState({
     minLength: false,
     hasUppercase: false,
     hasNumber: false,
     hasSpecialChar: false,
+    hasLowercase: false,
   });
   const navigate = useNavigate();
 
   const isPasswordValid = Object.values(passwordValidity).every(Boolean);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearError());
+    }
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -150,35 +162,24 @@ const SignUpPage: React.FC = () => {
         hasUppercase: /[A-Z]/.test(value),
         hasNumber: /[0-9]/.test(value),
         hasSpecialChar: /[!@#$]/.test(value),
+        hasLowercase: /[a-z]/.test(value),
       });
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     if (formData.password !== formData.passwordConfirm) {
       toast.error("Passwords do not match");
-      setLoading(false);
       return;
     }
 
     if (!isPasswordValid) {
       toast.error("Please ensure your password meets all requirements.");
-      setLoading(false);
       return;
     }
-
-    try {
-      await signUp(formData);
-      toast.success("Account created successfully. Redirecting to login...");
-      setTimeout(() => navigate("/auth/login"), 3000);
-    } catch (err: any) {
-      toast.error(err.message || "Sign up failed");
-    } finally {
-      setLoading(false);
-    }
+    dispatch(signUpStart(formData));
   };
 
   return (
@@ -208,6 +209,9 @@ const SignUpPage: React.FC = () => {
           <PasswordRequirements>
             <Requirement valid={passwordValidity.minLength}>
               At least 8 characters
+            </Requirement>
+            <Requirement valid={passwordValidity.hasLowercase}>
+              A lowercase letter
             </Requirement>
             <Requirement valid={passwordValidity.hasUppercase}>
               An uppercase letter

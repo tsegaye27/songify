@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ILoginData, IUser } from "../../app/models/user";
+import { ILoginData, ISignUpData, IUser } from "../../app/models/user";
 
 export interface AuthState {
   user: IUser | null;
@@ -50,6 +50,18 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    signUpStart: (state, _action: PayloadAction<ISignUpData>) => {
+      state.loading = true;
+      state.error = null;
+    },
+    signUpSuccess: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
+    signUpFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
@@ -69,6 +81,9 @@ export const {
   loginStart,
   loginSuccess,
   loginFailure,
+  signUpStart,
+  signUpSuccess,
+  signUpFailure,
   logout,
   clearError,
 } = authSlice.actions;
