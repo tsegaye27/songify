@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { signUp } from "../../../api/authAPI";
 import { ISignUpData } from "../../../app/models/user";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -138,7 +137,6 @@ const SignUpPage: React.FC = () => {
     hasSpecialChar: false,
     hasLowercase: false,
   });
-  const navigate = useNavigate();
 
   const isPasswordValid = Object.values(passwordValidity).every(Boolean);
 
