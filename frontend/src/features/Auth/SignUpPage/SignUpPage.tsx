@@ -98,6 +98,27 @@ const StyledLink = styled(Link)`
   }
 `;
 
+// New styled components for password requirements
+const PasswordRequirements = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  margin: -0.5rem 0 1rem 0;
+  padding: 0 0.25rem;
+`;
+
+const Requirement = styled.span<{ valid: boolean }>`
+  color: ${(props) =>
+    props.valid ? "var(--green-primary)" : "var(--text-color-secondary)"};
+  transition: color 0.3s ease;
+
+  &::before {
+    content: "${(props) => (props.valid ? "✓" : "•")}";
+    margin-right: 0.5rem;
+  }
+`;
+
 const SignUpPage: React.FC = () => {
   const [formData, setFormData] = useState<ISignUpData>({
     email: "",
@@ -105,7 +126,33 @@ const SignUpPage: React.FC = () => {
     passwordConfirm: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [passwordValidity, setPasswordValidity] = useState({
+    minLength: false,
+    hasUppercase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+  });
   const navigate = useNavigate();
+
+  const isPasswordValid = Object.values(passwordValidity).every(Boolean);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "password") {
+      setPasswordValidity({
+        minLength: value.length >= 8,
+        hasUppercase: /[A-Z]/.test(value),
+        hasNumber: /[0-9]/.test(value),
+        hasSpecialChar: /[!@#$]/.test(value),
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,22 +164,21 @@ const SignUpPage: React.FC = () => {
       return;
     }
 
+    if (!isPasswordValid) {
+      toast.error("Please ensure your password meets all requirements.");
+      setLoading(false);
+      return;
+    }
+
     try {
       await signUp(formData);
-      toast.success("Account created successfully");
+      toast.success("Account created successfully. Redirecting to login...");
       setTimeout(() => navigate("/auth/login"), 3000);
     } catch (err: any) {
       toast.error(err.message || "Sign up failed");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
   };
 
   return (
@@ -153,9 +199,28 @@ const SignUpPage: React.FC = () => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          onFocus={() => setIsPasswordFocused(true)}
+          onBlur={() => setIsPasswordFocused(false)}
           required
-          minLength={8}
         />
+
+        {isPasswordFocused && (
+          <PasswordRequirements>
+            <Requirement valid={passwordValidity.minLength}>
+              At least 8 characters
+            </Requirement>
+            <Requirement valid={passwordValidity.hasUppercase}>
+              An uppercase letter
+            </Requirement>
+            <Requirement valid={passwordValidity.hasNumber}>
+              A number
+            </Requirement>
+            <Requirement valid={passwordValidity.hasSpecialChar}>
+              A special character (!@#$)
+            </Requirement>
+          </PasswordRequirements>
+        )}
+
         <Input
           type="password"
           name="passwordConfirm"
